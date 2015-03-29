@@ -1,0 +1,35 @@
+.iframe {
+	border: none;
+}
+
+
+.custom { /* Applied to container DIV */
+	width: 100%;
+	height: 100%;
+	border: none;
+}
+
+.custom .simply-scroll-clip { /* Applied to clip DIV */
+	width: 100%;
+	height: 100%;
+	border: none;
+}
+
+/* Container DIV - automatically generated */
+.simply-scroll-container { 
+	position: fixed;
+	top:0px;
+	left:0px;
+	border: none;
+}
+
+/* Clip DIV - automatically generated */
+.simply-scroll-clip { 
+	overflow: hidden;
+	border: none;
+}
+
+.simply-scroll-list li img {
+	border: none;
+	display: block;
+}
