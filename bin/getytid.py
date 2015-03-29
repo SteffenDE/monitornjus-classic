@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+# Beilage zu MonitorNjus, 25.03.2015 (Version 0.6.1)
+# http://stackoverflow.com/a/7936523
 
 from urlparse import urlparse
 from urlparse import parse_qs

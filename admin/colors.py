@@ -2,6 +2,7 @@
 # -*- coding: UTF-8 -*-
 #
 # Copyright (c) 2015 Steffen Deusch
+# Licensed under the MIT license
 # Beilage zu MonitorNjus, 25.03.2015 (Version 0.6.1)
 
 import random
