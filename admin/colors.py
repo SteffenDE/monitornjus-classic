@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+#
+# Copyright (c) 2015 Steffen Deusch
+# Beilage zu MonitorNjus, 25.03.2015 (Version 0.6.1)
+
 import random
 
 rancolor = ['red','indigo','blue','light-blue','cyan','teal','green','light-green','lime','amber','orange','deep-orange','grey','blue-grey']
