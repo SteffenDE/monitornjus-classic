@@ -4,5 +4,5 @@ DirectoryIndex index.py
 
 AuthType Basic
 AuthName "MonitorNjus Admin Panel"
-AuthUserFile /var/www/virtual/steffend/monitornjus.steffend.de/admin/.htpasswd
+AuthUserFile PATHTO.htpasswd
 require valid-user
