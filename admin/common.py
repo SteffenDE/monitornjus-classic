@@ -38,13 +38,11 @@ def writewidgetinfo(Name, Info, value):
 		conn.execute("UPDATE WIDGETS SET "+Info+" = \'"+value+"\' WHERE NAME=\'"+Name+"\';");
 	conn.commit()
 
-def writegeteilt(Nummer, value):
-	conn.execute("UPDATE DISPLAYSETS SET GETEILT = "+value+" WHERE NUMMER=\'"+Nummer+"\';");
-	conn.commit()
-
 def getgeteilt(Seite):
 	cursor = conn.execute("SELECT AKTIV FROM DISPLAYSETS WHERE SEITE=\'"+Seite+"\';");
-	return cursor.fetchall()
+	val = str(cursor.fetchall())
+	liste = " ".join(val)
+	return liste
 
 def minaktiv(Seite):
 	cursor = conn.execute("SELECT NUMMER FROM DISPLAYSETS WHERE AKTIV=1 and SEITE=\'"+Seite+"\';");
