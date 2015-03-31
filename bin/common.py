@@ -13,7 +13,7 @@ version = "0.6.1&beta;"
 
 ##########################################################################################
 
-conn = sqlite3.connect('../admin/MonitorNjus.db')
+conn = sqlite3.connect('MonitorNjus.db')
 
 def getinfo(Info, Seite, Nummer):
 	cursor = conn.execute("SELECT "+Info+" FROM DISPLAYSETS WHERE SEITE=\'"+Seite+"\' AND NUMMER="+str(Nummer)+";");
@@ -38,23 +38,13 @@ def writewidgetinfo(Name, Info, value):
 		conn.execute("UPDATE WIDGETS SET "+Info+" = \'"+value+"\' WHERE NAME=\'"+Name+"\';");
 	conn.commit()
 
+def writegeteilt(Nummer, value):
+	conn.execute("UPDATE DISPLAYSETS SET GETEILT = "+value+" WHERE NUMMER=\'"+Nummer+"\';");
+	conn.commit()
+
 def getgeteilt(Seite):
 	cursor = conn.execute("SELECT AKTIV FROM DISPLAYSETS WHERE SEITE=\'"+Seite+"\';");
-	val = str(cursor.fetchall())
-	liste = " ".join(val)
-	return liste
-
-def minaktiv(Seite):
-	cursor = conn.execute("SELECT NUMMER FROM DISPLAYSETS WHERE AKTIV=1 and SEITE=\'"+Seite+"\';");
-	val = cursor.fetchall()
-	minval = min(val)
-	y = str(minval).replace('(','').replace(')','').replace(',','')
-	return y
-
-def allaktiv(Seite):
-	cursor = conn.execute("SELECT NUMMER FROM DISPLAYSETS WHERE AKTIV=1 and SEITE=\'"+Seite+"\';");
-	val = cursor.fetchall()
-	return val
+	return cursor.fetchall()
 
 ##########################################################################################
 
@@ -70,18 +60,31 @@ def getallrows():
 	liste = " ".join(val)
 	return liste
 
-def write(Seite, Nummer, URL, Aktiv, Refreshaktiv, Refresh):
+def write(Seite, Nummer, URL, Aktiv, Refreshaktiv, Refresh, vonbis, vonbiskaktiv):
 	conn.execute("DELETE FROM DISPLAYSETS where SEITE=\'"+Seite+"\' AND NUMMER="+str(Nummer)+"");
-	conn.execute("INSERT INTO DISPLAYSETS (SEITE,NUMMER,URL,AKTIV,REFRESHAKTIV,REFRESH) values (\'"+Seite+"\',"+str(Nummer)+",\'"+URL+"\',"+str(Aktiv)+","+str(Refreshaktiv)+","+str(Refresh)+")");
+	conn.execute("INSERT INTO DISPLAYSETS (SEITE,NUMMER,URL,AKTIV,REFRESHAKTIV,REFRESH,VONBIS,VONBISAKTIV) values (\'"+Seite+"\',"+str(Nummer)+",\'"+URL+"\',"+str(Aktiv)+","+str(Refreshaktiv)+","+str(Refresh)+",\'"+vonbis+"\',"+str(vonbiskaktiv)+")");
 	conn.commit()
 
 def createrow(Nummer):
-	write("Links", Nummer, "placeholder.html", 1, 0, 60)
-	write("Rechts", Nummer, "placeholder.html", 1, 0, 60)
+	write("Links", Nummer, "placeholder.html", 1, 0, 60, "*|*|*|*", 0)
+	write("Rechts", Nummer, "placeholder.html", 1, 0, 60, "*|*|*|*", 0)
 
 def delrow(Nummer):
-	conn.execute("DELETE FROM DISPLAYSETS where NUMMER="+str(Nummer)+"");
-	conn.commit()
+	rows = getrows()
+	if Nummer is not rows:
+		conn.execute("DELETE FROM DISPLAYSETS where NUMMER="+str(Nummer)+"");
+		x = rows
+		diff = rows - Nummer
+		z = 0
+		while z < diff:
+			conn.execute("UPDATE DISPLAYSETS SET NUMMER = "+str(Nummer+z)+" where NUMMER="+str(Nummer+z+1)+"");
+			conn.commit()
+			z = z + 1
+	elif Nummer == rows:
+		conn.execute("DELETE FROM DISPLAYSETS where NUMMER="+str(Nummer)+"");
+		conn.commit()
+	else:
+		pass
 
 def checkfiletype(datei):
 	if ".png" in datei or ".jpg" in datei or ".gif" in datei or ".bmp" in datei:

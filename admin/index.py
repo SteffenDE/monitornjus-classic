@@ -112,7 +112,7 @@ try:
 										</div>
 									</div>
 								</div>"""
-				if x != 1:
+				if rows != 1:
 					print """<center><a class="waves-effect waves-light btn" href="setn.py?referer=row&delrow=1&delnum="""+str(x)+"""">Displayset l&ouml;schen</a></center>"""
 				print """
 							</div>

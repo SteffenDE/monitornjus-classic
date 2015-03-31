@@ -70,8 +70,21 @@ def createrow(Nummer):
 	write("Rechts", Nummer, "placeholder.html", 1, 0, 60, "*|*|*|*", 0)
 
 def delrow(Nummer):
-	conn.execute("DELETE FROM DISPLAYSETS where NUMMER="+str(Nummer)+"");
-	conn.commit()
+	rows = getrows()
+	if Nummer is not rows:
+		conn.execute("DELETE FROM DISPLAYSETS where NUMMER="+str(Nummer)+"");
+		x = rows
+		diff = rows - Nummer
+		z = 0
+		while z < diff:
+			conn.execute("UPDATE DISPLAYSETS SET NUMMER = "+str(Nummer+z)+" where NUMMER="+str(Nummer+z+1)+"");
+			conn.commit()
+			z = z + 1
+	elif Nummer == rows:
+		conn.execute("DELETE FROM DISPLAYSETS where NUMMER="+str(Nummer)+"");
+		conn.commit()
+	else:
+		pass
 
 def checkfiletype(datei):
 	if ".png" in datei or ".jpg" in datei or ".gif" in datei or ".bmp" in datei:
