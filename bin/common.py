@@ -13,7 +13,7 @@ version = "0.6.1&beta;"
 
 ##########################################################################################
 
-conn = sqlite3.connect('MonitorNjus.db')
+conn = sqlite3.connect('../admin/MonitorNjus.db')
 
 def getinfo(Info, Seite, Nummer):
 	cursor = conn.execute("SELECT "+Info+" FROM DISPLAYSETS WHERE SEITE=\'"+Seite+"\' AND NUMMER="+str(Nummer)+";");
@@ -45,6 +45,18 @@ def writegeteilt(Nummer, value):
 def getgeteilt(Seite):
 	cursor = conn.execute("SELECT AKTIV FROM DISPLAYSETS WHERE SEITE=\'"+Seite+"\';");
 	return cursor.fetchall()
+
+def minaktiv(Seite):
+	cursor = conn.execute("SELECT NUMMER FROM DISPLAYSETS WHERE AKTIV=1 and SEITE=\'"+Seite+"\';");
+	val = cursor.fetchall()
+	minval = min(val)
+	y = str(minval).replace('(','').replace(')','').replace(',','')
+	return y
+
+def allaktiv(Seite):
+	cursor = conn.execute("SELECT NUMMER FROM DISPLAYSETS WHERE AKTIV=1 and SEITE=\'"+Seite+"\';");
+	val = cursor.fetchall()
+	return val
 
 ##########################################################################################
 

@@ -46,6 +46,18 @@ def getgeteilt(Seite):
 	cursor = conn.execute("SELECT AKTIV FROM DISPLAYSETS WHERE SEITE=\'"+Seite+"\';");
 	return cursor.fetchall()
 
+def minaktiv(Seite):
+	cursor = conn.execute("SELECT NUMMER FROM DISPLAYSETS WHERE AKTIV=1 and SEITE=\'"+Seite+"\';");
+	val = cursor.fetchall()
+	minval = min(val)
+	y = str(minval).replace('(','').replace(')','').replace(',','')
+	return y
+
+def allaktiv(Seite):
+	cursor = conn.execute("SELECT NUMMER FROM DISPLAYSETS WHERE AKTIV=1 and SEITE=\'"+Seite+"\';");
+	val = cursor.fetchall()
+	return val
+
 ##########################################################################################
 
 def getrows():
