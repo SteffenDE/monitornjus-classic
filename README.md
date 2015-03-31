@@ -5,4 +5,4 @@ Python application written for displaying various pages time-based or static on 
 ## example
 http://monitornjus.steffend.de
 
-derived from MonitorNews by Tamer Berber
+idea based on MonitorNews by Tamer Berber
