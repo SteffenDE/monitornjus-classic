@@ -18,7 +18,7 @@ print """
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-	<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<link href="../bin/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 	<title>MonitorNjus Admin-Panel</title>
 	<style type="text/css">
 	.input-field label { opacity: 0; }
@@ -53,8 +53,8 @@ print """
 	</style>
 </head>
 <body>
-	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-	<script type="text/javascript" src="js/materialize.min.js"></script>
+	<script type="text/javascript" src="../bin/js/jquery-2.1.3.min.js"></script>
+	<script type="text/javascript" src="../bin/js/materialize.min.js"></script>
 	<nav class=\""""+colors.color+"""\"="navigation">
 		<div class="container">
 			<div class="nav-wrapper"><a id="logo-container" href="#" class="brand-logo">MonitorNjus Admin Panel</a>
@@ -278,7 +278,7 @@ print """
 						</div>
 					</div>
 				</div>
-				<button class="btn waves-effect waves-light" type="submit">Submit<i class="mdi-content-send right"></i></button>
+				<button class="btn waves-effect waves-light" type="submit">Abschicken<i class="mdi-content-send right"></i></button>
 			</form>
 		</div>
 	</div>
@@ -298,7 +298,7 @@ print """
 	</row>
 </footer>
 <!--  Scripts-->
-<script src="js/init.js"></script>
+<script src="../bin/js/init.js"></script>
 </body>
 </html>
 	""" % (common.datum.year)

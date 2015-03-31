@@ -28,7 +28,7 @@ try:
     if gnummer is None:
         x = 0
         while x < rows:
-            if checktime.match(common.getinfo("VONBIS", mseite, int(common.minaktiv(mseite))+x),datetime.now()) == True:
+            if checktime.match(common.getinfo("VONBIS", mseite, int(common.minaktiv(mseite))+x),datetime.now()) == True and common.getinfo("AKTIV", mseite, int(common.minaktiv(mseite))+x) == 1:
                 nummer = int(common.minaktiv(mseite))+x
                 break
             x = x + 1
@@ -67,70 +67,99 @@ try:
     <meta http-equiv="refresh" content=\"'+str(refresh)+'; URL=contentset.py?seite='+str(seite)+';nummer='+str(nextnummer)+'\">'
     else:
         prrefresh = ""
-    if common.checkfiletype(url) == "image":
-        output = """
-        <img src="""+url+""" width="100%">"""
-    elif common.checkfiletype(url) == "video":
-        output = """
-        <div class="videocontainer"><video src=\'"""+url+"""\' style="width:100%; height:auto; max-height: 100%;" autoplay="autoplay" loop="loop">Dein Browser unterst&uuml;tzt keine HTML5 Videos...</video></div>"""
-    elif common.checkfiletype(url) == "pdf":
-        output = """
-        <iframe src=\""""+url+"""\" style="position:absolute; z-index:9; height:98%; width:98%; border-style:none; overflow:hidden" scrolling="no"></iframe>"""
-    elif common.checkfiletype(url) == "youtube":
-        output = """
-        <iframe style="position:absolute; height:100%; width:100%; top:0px; left: 0px; border-style:none; overflow:hidden" scrolling="no" src="//www.youtube.com/embed/"""+getytid.video_id(url)+"""?rel=0&autoplay=1&loop=1&controls=0&showinfo=0"></iframe>"""
+
+    typ = common.checkfiletype(url)
+
+    if typ == "image":
+        output = '\
+    <div class="container">\
+        <img src='+url+' style="position: absolute; margin-left: -8px; margin-top: -8px;">\
+    </div>'
+    elif typ == "video":
+        output = '\
+    <div class="videocontainer"><video src=\''+url+'\' style="width:100%; height:auto; max-height: 100%;" autoplay="autoplay" loop="loop">Dein Browser unterst&uuml;tzt keine HTML5 Videos...</video></div>'
+    elif typ == "pdf":
+        output = '\
+    <iframe src=\"'+url+'\" style="position:absolute; z-index:9; height:98%; width:98%; border-style:none; overflow:hidden" scrolling="no"></iframe>'
+    elif typ == "youtube":
+        output = '\
+    <iframe style="position:absolute; height:100%; width:100%; top:0px; left: 0px; border-style:none; overflow:hidden" scrolling="no" src="//www.youtube.com/embed/'+getytid.video_id(url)+'?rel=0&autoplay=1&loop=1&controls=0&showinfo=0"></iframe>'
     else:
         output = '\
     <iframe src=\"'+url+'\" style="position:absolute; width:100%; height:100%; top:0px; left:0px; margin-left:-1px; border-style:none;" scrolling="no" name="links"></iframe>'
+
     print "Content-Type: text/html"
     print
     print """\
-    <!DOCTYPE html>
-    <html lang="de">
-    <head>
-        <meta charset="UTF-8">
-        <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
-        <script type="text/javascript">
-        $(document).ready(function () {$('#content').css('display', 'none');$('#content').fadeIn(1000);});
-        </script>"""
-    if common.checkfiletype(url) == "video":
-        style = """\
-        <style>
-        .videocontainer 
-        {
-            position:absolute;
-            height:100%;
-            width:100%;
-            overflow: hidden;
-            top: 0px;
-        }
-
-        .videocontainer video 
-        {
-            min-width: 100%;
-            min-height: 100%;
-        }
-        </style>"""
-        print style
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript">
+    $(document).ready(function () {$('#content').css('display', 'none');$('#content').fadeIn(1000);});
+    </script>"""
+    if prrefresh is not "":
+        print prrefresh
     else:
         pass
-    print """\
-        <meta http-equiv="expires" content="0">"""
-    print prrefresh
     print "\
-        <title>MonitorNjus</title>\
-    </head>"
-        #print checktime.match(common.getinfo("VONBIS", mseite, int(common.minaktiv(mseite))),datetime.now())
-        #print nextanumma
-        #print nextnummer
+    <title>MonitorNjus</title>"
+    if typ == "video":
+        style = """\
+    <style>
+    .videocontainer 
+    {
+        position:absolute;
+        height:100%;
+        width:100%;
+        overflow: hidden;
+        top: 0px;
+    }
+    .videocontainer video 
+    {
+        min-width: 100%;
+        min-height: 100%;
+    }
+    </style>"""
+        print style
+    elif typ == "image":
+        print """
+        <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
+        <style>
+        .container img.wide {
+            width: 100%;
+            height: auto;
+        }
+        .container img.tall {
+            height: 100%;
+            width: auto;
+        }​
+        </style>"""
+    else:
+        pass
     print "\
-    <body id=\"content\">"
-        #print common.getinfo("VONBIS", mseite, nummer)
-        #print checktime.match(common.getinfo("VONBIS", mseite, nummer),datetime.now())
+</head>"
+    #print checktime.match(common.getinfo("VONBIS", mseite, int(common.minaktiv(mseite))),datetime.now())
+    #print nextanumma
+    #print nextnummer
+    print "\
+<body id=\"content\">"
+    #print common.getinfo("VONBIS", mseite, nummer)
+    #print checktime.match(common.getinfo("VONBIS", mseite, nummer),datetime.now())
     print output
+    if typ == "image":
+        print """\
+        <script type="text/javascript">
+        $(window).load(function(){
+         $('.container').find('img').each(function(){
+          var imgClass = (this.width/this.height > 1) ? 'wide' : 'tall';
+          $(this).addClass(imgClass);
+         })
+        })
+        </script>"""
     print "\
-    </body>\
-    </html>"
+</body>\n\
+</html>"
 
 except Exception, e:
     print "Content-Type: text/html"

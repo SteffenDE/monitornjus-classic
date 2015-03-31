@@ -31,7 +31,22 @@ try:
 <link href="css/loop.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
-<script type="text/javascript" src="js/scroller.js"></script>
+<script type="text/javascript">
+(function($) {
+    $(function() { //on DOM ready
+        $("#scroller").simplyScroll({
+            customClass: 'custom',
+            orientation: 'vertical',
+            auto: true,
+            autoMode: 'loop',
+            frameRate: 60,
+            speed: 1,
+            startOnLoad: true,
+            pauseOnHover: false
+        });
+    });
+})(jQuery);
+</script>
 <div id="scroller">
     <iframe src=\""""+url+"""\" style="position:static; width:100%; margin-left:2px; border-style:none; overflow:hidden" scrolling="no" name="links" onload="javascript:resizeIframe(this);"></iframe>
 </div>
