@@ -9,7 +9,7 @@ import datetime
 import sqlite3
 
 datum = datetime.datetime.now()
-version = "0.6.1&beta;"
+version = "0.7&beta;"
 
 ##########################################################################################
 
