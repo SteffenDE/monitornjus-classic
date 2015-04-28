@@ -8,7 +8,6 @@
 import colors
 import common
 import checkvalues
-import read_values
 
 print "Content-Type: text/html"
 print
