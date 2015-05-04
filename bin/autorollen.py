@@ -3,7 +3,7 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 25.03.2015 (Version 0.6.1)
+# Beilage zu MonitorNjus, 31.03.2015 (Version 0.7)
 
 try:
 	import cgi, cgitb 
@@ -28,7 +28,41 @@ try:
 	}
 
 </script>
-<link href="css/loop.css" type="text/css" rel="stylesheet"/>
+<style>
+.iframe {
+	border: none;
+}
+
+
+.custom {
+	width: 100%;
+	height: 100%;
+	border: none;
+}
+
+.custom .simply-scroll-clip {
+	width: 100%;
+	height: 100%;
+	border: none;
+}
+
+.simply-scroll-container { 
+	position: fixed;
+	top:0px;
+	left:0px;
+	border: none;
+}
+
+.simply-scroll-clip { 
+	overflow: hidden;
+	border: none;
+}
+
+.simply-scroll-list li img {
+	border: none;
+	display: block;
+}
+</style>
 </head>
 <body>
 <script type="text/javascript">
@@ -62,7 +96,6 @@ except Exception, e:
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
     <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link href="css/mnews.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <META HTTP-EQUIV="refresh" CONTENT="10">
 </head>
 <body>
