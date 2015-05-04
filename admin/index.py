@@ -3,7 +3,7 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 25.03.2015 (Version 0.6.1)
+# Beilage zu MonitorNjus, 31.03.2015 (Version 0.7)
 
 try:
 	import colors
@@ -16,7 +16,7 @@ try:
 
 	def displaysets():
 		x = 1
-		while x <= common.getrows():
+		while x <= rows:
 			if str(x) in common.getallrows():
 				print """
 						<div class="col s12">

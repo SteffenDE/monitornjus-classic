@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Beilage zu MonitorNjus, 25.03.2015 (Version 0.6.1)
+# Beilage zu MonitorNjus, 31.03.2015 (Version 0.7)
 #
 # timespan - Check if timestamps fall within specific boundaries
 # Copyright (c) 2012 Justine Alexandra Roberts Tunney

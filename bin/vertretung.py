@@ -3,7 +3,7 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 25.03.2015 (Version 0.6.1)
+# Beilage zu MonitorNjus, 31.03.2015 (Version 0.7)
 
 def replace_b(body):
 	end = body\

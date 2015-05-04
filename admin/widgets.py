@@ -3,7 +3,7 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 25.03.2015 (Version 0.6.1)
+# Beilage zu MonitorNjus, 31.03.2015 (Version 0.7)
 
 import colors
 import common
@@ -84,7 +84,7 @@ print """
 									<div class="col s6">
 										<div class="row">
 											<div class="input-field col s12">
-												<input style="color:black;" placeholder=\'"""+str(read_values.read_adminlinkalign)+"""\' name="adminlinkalign" id="adminlinkalign" type="text"/>
+												<input style="color:black;" placeholder=\'"""+str(common.getwidgetinfo("Admin-Link", "align"))+"""\' name="adminlinkalign" id="adminlinkalign" type="text"/>
 												<label for="adminlinkalign">Vertikaler Abstand</label>
 											</div>
 										</div>
@@ -96,7 +96,7 @@ print """
 									<div class="col s6">
 										<div class="row">
 											<div class="input-field col s12">
-												<input style="color:black;" placeholder=\'"""+str(read_values.read_adminlinkmargin)+"""\' name="adminlinkmargin" id="adminlinkmargin" type="text"/>
+												<input style="color:black;" placeholder=\'"""+str(common.getwidgetinfo("Admin-Link", "margin"))+"""\' name="adminlinkmargin" id="adminlinkmargin" type="text"/>
 												<label for="adminlinkmargin">Horizontaler Abstand</label>
 											</div>
 										</div>
@@ -121,7 +121,7 @@ print """
 									<div class="col s6">
 										<div class="row">
 											<div class="input-field col s12">
-												<input style="color:black;" placeholder=\'"""+str(read_values.read_uhrheight)+"""\' name="uhrheight" id="uhrheight" type="text"/>
+												<input style="color:black;" placeholder=\'"""+str(common.getwidgetinfo("Uhr", "height"))+"""\' name="uhrheight" id="uhrheight" type="text"/>
 												<label for="uhrheight">Uhr-H&ouml;he</label>
 											</div>
 										</div>
@@ -129,7 +129,7 @@ print """
 									<div class="col s6">
 										<div class="row">
 											<div class="input-field col s12">
-												<input style="color:black;" placeholder=\'"""+str(read_values.read_uhrwidth)+"""\' name="uhrwidth" id="uhrwidth" type="text"/>
+												<input style="color:black;" placeholder=\'"""+str(common.getwidgetinfo("Uhr", "width"))+"""\' name="uhrwidth" id="uhrwidth" type="text"/>
 												<label for="uhrwidth">Uhr-Breite</label>
 											</div>
 										</div>
@@ -141,7 +141,7 @@ print """
 									<div class="col s6">
 										<div class="row">
 											<div class="input-field col s12">
-												<input style="color:black;" placeholder=\'"""+str(read_values.read_uhralign)+"""\' name="uhralign" id="uhralign" type="text"/>
+												<input style="color:black;" placeholder=\'"""+str(common.getwidgetinfo("Uhr", "align"))+"""\' name="uhralign" id="uhralign" type="text"/>
 												<label for="uhralign">Vertikaler Abstand</label>
 											</div>
 										</div>
@@ -153,7 +153,7 @@ print """
 									<div class="col s6">
 										<div class="row">
 											<div class="input-field col s12">
-												<input style="color:black;" placeholder=\'"""+str(read_values.read_uhrmargin)+"""\' name="uhrmargin" id="uhrmargin" type="text"/>
+												<input style="color:black;" placeholder=\'"""+str(common.getwidgetinfo("Uhr", "margin"))+"""\' name="uhrmargin" id="uhrmargin" type="text"/>
 												<label for="uhrmargin">Horizontaler Abstand</label>
 											</div>
 										</div>
@@ -178,7 +178,7 @@ print """
 									<div class="col s6">
 										<div class="row">
 											<div class="input-field col s12">
-												<input style="color:black;" placeholder=\'"""+str(read_values.read_widgetheight)+"""\' name="widgetheight" id="widgetheight" type="text"/>
+												<input style="color:black;" placeholder=\'"""+str(common.getwidgetinfo("Freies-Widget", "height"))+"""\' name="widgetheight" id="widgetheight" type="text"/>
 												<label for="widgetheight">Widget-H&ouml;he</label>
 											</div>
 										</div>
@@ -186,7 +186,7 @@ print """
 									<div class="col s6">
 										<div class="row">
 											<div class="input-field col s12">
-												<input style="color:black;" placeholder=\'"""+str(read_values.read_widgetwidth)+"""\' name="widgetwidth" id="widgetwidth" type="text"/>
+												<input style="color:black;" placeholder=\'"""+str(common.getwidgetinfo("Freies-Widget", "width"))+"""\' name="widgetwidth" id="widgetwidth" type="text"/>
 												<label for="widgetwidth">Widget-Breite</label>
 											</div>
 										</div>
@@ -198,7 +198,7 @@ print """
 									<div class="col s6">
 										<div class="row">
 											<div class="input-field col s12">
-												<input style="color:black;" placeholder=\'"""+str(read_values.read_widgetalign)+"""\' name="widgetalign" id="widgetalign" type="text"/>
+												<input style="color:black;" placeholder=\'"""+str(common.getwidgetinfo("Freies-Widget", "align"))+"""\' name="widgetalign" id="widgetalign" type="text"/>
 												<label for="widgetalign">Vertikaler Abstand</label>
 											</div>
 										</div>
@@ -210,7 +210,7 @@ print """
 									<div class="col s6">
 										<div class="row">
 											<div class="input-field col s12">
-												<input style="color:black;" placeholder=\'"""+str(read_values.read_widgetmargin)+"""\' name="widgetmargin" id="widgetmargin" type="text"/>
+												<input style="color:black;" placeholder=\'"""+str(common.getwidgetinfo("Freies-Widget", "margin"))+"""\' name="widgetmargin" id="widgetmargin" type="text"/>
 												<label for="widgetmargin">Horizontaler Abstand</label>
 											</div>
 										</div>

@@ -3,7 +3,7 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 25.03.2015 (Version 0.6.1)
+# Beilage zu MonitorNjus, 31.03.2015 (Version 0.7)
 
 import os
 import sqlite3
@@ -42,10 +42,10 @@ if str(1) in read_firstrun:
 	def widgets(NAME, AKTIV, URLw, valign, align, vmargin, margin, width, height):
 		conn.execute("INSERT INTO WIDGETS (NAME,AKTIV,URL,valign,align,vmargin,margin,width,height) values (\'"+NAME+"\',"+str(AKTIV)+",\'"+URLw+"\',\'"+valign+"\',"+str(align)+",\'"+vmargin+"\',"+str(margin)+",\'"+str(width)+"\',\'"+str(height)+"\')");
 
-	write("Links", 1, "placeholder.html", 0, 0, 60, "*|*|*|*", 0)
-	write("Rechts", 1, "placeholder.html", 0, 0, 60, "*|*|*|*", 0)
-	write("globalmon", 0, "placeholder.html", 0, 0, 600, "*|*|*|*", 0)
-	write("global", 0, "placeholder.html", 0, 0, 300, "*|*|*|*", 0)
+	write("Links", 1, "placeholder.html", 1, 1, 60, "*|*|*|*", 0)
+	write("Rechts", 1, "placeholder.html", 1, 1, 60, "*|*|*|*", 0)
+	write("globalmon", 0, "placeholder.html", 1, 0, 600, "*|*|*|*", 0)
+	write("global", 0, "placeholder.html", 1, 0, 300, "*|*|*|*", 0)
 
 	widgets("Admin-Link", 1, "placeholder", "bottom", 0, "center", 0, "0", "0" )
 	widgets("Uhr", 1, "resources/uhr1.swf", "bottom", 0, "center", 0, "", "96px" )

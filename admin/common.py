@@ -3,7 +3,7 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 25.03.2015 (Version 0.6.1)
+# Beilage zu MonitorNjus, 31.03.2015 (Version 0.7)
 
 import datetime
 import sqlite3
@@ -26,8 +26,8 @@ def writeinfo(Seite, Nummer, Info, value):
 		conn.execute("UPDATE DISPLAYSETS SET "+Info+"=\'"+value+"\' WHERE SEITE=\'"+Seite+"\' AND NUMMER="+str(Nummer)+";");
 	conn.commit()
 
-def getwidgetinfo(Name, Info):
-	cursor = conn.execute("SELECT "+Info+" FROM WIDGETS WHERE NAME=\'"+Name+"\';");
+def getwidgetinfo(NAME, Info):
+	cursor = conn.execute("SELECT "+Info+" FROM WIDGETS WHERE NAME=\'"+str(NAME)+"\';");
 	widgetinfo = cursor.fetchone()[0]
 	return widgetinfo
 

@@ -3,7 +3,7 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 25.03.2015 (Version 0.6.1)
+# Beilage zu MonitorNjus, 31.03.2015 (Version 0.7)
 
 try:
     import cgi
@@ -12,11 +12,13 @@ try:
     import getytid
     import checktime
     from datetime import datetime
+
     form = cgi.FieldStorage()
     cgitb.enable()
     gseite = form.getvalue('seite')
     gnummer = form.getvalue('nummer')
     rows = common.getrows()
+
     if gseite == "1":
         seite = "1"
         mseite = "Links"
@@ -25,6 +27,7 @@ try:
         mseite = "Rechts"
     else:
         pass
+
     if gnummer is None:
         x = 0
         while x < rows:
@@ -34,9 +37,11 @@ try:
             x = x + 1
     else:
         nummer = int(gnummer)
+
     url = common.getinfo("URL", mseite, int(nummer))
     refresh = common.getinfo("REFRESH", mseite, int(nummer))
     x = 1
+
     while x < rows or x == 1:
         if nummer < rows and nummer+x <= rows:
             if common.getinfo("AKTIV", mseite, nummer+x) == 1 and checktime.match(common.getinfo("VONBIS", mseite, nummer+x),datetime.now()) == True:
@@ -58,10 +63,12 @@ try:
                     nextnummer = nummer
                 z = z + 1
         x = x + 1
+
     if common.getinfo("REFRESHAKTIV", mseite, nummer) == 1:
         on = 1
     else:
         on = 0
+        
     if on == 1:
         prrefresh = '\
     <meta http-equiv="refresh" content=\"'+str(refresh)+'; URL=contentset.py?seite='+str(seite)+';nummer='+str(nextnummer)+'\">'
