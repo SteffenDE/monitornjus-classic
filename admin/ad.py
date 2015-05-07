@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Beilage zu MonitorNjus, 07.05.2015 (Version 0.7.1)
 """active_directory - a lightweight wrapper around COM support
  for Microsoft's Active Directory
 

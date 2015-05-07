@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# Beilage zu MonitorNjus, 31.03.2015 (Version 0.7)
+# Beilage zu MonitorNjus, 07.05.2015 (Version 0.7.1)
 # http://stackoverflow.com/a/7936523
 
 from urlparse import urlparse
