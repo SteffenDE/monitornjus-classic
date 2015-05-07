@@ -87,13 +87,13 @@ try:
     <div class="videocontainer"><video src=\''+url+'\' style="width:100%; height:auto; max-height: 100%;" autoplay="autoplay" loop="loop">Dein Browser unterst&uuml;tzt keine HTML5 Videos...</video></div>'
     elif typ == "pdf":
         output = '\
-    <iframe src=\"'+url+'\" style="position:absolute; z-index:9; height:98%; width:98%; border-style:none; overflow:hidden" scrolling="no"></iframe>'
+    <iframe src=\"'+url+'\" style="position:absolute; z-index:9; height:98%; width:98%; border-style:none; overflow:hidden" scrolling="no" frameborder="0"></iframe>'
     elif typ == "youtube":
         output = '\
-    <iframe style="position:absolute; height:100%; width:100%; top:0px; left: 0px; border-style:none; overflow:hidden" scrolling="no" src="//www.youtube.com/embed/'+getytid.video_id(url)+'?rel=0&autoplay=1&loop=1&controls=0&showinfo=0"></iframe>'
+    <iframe style="position:absolute; height:100%; width:100%; top:0px; left: 0px; border-style:none; overflow:hidden" scrolling="no" frameborder="0" src="//www.youtube.com/embed/'+getytid.video_id(url)+'?rel=0&autoplay=1&loop=1&controls=0&showinfo=0"></iframe>'
     else:
         output = '\
-    <iframe src=\"'+url+'\" style="position:absolute; width:100%; height:100%; top:0px; left:0px; margin-left:-1px; border-style:none;" scrolling="no" name="links"></iframe>'
+    <iframe src=\"'+url+'\" style="position:absolute; width:100%; height:100%; top:0px; left:0px; margin-left:-1px; border-style:none;" scrolling="no" frameborder="0"></iframe>'
 
     print "Content-Type: text/html"
     print
