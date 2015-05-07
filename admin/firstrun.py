@@ -3,17 +3,25 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 31.03.2015 (Version 0.7)
+# Beilage zu MonitorNjus, 07.05.2015 (Version 0.7.1)
 
 import os
-import sqlite3
-import common
-
-rfr = open("firstrun", "r")
-read_firstrun = rfr.read()
+workingdir = os.getcwd()
+import imp
+if "admin" in workingdir:
+    common = imp.load_source('common', workingdir+"/../common.py")
+    rfr = open(workingdir+"/firstrun", "r")
+    read_firstrun = rfr.read()
+    rfr.close()
+    conn = common.sqlite3.connect(workingdir+'/MonitorNjus.db')
+else:
+    common = imp.load_source('common', workingdir+"/common.py")
+    rfr = open(workingdir+"/admin/firstrun", "r")
+    read_firstrun = rfr.read()
+    rfr.close()
+    conn = common.sqlite3.connect(workingdir+'/admin/MonitorNjus.db')
 
 if str(1) in read_firstrun:
-	conn = sqlite3.connect('MonitorNjus.db')
 	conn.execute('''CREATE TABLE DISPLAYSETS
 		(ID INT PRIMARY KEY,
 			SEITE			TEXT,
@@ -54,9 +62,16 @@ if str(1) in read_firstrun:
 
 	conn.commit()
 	conn.close()
-	os.remove('firstrun')
-	f = open('firstrun','w')
-	f.write("0")
+	if "admin" in workingdir:
+            os.remove(workingdir+'/firstrun')
+            f = open(workingdir+'/firstrun','w')
+            f.write("0")
+            f.close()
+        else:
+            os.remove(workingdir+'/admin/firstrun')
+            f = open(workingdir+'/admin/firstrun','w')
+            f.write("0")
+            f.close()
 
 else:
 	pass

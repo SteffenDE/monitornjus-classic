@@ -6,12 +6,18 @@
 # Beilage zu MonitorNjus, 31.03.2015 (Version 0.7)
 
 try:
+    import os
+    workingdir = os.getcwd()
+    import imp
+    if "bin" in workingdir:
+        common = imp.load_source('common', workingdir+"/../common.py")
+        checktime = imp.load_source('checktime', workingdir+"/../admin/checktime.py")
+    else:
+        common = imp.load_source('common', workingdir+"/common.py")
+        checktime = imp.load_source('checktime', workingdir+"/admin/checktime.py")
     import cgi
     import cgitb
-    import common
     import getytid
-    import checktime
-    from datetime import datetime
 
     form = cgi.FieldStorage()
     cgitb.enable()
@@ -31,7 +37,7 @@ try:
     if gnummer is None:
         x = 0
         while x < rows:
-            if checktime.match(common.getinfo("VONBIS", mseite, int(common.minaktiv(mseite))+x),datetime.now()) == True and common.getinfo("AKTIV", mseite, int(common.minaktiv(mseite))+x) == 1:
+            if checktime.match(common.getinfo("VONBIS", mseite, int(common.minaktiv(mseite))+x),common.datum.now()) == True and common.getinfo("AKTIV", mseite, int(common.minaktiv(mseite))+x) == 1:
                 nummer = int(common.minaktiv(mseite))+x
                 break
             x = x + 1
@@ -44,7 +50,7 @@ try:
 
     while x < rows or x == 1:
         if nummer < rows and nummer+x <= rows:
-            if common.getinfo("AKTIV", mseite, nummer+x) == 1 and checktime.match(common.getinfo("VONBIS", mseite, nummer+x),datetime.now()) == True:
+            if common.getinfo("AKTIV", mseite, nummer+x) == 1 and checktime.match(common.getinfo("VONBIS", mseite, nummer+x),common.datum.now()) == True:
                 on = 1
                 nextnummer = nummer + x
                 break
@@ -55,7 +61,7 @@ try:
             on = 1
             z = 0
             while z < rows:
-                if checktime.match(common.getinfo("VONBIS", mseite, int(common.minaktiv(mseite))+z),datetime.now()) == True:
+                if checktime.match(common.getinfo("VONBIS", mseite, int(common.minaktiv(mseite))+z),common.datum.now()) == True:
                     nextanumma = int(common.minaktiv(mseite))+z
                     nextnummer = nextanumma
                     break
@@ -147,13 +153,13 @@ try:
         pass
     print "\
 </head>"
-    #print checktime.match(common.getinfo("VONBIS", mseite, int(common.minaktiv(mseite))),datetime.now())
+    #print checktime.match(common.getinfo("VONBIS", mseite, int(common.minaktiv(mseite))),common.datum.now())
     #print nextanumma
     #print nextnummer
     print "\
 <body id=\"content\">"
     #print common.getinfo("VONBIS", mseite, nummer)
-    #print checktime.match(common.getinfo("VONBIS", mseite, nummer),datetime.now())
+    #print checktime.match(common.getinfo("VONBIS", mseite, nummer),common.datum.now())
     print output
     if typ == "image":
         print """\

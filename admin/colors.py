@@ -3,14 +3,14 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 31.03.2015 (Version 0.7)
+# Beilage zu MonitorNjus, 07.05.2015 (Version 0.7.1)
 
-import random
+import random                       # Random Modul importieren
 
 rancolor = ['red','indigo','blue','light-blue','cyan','teal','green','light-green','lime','amber','orange','deep-orange','grey','blue-grey']
-color = random.choice(rancolor)
+color = random.choice(rancolor)     # Zufallsauswahl der Darbe
 
-if color == "red":
+if color == "red":                  # Umwandlung des Farbnamens in Hexadezimal
     hexa = "#f44336"
 elif color == "indigo":
     hexa = "#3f51b5"

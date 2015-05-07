@@ -3,10 +3,18 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 31.03.2015 (Version 0.7)
+# Beilage zu MonitorNjus, 07.05.2015 (Version 0.7.1)
 
 import cgi, cgitb
-import common
+import os
+import imp
+workingdir = os.getcwd()
+if "admin" in workingdir:
+    common = imp.load_source('common', workingdir+"/../common.py")
+else:
+    common = imp.load_source('common', workingdir+"/common.py")
+
+common.authenticated()
 
 ########################################################################
 
@@ -203,30 +211,18 @@ else:
   pass
 
 if "index" in referer:
-
-  ########################################################################
-
   refresh = "<meta http-equiv=\"refresh\" content=\"0; URL=../admin/index.py\">"
-
-########################################################################
-
 elif "widgets" in referer:
-  #### Adminlink aktiv + valign
-
   refresh = "<meta http-equiv=\"refresh\" content=\"0; URL=../admin/widgets.py\">"
-
-########################################################################
-
 
 print "Content-Type: text/html"
 print
 print """
 <!DOCTYPE html>
-  <html lang="de">
-  <head>
-  """+refresh+"""
-  </head>
-  <body>"""
-print 
-print """
-</body></html>"""
+<html lang="de">
+<head>
+"""+refresh+"""
+</head>
+<body>
+</body>
+</html>"""

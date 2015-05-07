@@ -3,17 +3,19 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 31.03.2015 (Version 0.7)
+# Beilage zu MonitorNjus, 07.05.2015 (Version 0.7.1)
 
+import os
 import datetime
 import sqlite3
 
 datum = datetime.datetime.now()
-version = "0.7&beta;"
+version = "0.7.1&beta;"
+workingdir = os.getcwd()
 
 ##########################################################################################
 
-conn = sqlite3.connect('MonitorNjus.db')
+conn = sqlite3.connect(workingdir+'/MonitorNjus.db')
 
 def getinfo(Info, Seite, Nummer):
 	cursor = conn.execute("SELECT "+Info+" FROM DISPLAYSETS WHERE SEITE=\'"+Seite+"\' AND NUMMER="+str(Nummer)+";");

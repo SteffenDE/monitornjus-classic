@@ -3,10 +3,15 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 25.03.2015 (Version 0.6.1)
+# Beilage zu MonitorNjus, 31.03.2015 (Version 0.7)
 
 import os
-import common
+workingdir = os.getcwd()
+import imp
+if "bin" in workingdir:
+    common = imp.load_source('common', workingdir+"/../common.py")
+else:
+    common = imp.load_source('common', workingdir+"/common.py")
 
 read_refreshallenabled = common.getinfo("REFRESHAKTIV", "global", 0)
 read_refreshmonenabled = common.getinfo("REFRESHAKTIV", "globalmon", 0)

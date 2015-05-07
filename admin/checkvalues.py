@@ -3,18 +3,30 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 25.03.2015 (Version 0.6.1)
+# Beilage zu MonitorNjus, 07.05.2015 (Version 0.7.1)
 
-import common
+"""
+	Was macht diese Datei?
+	Sie sorgt dafür, dass das Admin-Interface je nach Aufruf nicht den Inhalt der Datenbank überprüfen muss,
+	sondern beispielsweise wenn Refresh aktiviert ist nicht "1" sondern "checked='checked'" als antwort bekommt.
+"""
 
-def testexist(GETNAME, Seite, Nummer):
+import os
+import imp
+workingdir = os.getcwd()
+if "admin" in workingdir:
+    common = imp.load_source('common', workingdir+"/../common.py")
+else:
+    common = imp.load_source('common', workingdir+"/common.py")
+
+def testexist(GETNAME, Seite, Nummer):										# Daten aus der Datenbank lesen
 	try:
 		if common.getinfo(GETNAME, Seite, Nummer):
 			return common.getinfo(GETNAME, Seite, Nummer)
 	except:
 		return "Keine Daten"
 
-def aktiv(GETNAME, Seite, Nummer):
+def aktiv(GETNAME, Seite, Nummer):											# Überprüft, ob eine Checkbox aktiviert ist
 	try:
 		if common.getinfo(GETNAME, Seite, Nummer) == 1:
 			return "checked=\"checked\""
@@ -23,7 +35,7 @@ def aktiv(GETNAME, Seite, Nummer):
 	except:
 		return ""
 
-def testexistwidg(GETNAME, widgname):
+def testexistwidg(GETNAME, widgname):										# Widget Daten aus der Datenbank lesen
 	try:
 		if common.getwidgetinfo(widgname, GETNAME) is not None:
 			if str(common.getwidgetinfo(widgname, GETNAME)).isdigit():
@@ -33,7 +45,7 @@ def testexistwidg(GETNAME, widgname):
 	except:
 		return "Fehler in checkvalues.testexistwidg"
 
-def widgaktiv(widgname):
+def widgaktiv(widgname):													# Dasselbe wie testexist(), nur für Widgets
 	try:
 		if common.getwidgetinfo(widgname, "Aktiv") == 1:
 			return "checked=\"checked\""
@@ -42,7 +54,7 @@ def widgaktiv(widgname):
 	except:
 		return ""
 
-def valign(widgname, typ):
+def valign(widgname, typ):													# Wichtig für die Dropdown Auswahl der Lage von Widgets
 	if typ == "valign":
 		try:
 			if common.getwidgetinfo(widgname, "valign") == "top":
@@ -84,9 +96,9 @@ def valign(widgname, typ):
 	else:
 		pass
 
-def getdate(value, Seite, Nummer):
-	timespan = common.getinfo("VONBIS", Seite, Nummer).split("|")
-	if value == "uhrzeit":
+def getdate(value, Seite, Nummer):											# Splittet die Daten in der Datenbank mit Anordnung nach (*|*|*|*)
+	timespan = common.getinfo("VONBIS", Seite, Nummer).split("|")			# in einzelne Werte für Uhrzeit, Wochentag, usw auf, um im Interface
+	if value == "uhrzeit":													# getrennt angezeigt zu werden
 		return timespan[0]
 	elif value == "wochentag":
 		return timespan[1]
@@ -97,8 +109,8 @@ def getdate(value, Seite, Nummer):
 	else:
 		return "Fehler"
 
-url1 = testexist("URL", "Links", 1)
-url2 = testexist("URL", "Rechts", 1)
+url1 = testexist("URL", "Links", 1)											# Speicherung der Strings in Variablen zum einfachen Abruf aus anderen
+url2 = testexist("URL", "Rechts", 1)										# Scripts
 url1_2 = testexist("URL", "Links", 2)
 url2_2 = testexist("URL", "Rechts", 2)
 refresh1 = testexist("REFRESH", "Links", 1)

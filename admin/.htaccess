@@ -1,8 +1,0 @@
-AddHandler cgi-script .py
-Options +ExecCGI
-DirectoryIndex index.py
-
-AuthType Basic
-AuthName "MonitorNjus Admin Panel"
-AuthUserFile PATHTO.htpasswd
-require valid-user

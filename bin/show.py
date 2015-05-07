@@ -6,18 +6,25 @@
 # Beilage zu MonitorNjus, 31.03.2015 (Version 0.7)
 
 try:
-    import common
-    import checktime
-    from datetime import datetime
+    import os
+    workingdir = os.getcwd()
+    import imp
+    if "bin" in workingdir:
+        common = imp.load_source('common', workingdir+"/../common.py")
+        checktime = imp.load_source('checktime', workingdir+"/../admin/checktime.py")
+    else:
+        common = imp.load_source('common', workingdir+"/common.py")
+        checktime = imp.load_source('checktime', workingdir+"/admin/checktime.py")
+
     rows = common.getrows()
 
     timeL = False
     timeR = False
     x = 1
     while x <= rows:
-        if checktime.match(common.getinfo("VONBIS", "Links", x),datetime.now()) == True and common.getinfo("AKTIV", "Links", x) == 1:
+        if checktime.match(common.getinfo("VONBIS", "Links", x),common.datum.now()) == True and common.getinfo("AKTIV", "Links", x) == 1:
             timeL = True
-        if checktime.match(common.getinfo("VONBIS", "Rechts", x),datetime.now()) == True and common.getinfo("AKTIV", "Rechts", x) == 1:
+        if checktime.match(common.getinfo("VONBIS", "Rechts", x),common.datum.now()) == True and common.getinfo("AKTIV", "Rechts", x) == 1:
             timeR = True
         else:
             pass
@@ -91,6 +98,7 @@ try:
 </html>"""
 
 except Exception, e:
+    import traceback
     print "Content-Type: text/html"
     print
     print """<!DOCTYPE html>
@@ -104,9 +112,10 @@ except Exception, e:
 </head>
 <body>
     <h1>Es ist ein Fehler aufgetreten (show.py)! Seite wird in 10 Sekunden neu geladen.</h1>
-    <h3>Details:<br>"""
-    print e
-    print """
-    </h3>
+    <h3>Details:</h3>
+    <pre>"""
+    print traceback.format_exc()
+    print """\
+    </pre>
 </body>
 </html>"""

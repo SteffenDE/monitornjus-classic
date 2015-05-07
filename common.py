@@ -3,17 +3,89 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 31.03.2015 (Version 0.7)
+# Beilage zu MonitorNjus, 07.05.2015 (Version 0.7.1)
 
+import os
 import datetime
 import sqlite3
 
 datum = datetime.datetime.now()
-version = "0.7&beta;"
+version = "0.7.1&beta;"
+workingdir = os.getcwd()
+
+###### Windows-Authentifizierung ######
+### Art ###
+
+listauth = 0      # Wenn ja, Benutzer in "userliste" eintragen. Benutzer benötigen Schreibrechte im ADMIN Verzeichnis!
+groupauth = 0     # Wenn ja, muss pywin32 installiert sein!
+
+### Userliste ###
+
+userliste = [
+"administrator",
+"groi",
+"peter.praker"
+]
+
+### Windows-Domäne ###
+
+domain = "SCHULE"
+
+### Gruppe ###
+
+group = "G_Projekt_MonitorNjus"
+
+###### Authentifizierungsfunktion ######
+
+def authenticated():
+        if listauth == 1:
+                import os
+                user = os.environ["REMOTE_USER"]
+                if user.lower().replace(domain.lower()+"\\", "") in userliste:
+                        pass
+                else:
+                        print "Content-Type: text/html"
+                        print
+                        print """\
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Du (%s) hast hier nichts verloren!</h1>
+</body>
+</html>""" % user
+                        exit(0)
+        elif groupauth == 1:
+                import sys
+                reload(sys)
+                sys.setdefaultencoding('utf-8')
+                import ad
+                import os
+                user = os.environ["REMOTE_USER"]
+                aduser = ad.find_user ()
+                if group.lower() in str(aduser.memberOf).lower() or "administrator" in user.lower():
+                        pass
+                else:
+                        print "Content-Type: text/html"
+                        print
+                        print """\
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Du (%s) hast hier nichts verloren!</h1>
+</body>
+</html>""" % user
+                        exit(0)
+        else:
+                pass
 
 ##########################################################################################
 
-conn = sqlite3.connect('../admin/MonitorNjus.db')
+if "admin" in workingdir:
+	conn = sqlite3.connect(workingdir+'/MonitorNjus.db')
+elif "bin" in workingdir:
+	conn = sqlite3.connect(workingdir+'/../admin/MonitorNjus.db')
+else:
+	conn = sqlite3.connect(workingdir+'/admin/MonitorNjus.db')
 
 def getinfo(Info, Seite, Nummer):
 	cursor = conn.execute("SELECT "+Info+" FROM DISPLAYSETS WHERE SEITE=\'"+Seite+"\' AND NUMMER="+str(Nummer)+";");
@@ -26,8 +98,8 @@ def writeinfo(Seite, Nummer, Info, value):
 		conn.execute("UPDATE DISPLAYSETS SET "+Info+"=\'"+value+"\' WHERE SEITE=\'"+Seite+"\' AND NUMMER="+str(Nummer)+";");
 	conn.commit()
 
-def getwidgetinfo(Name, Info):
-	cursor = conn.execute("SELECT "+Info+" FROM WIDGETS WHERE NAME=\'"+Name+"\';");
+def getwidgetinfo(NAME, Info):
+	cursor = conn.execute("SELECT "+Info+" FROM WIDGETS WHERE NAME=\'"+str(NAME)+"\';");
 	widgetinfo = cursor.fetchone()[0]
 	return widgetinfo
 

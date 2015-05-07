@@ -3,11 +3,19 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 31.03.2015 (Version 0.7)
+# Beilage zu MonitorNjus, 07.05.2015 (Version 0.7.1)
 
 import colors
-import common
+import os
+import imp
+workingdir = os.getcwd()
+if "admin" in workingdir:
+    common = imp.load_source('common', workingdir+"/../common.py")
+else:
+    common = imp.load_source('common', workingdir+"/common.py")
 import checkvalues
+
+common.authenticated()
 
 print "Content-Type: text/html"
 print
