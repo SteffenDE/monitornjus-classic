@@ -87,22 +87,14 @@ try:
 
 </body>"""
 
-except Exception, e:
-	print "Content-Type: text/html"
-	print
-	print """<!DOCTYPE html>
-<html lang="de">
-<head>
-	<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <META HTTP-EQUIV="refresh" CONTENT="10">
-</head>
-<body>
-	<h1>Es ist ein Fehler aufgetreten (autorollen.py)! Seite wird in 10 Sekunden neu geladen.</h1>
-	<h3>Details:<br>"""
-	print e
-	print """
-	</h3>
-</body>
-</html>"""
+except Exception as e:
+	import os
+    workingdir = os.getcwd()
+    import imp
+    if "bin" in workingdir:
+        common = imp.load_source('common', workingdir+"/../common.py")
+        checktime = imp.load_source('checktime', workingdir+"/../admin/checktime.py")
+    else:
+        common = imp.load_source('common', workingdir+"/common.py")
+        checktime = imp.load_source('checktime', workingdir+"/admin/checktime.py")
+    common.debug(e)

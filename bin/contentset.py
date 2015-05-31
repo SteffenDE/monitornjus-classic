@@ -32,7 +32,7 @@ try:
         seite = "2"
         mseite = "Rechts"
     else:
-        pass
+        raise Warning("Diese Seite existiert nicht!")
 
     if gnummer is None:
         x = 0
@@ -43,6 +43,12 @@ try:
             x = x + 1
     else:
         nummer = int(gnummer)
+
+    try:
+        nummer
+    except:
+        raise Warning("Es existiert keine aktive Seite oder ein anderer Fehler ist aufgetreten!")
+        exit(0)
 
     url = common.getinfo("URL", mseite, int(nummer))
     refresh = common.getinfo("REFRESH", mseite, int(nummer))
@@ -175,23 +181,5 @@ try:
 </body>\n\
 </html>"
 
-except Exception, e:
-    print "Content-Type: text/html"
-    print
-    print """<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
-    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
-    <link href="css/mnews.css" type="text/css" rel="stylesheet" media="screen,projection" />
-    <META HTTP-EQUIV="refresh" CONTENT="10" />
-</head>
-<body>
-    <h1>Es ist ein Fehler aufgetreten (contentset.py)! Seite wird in 10 Sekunden neu geladen.</h1>
-    <h3>Details:<br>"""
-    print e
-    print """
-    </h3>
-</body>
-/html>"""
+except Exception as e:
+    common.debug(e)

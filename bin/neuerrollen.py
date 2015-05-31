@@ -5,14 +5,15 @@
 # Licensed under the MIT license
 # Beilage zu MonitorNjus, 07.05.2015 (Version 0.7.1)
 
-import cgi, cgitb 
+try:
+    import cgi, cgitb 
 
-form = cgi.FieldStorage() 
-url = form.getvalue('url')
+    form = cgi.FieldStorage() 
+    url = form.getvalue('url')
 
-print "Content-Type: text/html"
-print
-print """\
+    print "Content-Type: text/html"
+    print
+    print """\
 <!DOCTYPE html>
 <html>
 <head>
@@ -98,3 +99,15 @@ intPos+=intStep*arrDir[strDir][0];
 objGo=setInterval('DM_ticken()',Interval);
 </script>
 </body></html>"""
+
+except Exception as e:
+    import os
+    workingdir = os.getcwd()
+    import imp
+    if "bin" in workingdir:
+        common = imp.load_source('common', workingdir+"/../common.py")
+        checktime = imp.load_source('checktime', workingdir+"/../admin/checktime.py")
+    else:
+        common = imp.load_source('common', workingdir+"/common.py")
+        checktime = imp.load_source('checktime', workingdir+"/admin/checktime.py")
+    common.debug(e)

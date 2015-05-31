@@ -13,6 +13,8 @@ datum = datetime.datetime.now()
 version = "0.7.1&beta;"
 workingdir = os.getcwd()
 
+debugv = 2		  # Verbosity: 0,1,2 (0 = off, 2 = high)
+
 ###### Windows-Authentifizierung ######
 ### Art ###
 
@@ -179,3 +181,44 @@ def checkfiletype(datei):
 		return "youtube"
 	else:
 		return "unknown"
+
+def debug(e):
+	import os
+	print "Content-Type: text/html"
+	print
+	print """<!DOCTYPE html>
+<html lang="de">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+	<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<META HTTP-EQUIV="refresh" CONTENT="30">
+</head>
+<body>
+	<div class="container">"""
+	if debugv >= 2:
+		import traceback
+		print """\
+	<h3>Es ist ein Fehler aufgetreten!</h3>
+	<h4>Details:</h4>
+	<pre><code>"""
+		print traceback.format_exc().replace(">","&gt;").replace("<",'&lt;').replace("\"",'&quot;')
+		print "</code></pre>"
+		print "    <small>Seite wird in 30 Sekunden neu geladen.</small><br>\
+	<small>Script: "+os.environ["SCRIPT_NAME"]+"</small>"
+	elif debugv == 1:
+		print """\
+    <h3>Es ist ein Fehler aufgetreten!</h3>
+    <h4>Details:<br>"""
+		print e
+		print "</h4>"
+		print "    <small>Seite wird in 30 Sekunden neu geladen.</small><br>\
+	<small>Script: "+os.environ["SCRIPT_NAME"]+"</small>"
+	else:
+		print """<h3>Es ist ein Fehler aufgetreten.<br>Weitere Informationen über "debug" in common.py!</h3>"""
+		print "    <small>Seite wird in 30 Sekunden neu geladen.</small><br>\
+	<small>Script: "+os.environ["SCRIPT_NAME"]+"</small>"
+	print """\
+	</div>
+</body>
+</html>"""

@@ -97,25 +97,5 @@ try:
     print """
 </html>"""
 
-except Exception, e:
-    import traceback
-    print "Content-Type: text/html"
-    print
-    print """<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link href="css/mnews.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <META HTTP-EQUIV="refresh" CONTENT="10">
-</head>
-<body>
-    <h1>Es ist ein Fehler aufgetreten (show.py)! Seite wird in 10 Sekunden neu geladen.</h1>
-    <h3>Details:</h3>
-    <pre>"""
-    print traceback.format_exc()
-    print """\
-    </pre>
-</body>
-</html>"""
+except Exception as e:
+    common.debug(e)

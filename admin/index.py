@@ -10,6 +10,7 @@ try:
 	import checkvalues
 	import os
 	import imp
+	
 	workingdir = os.getcwd()
 	if "admin" in workingdir:
 	    common = imp.load_source('common', workingdir+"/../common.py")
@@ -274,26 +275,5 @@ try:
 	</body>
 	</html>""" % (common.datum.year)
 
-except Exception, e:
-	print "Content-Type: text/html"
-	print
-	print """<!DOCTYPE html>
-	<html lang="de">
-	<head>
-		<meta http-equiv="cache-control" content="max-age=0" />
-		<meta http-equiv="cache-control" content="no-cache" />
-		<meta http-equiv="expires" content="0" />
-		<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
-		<meta http-equiv="pragma" content="no-cache" />
-	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-	    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-	    <link href="css/mnews.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-	    <META HTTP-EQUIV="refresh" CONTENT="10">
-	</head>
-	<body>
-		<h1>Es ist ein Fehler aufgetreten (index.py)! Seite wird in 10 Sekunden neu geladen.</h1>
-		<h3>Details:<br>"""
-	print e
-	print """
-	</h3></body></html>"""
+except Exception as e:
+    common.debug(e)

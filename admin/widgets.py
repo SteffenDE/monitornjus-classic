@@ -5,21 +5,22 @@
 # Licensed under the MIT license
 # Beilage zu MonitorNjus, 07.05.2015 (Version 0.7.1)
 
-import colors
-import os
-import imp
-workingdir = os.getcwd()
-if "admin" in workingdir:
-    common = imp.load_source('common', workingdir+"/../common.py")
-else:
-    common = imp.load_source('common', workingdir+"/common.py")
-import checkvalues
+try:
+	import colors
+	import os
+	import imp
+	workingdir = os.getcwd()
+	if "admin" in workingdir:
+	    common = imp.load_source('common', workingdir+"/../common.py")
+	else:
+	    common = imp.load_source('common', workingdir+"/common.py")
+	import checkvalues
 
-common.authenticated()
+	common.authenticated()
 
-print "Content-Type: text/html"
-print
-print """
+	print "Content-Type: text/html"
+	print
+	print """
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -309,3 +310,6 @@ print """
 </body>
 </html>
 	""" % (common.datum.year)
+
+except Exception as e:
+    common.debug(e)
