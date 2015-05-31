@@ -13,7 +13,7 @@ datum = datetime.datetime.now()
 version = "0.7.1&beta;"
 workingdir = os.getcwd()
 
-debugv = 2		  # Verbosity: 0,1,2 (0 = off, 2 = high)
+debugv = 1		  # Verbosity: 0,1,2 (0 = off, 1 = basic, 2 = high)
 
 ###### Windows-Authentifizierung ######
 ### Art ###
