@@ -9,17 +9,17 @@ import os
 import imp
 workingdir = os.getcwd()
 if "bin" in workingdir:
-    common = imp.load_source('common', workingdir+"/../common.py")
+	common = imp.load_source('common', workingdir+"/../common.py")
 else:
-    common = imp.load_source('common', workingdir+"/common.py")
+	common = imp.load_source('common', workingdir+"/common.py")
 
 try:
 	import read_values
 
 	if int(read_values.read_refreshmonenabled) == 1:
-	    refresh = "    <META HTTP-EQUIV=\"refresh\" CONTENT=\""+str(read_values.read_refreshmon)+"\" >"
+		refresh = "    <META HTTP-EQUIV=\"refresh\" CONTENT=\""+str(read_values.read_refreshmon)+"\" >"
 	else:
-	    refresh = ""
+		refresh = ""
 
 	disp = """
 	<iframe src="show.py" style="position:absolute; height:100%; width:100%; right:0px; border-style:none; overflow:hidden" scrolling="no"></iframe>"""
@@ -102,4 +102,4 @@ try:
 </html>"""
 
 except Exception as e:
-    common.debug(e)
+	common.debug(e)

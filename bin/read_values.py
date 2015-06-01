@@ -10,9 +10,9 @@ try:
 	workingdir = os.getcwd()
 	import imp
 	if "bin" in workingdir:
-	    common = imp.load_source('common', workingdir+"/../common.py")
+		common = imp.load_source('common', workingdir+"/../common.py")
 	else:
-	    common = imp.load_source('common', workingdir+"/common.py")
+		common = imp.load_source('common', workingdir+"/common.py")
 
 	read_refreshallenabled = common.getinfo("REFRESHAKTIV", "global", 0)
 	read_refreshmonenabled = common.getinfo("REFRESHAKTIV", "globalmon", 0)
@@ -54,4 +54,4 @@ try:
 	read_widgetwidth = common.getwidgetinfo("Freies-Widget", "width")
 
 except Exception as e:
-    common.debug(e)
+	common.debug(e)

@@ -24,7 +24,7 @@ try:
 <script type="text/javascript">
 	 
 	function resizeIframe(obj) {
-	    obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+		obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
 	}
 
 </script>
@@ -67,34 +67,34 @@ try:
 <body>
 <script type="text/javascript">
 (function($) {
-    $(function() { //on DOM ready
-        $("#scroller").simplyScroll({
-            customClass: 'custom',
-            orientation: 'vertical',
-            auto: true,
-            autoMode: 'loop',
-            frameRate: 60,
-            speed: 1,
-            startOnLoad: true,
-            pauseOnHover: false
-        });
-    });
+	$(function() { //on DOM ready
+		$("#scroller").simplyScroll({
+			customClass: 'custom',
+			orientation: 'vertical',
+			auto: true,
+			autoMode: 'loop',
+			frameRate: 60,
+			speed: 1,
+			startOnLoad: true,
+			pauseOnHover: false
+		});
+	});
 })(jQuery);
 </script>
 <div id="scroller">
-    <iframe src=\""""+url+"""\" style="position:static; width:100%; margin-left:2px; border-style:none; overflow:hidden" scrolling="no" name="links" onload="javascript:resizeIframe(this);"></iframe>
+	<iframe src=\""""+url+"""\" style="position:static; width:100%; margin-left:2px; border-style:none; overflow:hidden" scrolling="no" name="links" onload="javascript:resizeIframe(this);"></iframe>
 </div>
 
 </body>"""
 
 except Exception as e:
 	import os
-    workingdir = os.getcwd()
-    import imp
-    if "bin" in workingdir:
-        common = imp.load_source('common', workingdir+"/../common.py")
-        checktime = imp.load_source('checktime', workingdir+"/../admin/checktime.py")
-    else:
-        common = imp.load_source('common', workingdir+"/common.py")
-        checktime = imp.load_source('checktime', workingdir+"/admin/checktime.py")
-    common.debug(e)
+	workingdir = os.getcwd()
+	import imp
+	if "bin" in workingdir:
+		common = imp.load_source('common', workingdir+"/../common.py")
+		checktime = imp.load_source('checktime', workingdir+"/../admin/checktime.py")
+	else:
+		common = imp.load_source('common', workingdir+"/common.py")
+		checktime = imp.load_source('checktime', workingdir+"/admin/checktime.py")
+	common.debug(e)

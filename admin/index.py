@@ -13,9 +13,9 @@ try:
 	
 	workingdir = os.getcwd()
 	if "admin" in workingdir:
-	    common = imp.load_source('common', workingdir+"/../common.py")
+		common = imp.load_source('common', workingdir+"/../common.py")
 	else:
-	    common = imp.load_source('common', workingdir+"/common.py")
+		common = imp.load_source('common', workingdir+"/common.py")
 	import firstrun
 
 	common.authenticated()
@@ -276,4 +276,4 @@ try:
 	</html>""" % (common.datum.year)
 
 except Exception as e:
-    common.debug(e)
+	common.debug(e)

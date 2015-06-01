@@ -15,9 +15,9 @@ import os
 import imp
 workingdir = os.getcwd()
 if "admin" in workingdir:
-    common = imp.load_source('common', workingdir+"/../common.py")
+	common = imp.load_source('common', workingdir+"/../common.py")
 else:
-    common = imp.load_source('common', workingdir+"/common.py")
+	common = imp.load_source('common', workingdir+"/common.py")
 
 def testexist(GETNAME, Seite, Nummer):										# Daten aus der Datenbank lesen
 	try:
