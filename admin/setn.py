@@ -56,7 +56,7 @@ try:
 					else:
 						common.writewidgetinfo(widgname, GETNAME, str(val))
 		else:
-			pass
+			raise Warning("Function updateurl_refresh: This referer does not exist.")
 
 	def updateaktiv(Name, GETNAME, Seite, Nummer, widgname):
 		if "index" in referer:
@@ -80,7 +80,7 @@ try:
 				else:
 					common.writewidgetinfo(widgname, GETNAME, int(val_flag))
 		else:
-			pass
+			raise Warning("Function updateaktiv: This referer does not exist.")
 
 	def update_align(Name, GETNAME, widgname):
 		if "widgets" in referer:
@@ -99,6 +99,8 @@ try:
 						pass
 					else:
 						common.writewidgetinfo(widgname, GETNAME, str(val))
+		else:
+			raise Warning("Function update_align: This referer is not allowed.")
 
 	def updatetime(Seite, Nummer):
 		if "index" in referer:
@@ -108,7 +110,7 @@ try:
 			monat = form.getvalue("monat-"+Seite+"-"+str(Nummer))
 			if uhrzeit is None and wochentag is None and tag is None and monat is None:
 				pass
-			elif uhrzeit is not None or wochentag is not None or tag is not None or monat is not None:
+			else:
 				if uhrzeit is None:
 					uhrzeit = "*"
 				if wochentag is None:
@@ -118,6 +120,8 @@ try:
 				if monat is None:
 					monat = "*"
 				common.writeinfo(Seite, Nummer, "VONBIS", uhrzeit+"|"+wochentag+"|"+tag+"|"+monat)
+		else:
+			raise Warning("Function updatetime: This referer is not allowed.")
 
 	if "index" in referer:
 		x = 1
@@ -179,29 +183,15 @@ try:
 		update_align("widgetheight", "height", "Freies-Widget")
 
 	if "row" in referer:
-		if form.getvalue("createrow") is not None:
-			createrow = 1
-		else:
-			createrow = 0
 		cnum = form.getvalue("createnum")
-		if createrow is not None and cnum is not None:
+		dnum = form.getvalue("delnum")
+		if form.getvalue("createrow") is not None and cnum is not None:
 			num = int(cnum)
-		else:
-			num = None
-		if num is not None:
 			common.createrow(num)
 		else:
 			pass
-		if form.getvalue("delrow") is not None:
-			delrow = 1
-		else:
-			delrow = None
-		dnum = form.getvalue("delnum")
-		if delrow is not None and dnum is not None:
+		if form.getvalue("delrow") is not None and dnum is not None:
 			num = int(dnum)
-		else:
-			num = None
-		if num is not None:
 			common.delrow(num)
 		else:
 			pass
@@ -213,6 +203,8 @@ try:
 		refresh = "<meta http-equiv=\"refresh\" content=\"0; URL=../admin/index.py\">"
 	elif "widgets" in referer:
 		refresh = "<meta http-equiv=\"refresh\" content=\"0; URL=../admin/widgets.py\">"
+	else:
+		pass
 
 	print "Content-Type: text/html"
 	print

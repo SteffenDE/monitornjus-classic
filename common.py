@@ -15,7 +15,7 @@ workingdir = os.getcwd()
 
 ############################## Settings ##############################
 
-debugv = 2		  # Verbosity: 0,1,2 (0 = off, 1 = basic, 2 = high)
+debugv = 1		  # Verbosity: 0,1,2 (0 = off, 1 = basic, 2 = high)
 
 ###### Windows-Authentifizierung ######
 ### Art ###
@@ -148,14 +148,14 @@ def getallrows():
 	liste = " ".join(val)
 	return liste
 
-def write(Seite, Nummer, URL, Aktiv, Refreshaktiv, Refresh, vonbis, vonbiskaktiv):
+def write(Seite, Nummer, URL, Aktiv, Refreshaktiv, Refresh, vonbis):
 	conn.execute("DELETE FROM DISPLAYSETS where SEITE=\'"+Seite+"\' AND NUMMER="+str(Nummer)+"");
-	conn.execute("INSERT INTO DISPLAYSETS (SEITE,NUMMER,URL,AKTIV,REFRESHAKTIV,REFRESH,VONBIS,VONBISAKTIV) values (\'"+Seite+"\',"+str(Nummer)+",\'"+URL+"\',"+str(Aktiv)+","+str(Refreshaktiv)+","+str(Refresh)+",\'"+vonbis+"\',"+str(vonbiskaktiv)+")");
+	conn.execute("INSERT INTO DISPLAYSETS (SEITE,NUMMER,URL,AKTIV,REFRESHAKTIV,REFRESH,VONBIS) values (\'"+Seite+"\',"+str(Nummer)+",\'"+URL+"\',"+str(Aktiv)+","+str(Refreshaktiv)+","+str(Refresh)+",\'"+vonbis+"\')");
 	conn.commit()
 
 def createrow(Nummer):
-	write("Links", Nummer, "placeholder.html", 1, 0, 60, "*|*|*|*", 0)
-	write("Rechts", Nummer, "placeholder.html", 1, 0, 60, "*|*|*|*", 0)
+	write("Links", Nummer, "placeholder.html", 1, 0, 60, "*|*|*|*")
+	write("Rechts", Nummer, "placeholder.html", 1, 0, 60, "*|*|*|*")
 
 def delrow(Nummer):
 	rows = getrows()
@@ -225,11 +225,16 @@ Content-Type: text/html
 
 def debug(e):
 	import os
-	scrname = os.environ["SCRIPT_NAME"]
-	if "bin/index.py" in scrname:
+	if "bin/index.py" in os.environ["SCRIPT_NAME"]:
 		isfirstrun()
 	else:
 		pass
+	if "bin" in workingdir:
+		css = "css/"
+	elif "admin" in workingdir:
+		css = "../bin/css/"
+	else:
+		css = "bin/css/"
 	print "Content-Type: text/html"
 	print
 	print """<!DOCTYPE html>
@@ -237,7 +242,7 @@ def debug(e):
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-	<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<link href=\""""+css+"""materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 	<META HTTP-EQUIV="refresh" CONTENT="30">
 </head>
 <body>
@@ -249,22 +254,18 @@ def debug(e):
 	<h4>Details:</h4>
 	<pre><code>"""
 		print traceback.format_exc().replace(">","&gt;").replace("<",'&lt;').replace("\"",'&quot;')
-		print "</code></pre>"
-		print "    <small>Seite wird in 30 Sekunden neu geladen.</small><br>\
-	<small>Script: "+scrname+"</small>"
+		print "    </code></pre>"
 	elif debugv == 1:
 		print """\
 	<h3>Es ist ein Fehler aufgetreten!</h3>
 	<h4>Details:<br>"""
 		print e
 		print "</h4>"
-		print "    <small>Seite wird in 30 Sekunden neu geladen.</small><br>\
-	<small>Script: "+scrname+"</small>"
 	else:
 		print """<h3>Es ist ein Fehler aufgetreten.<br>Weitere Informationen über "debug" in common.py!</h3>"""
-		print "    <small>Seite wird in 30 Sekunden neu geladen.</small><br>\
-	<small>Script: "+scrname+"</small>"
 	print """\
+	<small>Seite wird in 30 Sekunden neu geladen.</small><br>
+	<small>Script: """+os.environ["SCRIPT_NAME"]+"""</small>
 	</div>
 </body>
 </html>"""
