@@ -44,45 +44,45 @@ group = "G_Projekt_MonitorNjus"
 ###### Authentifizierungsfunktion ######
 
 def authenticated():
-        if listauth == 1:
-                import os
-                user = os.environ["REMOTE_USER"]
-                if user.lower().replace(domain.lower()+"\\", "") in userliste:
-                        pass
-                else:
-                        print "Content-Type: text/html"
-                        print
-                        print """\
+		if listauth == 1:
+				import os
+				user = os.environ["REMOTE_USER"]
+				if user.lower().replace(domain.lower()+"\\", "") in userliste:
+						pass
+				else:
+						print "Content-Type: text/html"
+						print
+						print """\
 <!DOCTYPE html>
 <html>
 <body>
 <h1>Du (%s) hast hier nichts verloren!</h1>
 </body>
 </html>""" % user
-                        exit(0)
-        elif groupauth == 1:
-                import sys
-                reload(sys)
-                sys.setdefaultencoding('utf-8')
-                import ad
-                import os
-                user = os.environ["REMOTE_USER"]
-                aduser = ad.find_user ()
-                if group.lower() in str(aduser.memberOf).lower() or "administrator" in user.lower():
-                        pass
-                else:
-                        print "Content-Type: text/html"
-                        print
-                        print """\
+						exit(0)
+		elif groupauth == 1:
+				import sys
+				reload(sys)
+				sys.setdefaultencoding('utf-8')
+				import ad
+				import os
+				user = os.environ["REMOTE_USER"]
+				aduser = ad.find_user ()
+				if group.lower() in str(aduser.memberOf).lower() or "administrator" in user.lower():
+						pass
+				else:
+						print "Content-Type: text/html"
+						print
+						print """\
 <!DOCTYPE html>
 <html>
 <body>
 <h1>Du (%s) hast hier nichts verloren!</h1>
 </body>
 </html>""" % user
-                        exit(0)
-        else:
-                pass
+						exit(0)
+		else:
+				pass
 
 ##########################################################################################
 
@@ -212,8 +212,8 @@ def debug(e):
 	<small>Script: "+os.environ["SCRIPT_NAME"]+"</small>"
 	elif debugv == 1:
 		print """\
-    <h3>Es ist ein Fehler aufgetreten!</h3>
-    <h4>Details:<br>"""
+	<h3>Es ist ein Fehler aufgetreten!</h3>
+	<h4>Details:<br>"""
 		print e
 		print "</h4>"
 		print "    <small>Seite wird in 30 Sekunden neu geladen.</small><br>\
