@@ -77,7 +77,8 @@ try:
 	<h3 class="header center """+colors.color+"""-text">Widgets</h3>
 	<div class="container">
 		<div class="row">
-			<form class="col s12" action="setn.py?referer=widgets" method="post">
+			<form class="col s12" action="setn.py" method="post">
+				<input type="hidden" name="referer" value="widgets" />
 				<div class="row">
 					<div class="col s6">
 						<div class="card white darken-1">

@@ -186,7 +186,8 @@ try:
 		<h3 class="header center """+colors.color+"""-text">Haupteinstellungen</h3>
 		<div class="container">
 			<div class="row">
-				<form class="col s12" action="setn.py?referer=index" method="post">
+				<form class="col s12" action="setn.py" method="post">
+					<input type="hidden" name="referer" value="index" />
 					<div class="row">"""
 	displaysets()
 	print """
