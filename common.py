@@ -194,17 +194,14 @@ def isfirstrun():
 		rfr = open(workingdir+"/firstrun", "r")
 		read_firstrun = rfr.read()
 		rfr.close()
-		wheretogo = "index.py"
 	elif "bin" in workingdir:
 		rfr = open(workingdir+"/../admin/firstrun", "r")
 		read_firstrun = rfr.read()
 		rfr.close()
-		wheretogo = "../admin/index.py"
 	else:
 		rfr = open(workingdir+"/admin/firstrun", "r")
 		read_firstrun = rfr.read()
 		rfr.close()
-		wheretogo = "admin/index.py"
 	if int(read_firstrun) == 1:
 		print """\
 Content-Type: text/html
@@ -214,7 +211,7 @@ Content-Type: text/html
 <head>
 	<meta charset="UTF-8">
 	<title>Redirecting...</title>
-	<meta http-equiv="refresh" content="0;url="""+wheretogo+"""\">
+	<meta http-equiv="refresh" content="0;url=../admin/index.py">
 </head>
 <body>
 </body>
