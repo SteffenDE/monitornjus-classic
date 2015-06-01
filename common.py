@@ -13,13 +13,15 @@ datum = datetime.datetime.now()
 version = "0.7.2&beta;"
 workingdir = os.getcwd()
 
+############################## Settings ##############################
+
 debugv = 1		  # Verbosity: 0,1,2 (0 = off, 1 = basic, 2 = high)
 
 ###### Windows-Authentifizierung ######
 ### Art ###
 
 listauth = 0      # Wenn ja, Benutzer in "userliste" eintragen. Benutzer benötigen Schreibrechte im ADMIN Verzeichnis!
-groupauth = 0     # Wenn ja, muss pywin32 installiert sein!
+groupauth = 0     # Wenn ja, muss pywin32 installiert sein! Gruppe für die Authentifizierung unter group = "xy" festlegen!
 
 ### Userliste ###
 
@@ -36,6 +38,8 @@ domain = "SCHULE"
 ### Gruppe ###
 
 group = "G_Projekt_MonitorNjus"
+
+######################################################################
 
 ###### Authentifizierungsfunktion ######
 
