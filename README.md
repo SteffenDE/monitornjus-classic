@@ -27,7 +27,7 @@ Diese Gruppe benötigt Schreibzugriff auf das MonitorNjus Admin Verzeichnis!
 "group" legt die Active-Directory Benutzergruppe fest, gegen die die zugreifenden Benutzer authentifiziert werden sollen.
 
 #### bin/vertretung.py
-Diese Datei passt das Design der HTML Dateien generiert von UNTIS an. Die jeweiligen replace Befehle können nach Belieben geändert werden.
+Diese Datei ist dafüt gedacht, den Vertretungplan einer Schule, die UNTIS einsetzt in einem passenderen Design auf dem Monitor anzuzeigen. Die jeweiligen replace Befehle können nach Belieben geändert werden.
 Der Dateisystempfad zu den HTML Dateien für den aktuellen bzw. nächsten Tag muss in der Variablen "path" angegeben werden. 
 Beispiele:
 "D:/MLData/Benutzer/Projekte/MonitorNjus/sync/heute_und_morgen/"
