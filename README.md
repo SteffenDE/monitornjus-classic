@@ -9,7 +9,7 @@ idea based on MonitorNews by Tamer Berber
 
 ## Setup
 ### German
-MonitorNjus ist eine Alternative zu "MonitorNews". Im Gegensatz zu "MonitorNews" von Tamer Berber ist MonitorNjus in Python geschrieben. Auf dem Server, der eingesetzt werden soll muss also Python installiert sein. MonitorNjus in für Python 2 ausgelegt.
+MonitorNjus ist eine Alternative zu "MonitorNews" von Tamer Berber. Im Gegensatz zu "MonitorNews" ist MonitorNjus in Python geschrieben. Auf dem Server, der eingesetzt werden soll muss also Python installiert sein. MonitorNjus in für Python 2 ausgelegt.
 
 #### common.py
 In der Datei "common.py" werden im Abschnitt "Settings" mögliche Einstellungen vorgenommen.
