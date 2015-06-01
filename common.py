@@ -15,7 +15,7 @@ workingdir = os.getcwd()
 
 ############################## Settings ##############################
 
-debugv = 1		  # Verbosity: 0,1,2 (0 = off, 1 = basic, 2 = high)
+debugv = 2		  # Verbosity: 0,1,2 (0 = off, 1 = basic, 2 = high)
 
 ###### Windows-Authentifizierung ######
 ### Art ###
@@ -186,8 +186,50 @@ def checkfiletype(datei):
 	else:
 		return "unknown"
 
+def isfirstrun():
+	import os
+	workingdir = os.getcwd()
+	import imp
+	if "admin" in workingdir:
+		rfr = open(workingdir+"/firstrun", "r")
+		read_firstrun = rfr.read()
+		rfr.close()
+		wheretogo = "index.py"
+	elif "bin" in workingdir:
+		rfr = open(workingdir+"/../admin/firstrun", "r")
+		read_firstrun = rfr.read()
+		rfr.close()
+		wheretogo = "../admin/index.py"
+	else:
+		rfr = open(workingdir+"/admin/firstrun", "r")
+		read_firstrun = rfr.read()
+		rfr.close()
+		wheretogo = "admin/index.py"
+	if int(read_firstrun) == 1:
+		print """\
+Content-Type: text/html
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Redirecting...</title>
+	<meta http-equiv="refresh" content="0;url="""+wheretogo+"""\">
+</head>
+<body>
+</body>
+</html>"""
+		exit(0)
+	else:
+		pass
+
 def debug(e):
 	import os
+	scrname = os.environ["SCRIPT_NAME"]
+	if "bin/index.py" in scrname:
+		isfirstrun()
+	else:
+		pass
 	print "Content-Type: text/html"
 	print
 	print """<!DOCTYPE html>
@@ -209,7 +251,7 @@ def debug(e):
 		print traceback.format_exc().replace(">","&gt;").replace("<",'&lt;').replace("\"",'&quot;')
 		print "</code></pre>"
 		print "    <small>Seite wird in 30 Sekunden neu geladen.</small><br>\
-	<small>Script: "+os.environ["SCRIPT_NAME"]+"</small>"
+	<small>Script: "+scrname+"</small>"
 	elif debugv == 1:
 		print """\
 	<h3>Es ist ein Fehler aufgetreten!</h3>
@@ -217,11 +259,11 @@ def debug(e):
 		print e
 		print "</h4>"
 		print "    <small>Seite wird in 30 Sekunden neu geladen.</small><br>\
-	<small>Script: "+os.environ["SCRIPT_NAME"]+"</small>"
+	<small>Script: "+scrname+"</small>"
 	else:
 		print """<h3>Es ist ein Fehler aufgetreten.<br>Weitere Informationen über "debug" in common.py!</h3>"""
 		print "    <small>Seite wird in 30 Sekunden neu geladen.</small><br>\
-	<small>Script: "+os.environ["SCRIPT_NAME"]+"</small>"
+	<small>Script: "+scrname+"</small>"
 	print """\
 	</div>
 </body>
