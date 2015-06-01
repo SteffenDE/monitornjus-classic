@@ -5,6 +5,10 @@
 # Licensed under the MIT license
 # Beilage zu MonitorNjus, 07.05.2015 (Version 0.7.1)
 
+path = "sync/heute_und_morgen/"
+name_heute = "subst_001.htm"
+name_morgen = "subst_002.htm"
+
 def replace_b(body):
 	end = body\
 		.replace("<style type=\"text/css\">","<!--<style>")\
@@ -72,9 +76,8 @@ try:
 	headerarg = str(headerg)
 	bodyarg = str(bodyg)
 
-	sync_heute_und_morgen = "sync/heute_und_morgen/"
-	actday_file = sync_heute_und_morgen + "subst_001.htm"
-	nxtday_file = sync_heute_und_morgen + "subst_002.htm"
+	actday_file = path + name_heute
+	nxtday_file = path + name_morgen
 
 	monitornews = 0
 	if "1" in nxtdayarg or "10" in nxtdayarg:
@@ -100,10 +103,10 @@ try:
 		header = 1
 		body = 0
 
-	syh = open(sync_heute_und_morgen + "subst_001.htm", "r")
+	syh = open(path + name_heute, "r")
 	sync_heute = syh.read()
 
-	sym = open(sync_heute_und_morgen + "subst_002.htm", "r")
+	sym = open(path + name_morgen, "r")
 	sync_morgen = sym.read()
 
 	if actday == 1 and header == 1:
