@@ -231,9 +231,9 @@ def debug(e):
 	elif "admin" in workingdir:
 		css = "../bin/css/"
 	else:
-		if "bin" in os.environ["SCRIPT_NAME"]
+		if "bin" in os.environ["SCRIPT_NAME"]:
 			css = "css/"
-		elif "admin" in os.environ["SCRIPT_NAME"]
+		elif "admin" in os.environ["SCRIPT_NAME"]:
 			css = "../bin/css/"
 		else:
 			css = "bin/css/"
