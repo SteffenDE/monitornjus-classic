@@ -309,8 +309,7 @@ try:
 <!--  Scripts-->
 <script src="../bin/js/init.js"></script>
 </body>
-</html>
-	""" % (common.datum.year)
+</html>""" % (common.datum.year)
 
 except Exception as e:
 	common.debug(e)
