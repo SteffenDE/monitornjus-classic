@@ -231,7 +231,12 @@ def debug(e):
 	elif "admin" in workingdir:
 		css = "../bin/css/"
 	else:
-		css = "bin/css/"
+		if "bin" in os.environ["SCRIPT_NAME"]
+			css = "css/"
+		elif "admin" in os.environ["SCRIPT_NAME"]
+			css = "../bin/css/"
+		else:
+			css = "bin/css/"
 	print "Content-Type: text/html"
 	print
 	print """<!DOCTYPE html>
