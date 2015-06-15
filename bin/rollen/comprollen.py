@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 # Copyright (c) 2015 Steffen Deusch
-# Beilage zu MonitorNjus, 02.06.2015 (Version 0.7.4)
 
 try:
     import cgi, cgitb 
@@ -10,6 +9,14 @@ try:
     form = cgi.FieldStorage() 
     url = form.getvalue('url')
     typ = form.getvalue("type")
+
+    ######### Settings #########
+
+    schritte = 1        # Pixel pro Step
+    speed = 10          # Millisekundeb pro Step
+    direction = "up"    # up / down
+
+    ############################
 
     print "Content-Type: text/html"
     print
@@ -22,23 +29,7 @@ try:
 <title>MonitorNjus scrollredirect</title>
 <meta charset="UTF-8">
 <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
-<script type="text/javascript" src="js/jquery.simplyscroll.js"></script>"""
-# <script type="text/javascript">
- 
-#     function resizeIframe(obj) {
-#         obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
-#     }
-
-#     function initialize() {
-#         var frame = document.getElementsByTagName('iframe')[0];
-#         if(frame.contentWindow.document.body.scrollHeight > 950)
-#         	{
-#             window.location.href = "autorollen.py?url="""+url+""""
-#         	}
-#     }
-
-# </script>
-        print """\
+<script type="text/javascript" src="js/jquery.simplyscroll.js"></script>
 <script type="text/javascript">
 function resizeIframe(obj) {
     obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
@@ -88,7 +79,7 @@ function autoresize_frames()
     }
 </script>
 """
-# <script language="JavaScript1.2">
+# <script language="text/javascript">
 # var framefenster = document.getElementsByTagName("iFrame");
 # var auto_resize_timer = window.setInterval("autoresize_frames()", 400);
 # function autoresize_frames()
@@ -113,11 +104,11 @@ function autoresize_frames()
 <script type="text/javascript">
 //Laufrichtung(up,down)
 var frame = '<iframe src=\""""+url+"""\" style="width:100%; height:100%;" frameborder="0" name="links" scrolling="no" onload="javascript:resizeIframe(this);"></iframe>'
-var strDir      ='up';
+var strDir      ='"""+direction+"""';
     //Interval in ms
-var Interval = 20;
+var Interval = """+str(speed)+""";
     //Falls Leeraum zwischen News...hier Wert erhoehen...minimum:1
-var intRepeat   = 2;
+var intRepeat   = 3;
     //Background-color
 var strBgc      ='#fff';
     //Text-color
@@ -125,7 +116,7 @@ var strTxtc     ='#ffffff';
     //Textausrichtung
 var strAlign    ='left';
     //Schritt pro Durchlauf(px)
-var intStep=1;
+var intStep="""+str(schritte)+""";
 /* * * * * * * * * * * * * * * * * * D E R  T I C K E R * * * * * * * * * * * * * * * * * * * * * */
 blnDir=(strDir=='up'||strDir=='down')?true:false;
 strAlign=(blnDir)?'text-align:'+strAlign+';':'';
