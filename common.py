@@ -256,13 +256,13 @@ def debug(e):
 	<h4>Details:</h4>
 	<pre><code>"""
 		print traceback.format_exc().replace(">","&gt;").replace("<",'&lt;').replace("\"",'&quot;')
-		print "    </code></pre>"
+		print "	</code></pre>"
 	elif debugv == 1:
 		print """\
 	<h3>Es ist ein Fehler aufgetreten!</h3>
 	<h4>Details:<br>"""
 		print e
-		print "</h4>"
+		print "	</h4>"
 	else:
 		print """<h3>Es ist ein Fehler aufgetreten.<br>Weitere Informationen über "debug" in common.py!</h3>"""
 	print """\

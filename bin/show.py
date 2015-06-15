@@ -20,6 +20,8 @@ try:
 
 	timeL = False
 	timeR = False
+	geteilt = False
+
 	x = 1
 	while x <= rows:
 		if checktime.match(common.getinfo("VONBIS", "Links", x),common.datum.now()) == True and common.getinfo("AKTIV", "Links", x) == 1:
@@ -32,42 +34,39 @@ try:
 			break
 		x = x + 1
 
-	geteilt = False
 	if "1" in common.getgeteilt("Links") and "1" in common.getgeteilt("Rechts") and timeL == True and timeR == True:
 		geteilt = True
 
 	if geteilt == True:
-		disp = """
+		disp = """\
 	<frameset frameborder="0" rows="*,0">
 		<frameset frameborder="0" cols="50,50">
 			<frame scrolling="no" src="contentset.py?seite=1" name="links" />
 			<frame scrolling="no" src="contentset.py?seite=2" name="rechts" />
-	  </frameset> 
-	</frameset>
-	<noframes>
-	</noframes>"""
+		</frameset> 
+	</frameset>"""
 	elif "1" in common.getgeteilt("Links") and "0" in common.getgeteilt("Rechts") and timeL == True:
-		disp = """
+		disp = """\
 	<frameset frameborder="0" rows="*,0">
 		<frame scrolling="no" src="contentset.py?seite=1" name="links" />
 	</frameset>"""
 	elif "1" in common.getgeteilt("Rechts") and "0" in common.getgeteilt("Links") and timeR == True:
-		disp = """
+		disp = """\
 	<frameset frameborder="0" rows="*,0">
 		<frame scrolling="no" src="contentset.py?seite=2" name="rechts" />
 	</frameset>"""
 	elif "1" in common.getgeteilt("Links") and "1" in common.getgeteilt("Rechts") and timeL == True:
-		disp = """
+		disp = """\
 	<frameset frameborder="0" rows="*,0">
 		<frame scrolling="no" src="contentset.py?seite=1" name="links" />
 	</frameset>"""
 	elif "1" in common.getgeteilt("Rechts") and "1" in common.getgeteilt("Links") and timeR == True:
-		disp = """
+		disp = """\
 	<frameset frameborder="0" rows="*,0">
 		<frame scrolling="no" src="contentset.py?seite=2" name="rechts" />
 	</frameset>"""
 	else:
-		disp = """
+		disp = """\
 	<div class="row">
 		<div class="col s12">
 			<h1>Konfigurationsfehler.</h1>
@@ -76,7 +75,7 @@ try:
 
 	print "Content-Type: text/html"
 	if common.getinfo("REFRESHAKTIV", "global", 0) == 1:
-		refresh = "    <META HTTP-EQUIV=\"refresh\" CONTENT=\""+str(common.getinfo("REFRESH", "global", 0))+"\">"
+		refresh = "	<META HTTP-EQUIV=\"refresh\" CONTENT=\""+str(common.getinfo("REFRESH", "global", 0))+"\">"
 	else:
 		refresh = ""
 	print
@@ -87,14 +86,14 @@ try:
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
 	<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>"""
 	print refresh
-	print """
+	print """\
 	<title>MonitorNjus</title>
 </head>"""
 	#print timeL
 	#print timeR
 	#print geteilt
 	print disp
-	print """
+	print """\
 </html>"""
 
 except Exception as e:
