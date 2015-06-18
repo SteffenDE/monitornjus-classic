@@ -73,6 +73,24 @@ try:
 													<label for="monat-Links-"""+str(x)+"""">Monat</label>
 												</div>
 											</div>
+											<div class="row">
+												<div class="input-field col s3">
+													<input style="color:black;" placeholder=\""""+str(common.getinfo("MARGINLEFT","Links",x))+"""\" name="marginleft-Links-"""+str(x)+"""" id="marginleft-Links-"""+str(x)+"""" type="text">
+													<label for="marginleft-Links-"""+str(x)+"""">Rand-Links</label>
+												</div>
+												<div class="input-field col s3">
+													<input style="color:black;" placeholder=\""""+str(common.getinfo("MARGINRIGHT","Links",x))+"""\" name="marginright-Links-"""+str(x)+"""" id="marginright-Links-"""+str(x)+"""" type="text">
+													<label for="marginright-Links-"""+str(x)+"""">Rand-Rechts</label>
+												</div>
+												<div class="input-field col s3">
+													<input style="color:black;" placeholder=\""""+str(common.getinfo("MARGINTOP","Links",x))+"""\" name="margintop-Links-"""+str(x)+"""" id="margintop-Links-"""+str(x)+"""" type="text">
+													<label for="margintop-Links-"""+str(x)+"""">Rand-Oben</label>
+												</div>
+												<div class="input-field col s3">
+													<input style="color:black;" placeholder=\""""+str(common.getinfo("MARGINBOTTOM","Links",x))+"""\" name="marginbottom-Links-"""+str(x)+"""" id="marginbottom-Links-"""+str(x)+"""" type="text">
+													<label for="marginbottom-Links-"""+str(x)+"""">Rand-Unten</label>
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -116,6 +134,24 @@ try:
 												<div class="input-field col s2">
 													<input style="color:black;" placeholder=\""""+checkvalues.getdate("monat", "Rechts", x)+"""\" name="monat-Rechts-"""+str(x)+"""" id="monat-Rechts-"""+str(x)+"""" type="text">
 													<label for="monat-Rechts-"""+str(x)+"""">Monat</label>
+												</div>
+											</div>
+											<div class="row">
+												<div class="input-field col s3">
+													<input style="color:black;" placeholder=\""""+str(common.getinfo("MARGINLEFT","Rechts",x))+"""\" name="marginleft-Rechts-"""+str(x)+"""" id="marginleft-Rechts-"""+str(x)+"""" type="text">
+													<label for="marginleft-Rechts-"""+str(x)+"""">Rand-Links</label>
+												</div>
+												<div class="input-field col s3">
+													<input style="color:black;" placeholder=\""""+str(common.getinfo("MARGINRIGHT","Rechts",x))+"""\" name="marginright-Rechts-"""+str(x)+"""" id="marginright-Rechts-"""+str(x)+"""" type="text">
+													<label for="marginright-Rechts-"""+str(x)+"""">Rand-Rechts</label>
+												</div>
+												<div class="input-field col s3">
+													<input style="color:black;" placeholder=\""""+str(common.getinfo("MARGINTOP","Rechts",x))+"""\" name="margintop-Rechts-"""+str(x)+"""" id="margintop-Rechts-"""+str(x)+"""" type="text">
+													<label for="margintop-Rechts-"""+str(x)+"""">Rand-Oben</label>
+												</div>
+												<div class="input-field col s3">
+													<input style="color:black;" placeholder=\""""+str(common.getinfo("MARGINBOTTOM","Rechts",x))+"""\" name="marginbottom-Rechts-"""+str(x)+"""" id="marginbottom-Rechts-"""+str(x)+"""" type="text">
+													<label for="marginbottom-Rechts-"""+str(x)+"""">Rand-Unten</label>
 												</div>
 											</div>
 										</div>

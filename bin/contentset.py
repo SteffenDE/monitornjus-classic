@@ -3,7 +3,7 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 07.05.2015 (Version 0.7.1)
+# Beilage zu MonitorNjus, 18.06.2015 (Version 0.7.5)
 
 try:
 	import os
@@ -19,11 +19,16 @@ try:
 	import cgitb
 	import getytid
 
+	###########################
+
 	form = cgi.FieldStorage()
 	cgitb.enable()
 	gseite = form.getvalue('seite')
 	gnummer = form.getvalue('nummer')
 	rows = common.getrows()
+	rand = False
+
+	###########################
 
 	if gseite == "1":
 		seite = "1"
@@ -50,21 +55,25 @@ try:
 		raise Warning("Es existiert keine aktive Seite oder ein anderer Fehler ist aufgetreten!")
 		exit(0)
 
+	###########################
+
 	url = common.getinfo("URL", mseite, int(nummer))
 	refresh = common.getinfo("REFRESH", mseite, int(nummer))
-	x = 1
+	
+	###########################
 
+	x = 1
 	while x < rows or x == 1:
 		if nummer < rows and nummer+x <= rows:
 			if common.getinfo("AKTIV", mseite, nummer+x) == 1 and checktime.match(common.getinfo("VONBIS", mseite, nummer+x),common.datum.now()) == True:
-				on = 1
+				refreshon = True
 				nextnummer = nummer + x
 				break
 			else:
-				on = 0
+				refreshon = False
 				nextnummer = nummer
 		else:
-			on = 1
+			refreshon = True
 			z = 0
 			while z < rows:
 				if checktime.match(common.getinfo("VONBIS", mseite, int(common.minaktiv(mseite))+z),common.datum.now()) == True:
@@ -73,39 +82,47 @@ try:
 					break
 				else:
 					nextnummer = nummer
-				z = z + 1
-		x = x + 1
+				z += 1
+		x += 1
+
+	###########################
 
 	if common.getinfo("REFRESHAKTIV", mseite, nummer) == 1:
-		on = 1
+		refreshon = True
 	else:
-		on = 0
+		refreshon = False
+
+	###########################
 		
-	if on == 1:
+	if refreshon:
 		prrefresh = '\
 	<meta http-equiv="refresh" content=\"'+str(refresh)+'; URL=contentset.py?seite='+str(seite)+';nummer='+str(nextnummer)+'\">'
 	else:
-		prrefresh = ""
+		prrefresh = None
+
+	###########################
 
 	typ = common.checkfiletype(url)
 
 	if typ == "image":
-		output = '\
-	<div class="container">\
-		<img src='+url+' style="position: absolute; margin-left: -8px; margin-top: -8px;">\
-	</div>'
+		output = '	<div id="background"></div>'
 	elif typ == "video":
 		output = '\
 	<div class="videocontainer"><video src=\''+url+'\' style="width:100%; height:auto; max-height: 100%;" autoplay="autoplay" loop="loop">Dein Browser unterst&uuml;tzt keine HTML5 Videos...</video></div>'
 	elif typ == "pdf":
 		output = '\
 	<iframe src=\"'+url+'\" style="position:absolute; z-index:9; height:98%; width:98%; border-style:none; overflow:hidden" scrolling="no" frameborder="0"></iframe>'
+		rand = True
 	elif typ == "youtube":
 		output = '\
 	<iframe style="position:absolute; height:100%; width:100%; top:0px; left: 0px; border-style:none; overflow:hidden" scrolling="no" frameborder="0" src="//www.youtube.com/embed/'+getytid.video_id(url)+'?rel=0&autoplay=1&loop=1&controls=0&showinfo=0"></iframe>'
+		rand = True
 	else:
 		output = '\
-	<iframe src=\"'+url+'\" style="position:absolute; width:100%; height:100%; top:0px; left:0px; margin-left:-1px; border-style:none;" scrolling="no" frameborder="0"></iframe>'
+	<iframe src=\"'+url+'\" style="position:absolute; width:100%; height:100%; top:0px; left:0px; border-style:none;" scrolling="no" frameborder="0"></iframe>'
+		rand = True
+
+################################ HTML ################################
 
 	print "Content-Type: text/html"
 	print
@@ -118,7 +135,7 @@ try:
 	<script type="text/javascript">
 	$(document).ready(function () {$('#content').css('display', 'none');$('#content').fadeIn(1000);});
 	</script>"""
-	if prrefresh is not "":
+	if prrefresh is not None:
 		print prrefresh
 	else:
 		pass
@@ -126,7 +143,6 @@ try:
 	<title>MonitorNjus</title>"
 	if typ == "video":
 		style = """\
-	<style>
 	.videocontainer 
 	{
 		position:absolute;
@@ -139,25 +155,37 @@ try:
 	{
 		min-width: 100%;
 		min-height: 100%;
-	}
-	</style>"""
-		print style
+	}"""
 	elif typ == "image":
-		print """
-	<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
-	<style>
-	.container img.wide {
+		style = """\
+	#background {
+		position: absolute;
+		min-height:100%;
 		width: 100%;
 		height: auto;
-	}
-	.container img.tall {
-		height: 100%;
-		width: auto;
-	}​
-	</style>"""
+		top: 0;
+		left: 0;
+		background: url("""+url+""") no-repeat center center;
+		background-size: contain;         /* around images */
+	}"""
 	else:
-		pass
+		style = ""
+	if rand:
+		print """\
+	<style>
+	iframe {
+		padding-left: """+str(common.getinfo("MARGINLEFT", mseite, nummer))+"""px;
+		padding-right: """+str(common.getinfo("MARGINRIGHT", mseite, nummer))+"""px;
+		padding-top: """+str(common.getinfo("MARGINTOP", mseite, nummer))+"""px;
+		padding-bottom: """+str(common.getinfo("MARGINBOTTOM", mseite, nummer))+"""px;
+		box-sizing: border-box;
+	}"""
+	else:
+		print "\
+	<style>"
+	print style
 	print "\
+	</style>\n\
 </head>"
 	#print checktime.match(common.getinfo("VONBIS", mseite, int(common.minaktiv(mseite))),common.datum.now())
 	#print nextanumma
@@ -167,16 +195,6 @@ try:
 	#print common.getinfo("VONBIS", mseite, nummer)
 	#print checktime.match(common.getinfo("VONBIS", mseite, nummer),common.datum.now())
 	print output
-	if typ == "image":
-		print """\
-	<script type="text/javascript">
-	$(window).load(function(){
-	 $('.container').find('img').each(function(){
-	  var imgClass = (this.width/this.height > 1) ? 'wide' : 'tall';
-	  $(this).addClass(imgClass);
-	 })
-	})
-	</script>"""
 	print "\
 </body>\n\
 </html>"

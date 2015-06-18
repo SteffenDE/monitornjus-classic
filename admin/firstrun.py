@@ -31,7 +31,11 @@ try:
 				AKTIV			INT,
 				REFRESH 		INT,
 				REFRESHAKTIV 	INT,
-				VONBIS			TEXT);''')
+				VONBIS			TEXT,
+				MARGINLEFT		INT,
+				MARGINRIGHT		INT,
+				MARGINTOP		INT,
+				MARGINBOTTOM	INT);''')
 		conn.execute('''CREATE TABLE WIDGETS
 			(ID INT PRIMARY KEY,
 				NAME			TEXT,
@@ -44,16 +48,16 @@ try:
 				width			TEXT,
 				height			TEXT);''')
 
-		def write(Seite, Nummer, URL, Aktiv, Refreshaktiv, Refresh, vonbis):
+		def write(Seite, Nummer, URL, Aktiv, Refreshaktiv, Refresh, vonbis, marginleft, marginright, margintop, marginbottom):
 			conn.execute("DELETE FROM DISPLAYSETS where SEITE=\'"+Seite+"\' AND NUMMER="+str(Nummer)+"");
-			conn.execute("INSERT INTO DISPLAYSETS (SEITE,NUMMER,URL,AKTIV,REFRESHAKTIV,REFRESH,VONBIS) values (\'"+Seite+"\',"+str(Nummer)+",\'"+URL+"\',"+str(Aktiv)+","+str(Refreshaktiv)+","+str(Refresh)+",\'"+vonbis+"\')");
+			conn.execute("INSERT INTO DISPLAYSETS (SEITE,NUMMER,URL,AKTIV,REFRESHAKTIV,REFRESH,VONBIS,MARGINLEFT,MARGINRIGHT,MARGINTOP,MARGINBOTTOM) values (\'"+Seite+"\',"+str(Nummer)+",\'"+URL+"\',"+str(Aktiv)+","+str(Refreshaktiv)+","+str(Refresh)+",\'"+vonbis+"\',"+str(marginleft)+","+str(marginright)+","+str(margintop)+","+str(marginbottom)+")");
 		def widgets(NAME, AKTIV, URLw, valign, align, vmargin, margin, width, height):
 			conn.execute("INSERT INTO WIDGETS (NAME,AKTIV,URL,valign,align,vmargin,margin,width,height) values (\'"+NAME+"\',"+str(AKTIV)+",\'"+URLw+"\',\'"+valign+"\',"+str(align)+",\'"+vmargin+"\',"+str(margin)+",\'"+str(width)+"\',\'"+str(height)+"\')");
 
-		write("Links", 1, "placeholder.html", 1, 1, 60, "*|*|*|*")
-		write("Rechts", 1, "placeholder.html", 1, 1, 60, "*|*|*|*")
-		write("globalmon", 0, "placeholder.html", 1, 0, 600, "*|*|*|*")
-		write("global", 0, "placeholder.html", 1, 0, 300, "*|*|*|*")
+		write("Links", 1, "placeholder.html", 1, 1, 60, "*|*|*|*", 0, 0, 0, 0)
+		write("Rechts", 1, "placeholder.html", 1, 1, 60, "*|*|*|*", 0, 0, 0, 0)
+		write("globalmon", 0, "placeholder.html", 1, 0, 600, "*|*|*|*", 0, 0, 0, 0)
+		write("global", 0, "placeholder.html", 1, 0, 300, "*|*|*|*", 0, 0, 0, 0)
 
 		widgets("Admin-Link", 1, "placeholder", "bottom", 0, "center", 0, "0", "0")
 		widgets("Uhr", 0, "resources/uhr1.swf", "bottom", 0, "center", 0, "", "96px")

@@ -3,14 +3,14 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 02.06.2015 (Version 0.7.4)
+# Beilage zu MonitorNjus, 18.06.2015 (Version 0.7.5)
 
 import os
 import datetime
 import sqlite3
 
 datum = datetime.datetime.now()
-version = "0.7.4&beta;"
+version = "0.7.5&beta;"
 workingdir = os.getcwd()
 
 ############################## Settings ##############################
@@ -20,8 +20,8 @@ debugv = 1		  # Verbosity: 0,1,2 (0 = off, 1 = basic, 2 = high)
 ###### Windows-Authentifizierung ######
 ### Art ###
 
-listauth = 0      # Wenn ja, Benutzer in "userliste" eintragen. Benutzer benötigen Schreibrechte im ADMIN Verzeichnis!
-groupauth = 0     # Wenn ja, muss pywin32 installiert sein! Gruppe für die Authentifizierung unter group = "xy" festlegen!
+listauth = False     # Wenn True, Benutzer in "userliste" eintragen. Benutzer benötigen Schreibrechte im ADMIN Verzeichnis!
+groupauth = False     # Wenn True, muss pywin32 installiert sein! Gruppe für die Authentifizierung unter group = "xy" festlegen!
 
 ### Userliste ###
 
@@ -44,7 +44,9 @@ group = "G_Projekt_MonitorNjus"
 ###### Authentifizierungsfunktion ######
 
 def authenticated():
-		if listauth == 1:
+		if groupauth and listauth:
+			raise Exception("listauth und groupauth können nicht gleichzeitig aktiv sein.")
+		if listauth:
 				import os
 				user = os.environ["REMOTE_USER"]
 				if user.lower().replace(domain.lower()+"\\", "") in userliste:
@@ -60,7 +62,7 @@ def authenticated():
 </body>
 </html>""" % user
 						exit(0)
-		elif groupauth == 1:
+		elif groupauth:
 				import sys
 				reload(sys)
 				sys.setdefaultencoding('utf-8')
@@ -82,7 +84,7 @@ def authenticated():
 </html>""" % user
 						exit(0)
 		else:
-				pass
+			pass
 
 ##########################################################################################
 
