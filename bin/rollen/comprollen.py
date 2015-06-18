@@ -61,7 +61,7 @@ function autoresize_frames()
 </script>
 </head>
 <body onload="autoresize_frames()">
-<iframe src=\""""+url+"""\" style="display: none; position:absolute; width:100%; height:100%; top:0px; left:0px; margin-left:2px; border-style:none; overflow:hidden" scrolling="no" id="fest" onload="javascript:resizeIframe(this);"></iframe>
+<iframe src=\""""+url+"""\" style="display: none; position:absolute; width:100%; height:100%; top:0px; left:0px; margin-left:2px; border-style:none; overflow:hidden" frameborder="0" scrolling="no" id="fest" onload="javascript:resizeIframe(this);"></iframe>
 </body>"""
 
     elif typ == "rollen":
