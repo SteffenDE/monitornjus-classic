@@ -100,7 +100,7 @@ function autoresize_frames()
 # </script>
 		print """\
 </head>
-<body onload="autoresize_frames()">
+<body>
 <script type="text/javascript">
 //Laufrichtung(up,down)
 var frame = '<iframe src=\""""+url+"""\" style="width:100%; height:100%;" frameborder="0" name="links" scrolling="no" onload="javascript:resizeIframe(this);"></iframe>'
