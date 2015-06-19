@@ -45,7 +45,7 @@ try:
 			if checktime.match(common.getinfo("VONBIS", mseite, int(common.minaktiv(mseite))+x),common.datum.now()) == True and common.getinfo("AKTIV", mseite, int(common.minaktiv(mseite))+x) == 1:
 				nummer = int(common.minaktiv(mseite))+x
 				break
-			x = x + 1
+			x += 1
 	else:
 		nummer = int(gnummer)
 

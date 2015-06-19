@@ -3,7 +3,7 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 07.05.2015 (Version 0.7.1)
+# Beilage zu MonitorNjus, 18.06.2015 (Version 0.7.5)
 
 try:
 	import colors
@@ -210,12 +210,17 @@ try:
 	<script type="text/javascript" src="../bin/js/materialize.min.js"></script>
 	<nav class=\""""+colors.color+"""\"="navigation">
 		<div class="container">
-			<div class="nav-wrapper"><a id="logo-container" href="#" class="brand-logo">MonitorNjus Admin Panel</a>
-				<ul class="right">
+			<div class="nav-wrapper">
+				<a id="logo-container" href="#" class="brand-logo">MonitorNjus Admin Panel</a>
+				<a href="#" data-activates="mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+				<ul id="nav-mobile" class="right hide-on-med-and-down">
 					<li><a href="widgets.py">Widgets</a></li>
 					<li><a href="../bin/">Zum Frontend</a></li>
 				</ul>
-				<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+				<ul class="side-nav" id="mobile">
+					<li><a href="widgets.py">Widgets</a></li>
+					<li><a href="../bin/">Zum Frontend</a></li>
+				</ul>
 			</div>
 		</div>
 	</nav>

@@ -3,7 +3,7 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 07.05.2015 (Version 0.7.1)
+# Beilage zu MonitorNjus, 18.06.2015 (Version 0.7.5)
 
 try:
 	import cgi, cgitb
@@ -20,11 +20,11 @@ try:
 	########################################################################
 
 	form = cgi.FieldStorage() 
-	cgitb.enable()
+	#cgitb.enable()
 
 	########################################################################
 
-	referer = form.getfirst('referer',None)
+	referer = form.getfirst('referer', None)
 
 	def updateurl_refresh(Name, GETNAME, Seite, Nummer, widgname):
 		if "index" in referer:
@@ -124,37 +124,39 @@ try:
 			raise Warning("Function updatetime: This referer is not allowed.")
 
 	if "index" in referer:
+		refresh = "<meta http-equiv=\"refresh\" content=\"0; URL=../admin/index.py\">"
+
 		x = 1
 		while x <= common.getrows():
 			if str(x) in common.getallrows():
-				updateurl_refresh("url1-"+str(x), "URL", "Links", x, "")
-				updateurl_refresh("url2-"+str(x), "URL", "Rechts", x, "")
-				updateurl_refresh("refresh1-"+str(x), "REFRESH", "Links", x, "")
-				updateurl_refresh("refresh2-"+str(x), "REFRESH", "Rechts", x, "")
-				updateurl_refresh("marginleft-Links-"+str(x), "MARGINLEFT", "Links", x, "")
-				updateurl_refresh("marginright-Links-"+str(x), "MARGINRIGHT", "Links", x, "")
-				updateurl_refresh("margintop-Links-"+str(x), "MARGINTOP", "Links", x, "")
-				updateurl_refresh("marginbottom-Links-"+str(x), "MARGINBOTTOM", "Links", x, "")
-				updateurl_refresh("marginleft-Rechts-"+str(x), "MARGINLEFT", "Rechts", x, "")
-				updateurl_refresh("marginright-Rechts-"+str(x), "MARGINRIGHT", "Rechts", x, "")
-				updateurl_refresh("margintop-Rechts-"+str(x), "MARGINTOP", "Rechts", x, "")
-				updateurl_refresh("marginbottom-Rechts-"+str(x), "MARGINBOTTOM", "Rechts", x, "")
-				updateaktiv("leftenabled-"+str(x), "AKTIV", "Links", x, "")
-				updateaktiv("rightenabled-"+str(x), "AKTIV", "Rechts", x, "")
-				updateaktiv("refreshleftenabled-"+str(x), "REFRESHAKTIV", "Links", x, "")
-				updateaktiv("refreshrightenabled-"+str(x), "REFRESHAKTIV", "Rechts", x, "")
-				updatetime("Links", x)
-				updatetime("Rechts", x)
-			x = x + 1
+				if "url1-"+str(x) in form: updateurl_refresh("url1-"+str(x), "URL", "Links", x, "")
+				if "url2-"+str(x) in form: updateurl_refresh("url2-"+str(x), "URL", "Rechts", x, "")
+				if "refresh1-"+str(x) in form: updateurl_refresh("refresh1-"+str(x), "REFRESH", "Links", x, "")
+				if "refresh2-"+str(x) in form: updateurl_refresh("refresh2-"+str(x), "REFRESH", "Rechts", x, "")
+				if "marginleft-Links-"+str(x) in form: updateurl_refresh("marginleft-Links-"+str(x), "MARGINLEFT", "Links", x, "")
+				if "marginright-Links-"+str(x) in form: updateurl_refresh("marginright-Links-"+str(x), "MARGINRIGHT", "Links", x, "")
+				if "margintop-Links-"+str(x) in form: updateurl_refresh("margintop-Links-"+str(x), "MARGINTOP", "Links", x, "")
+				if "marginbottom-Links-"+str(x) in form: updateurl_refresh("marginbottom-Links-"+str(x), "MARGINBOTTOM", "Links", x, "")
+				if "marginleft-Rechts-"+str(x) in form: updateurl_refresh("marginleft-Rechts-"+str(x), "MARGINLEFT", "Rechts", x, "")
+				if "marginright-Rechts-"+str(x) in form: updateurl_refresh("marginright-Rechts-"+str(x), "MARGINRIGHT", "Rechts", x, "")
+				if "margintop-Rechts-"+str(x) in form: updateurl_refresh("margintop-Rechts-"+str(x), "MARGINTOP", "Rechts", x, "")
+				if "marginbottom-Rechts-"+str(x) in form: updateurl_refresh("marginbottom-Rechts-"+str(x), "MARGINBOTTOM", "Rechts", x, "")
+				if "leftenabled-"+str(x) in form: updateaktiv("leftenabled-"+str(x), "AKTIV", "Links", x, "")
+				if "rightenabled-"+str(x) in form: updateaktiv("rightenabled-"+str(x), "AKTIV", "Rechts", x, "")
+				if "refreshleftenabled-"+str(x) in form: updateaktiv("refreshleftenabled-"+str(x), "REFRESHAKTIV", "Links", x, "")
+				if "refreshrightenabled-"+str(x) in form: updateaktiv("refreshrightenabled-"+str(x), "REFRESHAKTIV", "Rechts", x, "")
+				if "uhrzeit-Links-"+str(x) in form: updatetime("Links", x)
+				if "uhrzeit-Rechts-"+str(x) in form: updatetime("Rechts", x)
+			x += 1
 
-		updateurl_refresh("refreshall", "REFRESH", "global", 0, "")
-		updateurl_refresh("refreshmon", "REFRESH", "globalmon", 0, "")
-
-		updateaktiv("refreshallenabled", "REFRESHAKTIV", "global", 0, "")
-		updateaktiv("refreshmonenabled", "REFRESHAKTIV", "globalmon", 0, "")
-
+		if "refreshall" in form: updateurl_refresh("refreshall", "REFRESH", "global", 0, "")
+		if "refreshmon" in form: updateurl_refresh("refreshmon", "REFRESH", "globalmon", 0, "")
+		if "refreshallenabled" in form: updateaktiv("refreshallenabled", "REFRESHAKTIV", "global", 0, "")
+		if "refreshmonenabled" in form: updateaktiv("refreshmonenabled", "REFRESHAKTIV", "globalmon", 0, "")
 
 	elif "widgets" in referer:
+		refresh = "<meta http-equiv=\"refresh\" content=\"0; URL=../admin/widgets.py\">"
+
 		updateurl_refresh("uhrlink", "URL", "", 0, "Uhr")
 		updateurl_refresh("logolink", "URL", "", 0, "Logo")
 		updateurl_refresh("widgetlink", "URL", "", 0, "Freies-Widget")
@@ -190,41 +192,38 @@ try:
 		update_align("widgetwidth", "width", "Freies-Widget")
 		update_align("widgetheight", "height", "Freies-Widget")
 
-	if "row" in referer:
+	elif "row" in referer:
+		refresh = "<meta http-equiv=\"refresh\" content=\"0; URL=../admin/index.py\">"
 		cnum = form.getfirst("createnum", None)
 		dnum = form.getfirst("delnum", None)
-		if form.getfirst("createrow", None) is not None and cnum is not None:
+		if cnum is not None:
 			num = int(cnum)
 			common.createrow(num)
 		else:
 			pass
-		if form.getfirst("delrow", None) is not None and dnum is not None:
+		if dnum is not None:
 			num = int(dnum)
 			common.delrow(num)
 		else:
 			pass
-		refresh = "<meta http-equiv=\"refresh\" content=\"0; URL=../admin/index.py\">"
-	else:
-		pass
 
-	if "index" in referer:
-		refresh = "<meta http-equiv=\"refresh\" content=\"0; URL=../admin/index.py\">"
-	elif "widgets" in referer:
-		refresh = "<meta http-equiv=\"refresh\" content=\"0; URL=../admin/widgets.py\">"
 	else:
-		pass
+		refresh = ""
 
-	print "Content-Type: text/html"
-	print
-	print """
-	<!DOCTYPE html>
-	<html lang="de">
-	<head>
-	"""+refresh+"""
-	</head>
-	<body>
-	</body>
-	</html>"""
+	print """\
+Content-Type: text/html
+
+<!DOCTYPE html>
+<html lang="de">
+<head>"""
+	#for item in form:
+		#print item
+	print refresh
+	print """\
+</head>
+<body>
+</body>
+</html>"""
 
 except Exception as e:
 	common.debug(e)
