@@ -53,8 +53,8 @@ try:
 
 		common.write("Links", 1, "placeholder.html", 1, 1, 60, "*|*|*|*", 0, 0, 0, 0)
 		common.write("Rechts", 1, "placeholder.html", 1, 1, 60, "*|*|*|*", 0, 0, 0, 0)
-		common.write("globalmon", 1, "placeholder.html", 1, 0, 600, "*|*|*|*", 0, 0, 0, 0)
-		common.write("global", 1, "placeholder.html", 1, 0, 300, "*|*|*|*", 0, 0, 0, 0)
+		common.write("globalmon", 0, "placeholder.html", 1, 0, 600, "*|*|*|*", 0, 0, 0, 0)
+		common.write("global", 0, "placeholder.html", 1, 0, 300, "*|*|*|*", 0, 0, 0, 0)
 
 		widgets("Admin-Link", 1, "placeholder", "bottom", 0, "center", 0, "0", "0")
 		widgets("Uhr", 0, "resources/uhr1.swf", "bottom", 0, "center", 0, "", "96px")
