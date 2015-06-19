@@ -7,8 +7,8 @@
 
 try:
 	import colors
-	import checkvalues
 	import os
+	import checkvalues
 	import imp
 	
 	workingdir = os.getcwd()
