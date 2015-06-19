@@ -24,11 +24,11 @@ try:
 
 	########################################################################
 
-	referer = form.getvalue('referer')
+	referer = form.getfirst('referer',None)
 
 	def updateurl_refresh(Name, GETNAME, Seite, Nummer, widgname):
 		if "index" in referer:
-			gval = form.getvalue(Name)
+			gval = form.getfirst(Name, None)
 			if gval is not None:
 				val = gval
 			else:
@@ -42,7 +42,7 @@ try:
 					else:
 						common.writeinfo(Seite, Nummer, GETNAME, str(val))
 		elif "widgets" in referer:
-			gval = form.getvalue(Name)
+			gval = form.getfirst(Name, None)
 			if gval is not None:
 				val = gval
 			else:
@@ -60,7 +60,7 @@ try:
 
 	def updateaktiv(Name, GETNAME, Seite, Nummer, widgname):
 		if "index" in referer:
-			if form.getvalue(Name):
+			if form.getfirst(Name, None):
 				val_flag = 1
 			else:
 				val_flag = 0
@@ -70,7 +70,7 @@ try:
 				else:
 					common.writeinfo(Seite, Nummer, GETNAME, int(val_flag))
 		elif "widgets" in referer:
-			if form.getvalue(Name):
+			if form.getfirst(Name, None):
 				val_flag = 1
 			else:
 				val_flag = 0
@@ -84,8 +84,8 @@ try:
 
 	def update_align(Name, GETNAME, widgname):
 		if "widgets" in referer:
-			if form.getvalue(Name):
-				val = form.getvalue(Name)
+			if form.getfirst(Name, None):
+				val = form.getfirst(Name, None)
 			else:
 				val = None
 			if val is not None:
@@ -104,10 +104,10 @@ try:
 
 	def updatetime(Seite, Nummer):
 		if "index" in referer:
-			uhrzeit = form.getvalue("uhrzeit-"+Seite+"-"+str(Nummer))
-			wochentag = form.getvalue("wochentag-"+Seite+"-"+str(Nummer))
-			tag = form.getvalue("tag-"+Seite+"-"+str(Nummer))
-			monat = form.getvalue("monat-"+Seite+"-"+str(Nummer))
+			uhrzeit = form.getfirst("uhrzeit-"+Seite+"-"+str(Nummer), None)
+			wochentag = form.getfirst("wochentag-"+Seite+"-"+str(Nummer), None)
+			tag = form.getfirst("tag-"+Seite+"-"+str(Nummer), None)
+			monat = form.getfirst("monat-"+Seite+"-"+str(Nummer), None)
 			if uhrzeit is None and wochentag is None and tag is None and monat is None:
 				pass
 			else:
@@ -191,14 +191,14 @@ try:
 		update_align("widgetheight", "height", "Freies-Widget")
 
 	if "row" in referer:
-		cnum = form.getvalue("createnum")
-		dnum = form.getvalue("delnum")
-		if form.getvalue("createrow") is not None and cnum is not None:
+		cnum = form.getfirst("createnum", None)
+		dnum = form.getfirst("delnum", None)
+		if form.getfirst("createrow", None) is not None and cnum is not None:
 			num = int(cnum)
 			common.createrow(num)
 		else:
 			pass
-		if form.getvalue("delrow") is not None and dnum is not None:
+		if form.getfirst("delrow", None) is not None and dnum is not None:
 			num = int(dnum)
 			common.delrow(num)
 		else:

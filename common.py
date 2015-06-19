@@ -150,14 +150,14 @@ def getallrows():
 	liste = " ".join(val)
 	return liste
 
-def write(Seite, Nummer, URL, Aktiv, Refreshaktiv, Refresh, vonbis):
+def write(Seite, Nummer, URL, Aktiv, Refreshaktiv, Refresh, vonbis, marginleft, marginright, margintop, marginbottom):
 	conn.execute("DELETE FROM DISPLAYSETS where SEITE=\'"+Seite+"\' AND NUMMER="+str(Nummer)+"");
-	conn.execute("INSERT INTO DISPLAYSETS (SEITE,NUMMER,URL,AKTIV,REFRESHAKTIV,REFRESH,VONBIS) values (\'"+Seite+"\',"+str(Nummer)+",\'"+URL+"\',"+str(Aktiv)+","+str(Refreshaktiv)+","+str(Refresh)+",\'"+vonbis+"\')");
+	conn.execute("INSERT INTO DISPLAYSETS (SEITE,NUMMER,URL,AKTIV,REFRESHAKTIV,REFRESH,VONBIS,MARGINLEFT,MARGINRIGHT,MARGINTOP,MARGINBOTTOM) values (\'"+Seite+"\',"+str(Nummer)+",\'"+URL+"\',"+str(Aktiv)+","+str(Refreshaktiv)+","+str(Refresh)+",\'"+vonbis+"\',"+str(marginleft)+","+str(marginright)+","+str(margintop)+","+str(marginbottom)+")");
 	conn.commit()
 
 def createrow(Nummer):
-	write("Links", Nummer, "placeholder.html", 1, 0, 60, "*|*|*|*")
-	write("Rechts", Nummer, "placeholder.html", 1, 0, 60, "*|*|*|*")
+	write("Links", Nummer, "placeholder.html", 1, 1, 60, "*|*|*|*", 0, 0, 0, 0)
+	write("Rechts", Nummer, "placeholder.html", 1, 1, 60, "*|*|*|*", 0, 0, 0, 0)
 
 def delrow(Nummer):
 	rows = getrows()
