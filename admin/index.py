@@ -8,6 +8,7 @@
 try:
 	import colors
 	import os
+	import firstrun
 	import checkvalues
 	import imp
 	
@@ -16,7 +17,6 @@ try:
 		common = imp.load_source('common', workingdir+"/../common.py")
 	else:
 		common = imp.load_source('common', workingdir+"/common.py")
-	import firstrun
 
 	common.authenticated()
 
