@@ -174,15 +174,14 @@ try:
 		print """\
 	<style>
 	iframe {
-		padding-left: """+str(common.getinfo("MARGINLEFT", mseite, nummer))+"""px;
-		padding-right: """+str(common.getinfo("MARGINRIGHT", mseite, nummer))+"""px;
-		padding-top: """+str(common.getinfo("MARGINTOP", mseite, nummer))+"""px;
-		padding-bottom: """+str(common.getinfo("MARGINBOTTOM", mseite, nummer))+"""px;
+		padding-left: """+common.addpx(common.getinfo("MARGINLEFT", mseite, nummer))+""";
+		padding-right: """+common.addpx(common.getinfo("MARGINRIGHT", mseite, nummer))+""";
+		padding-top: """+common.addpx(common.getinfo("MARGINTOP", mseite, nummer))+""";
+		padding-bottom: """+common.addpx(common.getinfo("MARGINBOTTOM", mseite, nummer))+""";
 		box-sizing: border-box;
 	}"""
 	else:
-		print "\
-	<style>"
+		print "	<style>"
 	print style
 	print "\
 	</style>\n\
