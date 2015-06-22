@@ -141,18 +141,18 @@ try:
 				if "marginright-Rechts-"+str(x) in form: updateurl_refresh("marginright-Rechts-"+str(x), "MARGINRIGHT", "Rechts", x, "")
 				if "margintop-Rechts-"+str(x) in form: updateurl_refresh("margintop-Rechts-"+str(x), "MARGINTOP", "Rechts", x, "")
 				if "marginbottom-Rechts-"+str(x) in form: updateurl_refresh("marginbottom-Rechts-"+str(x), "MARGINBOTTOM", "Rechts", x, "")
-				if "leftenabled-"+str(x) in form: updateaktiv("leftenabled-"+str(x), "AKTIV", "Links", x, "")
-				if "rightenabled-"+str(x) in form: updateaktiv("rightenabled-"+str(x), "AKTIV", "Rechts", x, "")
-				if "refreshleftenabled-"+str(x) in form: updateaktiv("refreshleftenabled-"+str(x), "REFRESHAKTIV", "Links", x, "")
-				if "refreshrightenabled-"+str(x) in form: updateaktiv("refreshrightenabled-"+str(x), "REFRESHAKTIV", "Rechts", x, "")
+				updateaktiv("leftenabled-"+str(x), "AKTIV", "Links", x, "")
+				updateaktiv("rightenabled-"+str(x), "AKTIV", "Rechts", x, "")
+				updateaktiv("refreshleftenabled-"+str(x), "REFRESHAKTIV", "Links", x, "")
+				updateaktiv("refreshrightenabled-"+str(x), "REFRESHAKTIV", "Rechts", x, "")
 				if "uhrzeit-Links-"+str(x) in form: updatetime("Links", x)
 				if "uhrzeit-Rechts-"+str(x) in form: updatetime("Rechts", x)
 			x += 1
 
 		if "refreshall" in form: updateurl_refresh("refreshall", "REFRESH", "global", 0, "")
 		if "refreshmon" in form: updateurl_refresh("refreshmon", "REFRESH", "globalmon", 0, "")
-		if "refreshallenabled" in form: updateaktiv("refreshallenabled", "REFRESHAKTIV", "global", 0, "")
-		if "refreshmonenabled" in form: updateaktiv("refreshmonenabled", "REFRESHAKTIV", "globalmon", 0, "")
+		updateaktiv("refreshallenabled", "REFRESHAKTIV", "global", 0, "")
+		updateaktiv("refreshmonenabled", "REFRESHAKTIV", "globalmon", 0, "")
 
 	elif "widgets" in referer:
 		refresh = "<meta http-equiv=\"refresh\" content=\"0; URL=../admin/widgets.py\">"

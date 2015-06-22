@@ -21,23 +21,23 @@ try:
 	timeL = False
 	timeR = False
 	geteilt = False
+	linksgeteilt = common.getgeteilt("Links")
+	rechtsgeteilt = common.getgeteilt("Rechts")
 
 	x = 1
 	while x <= rows:
-		if checktime.match(common.getinfo("VONBIS", "Links", x),common.datum.now()) == True and common.getinfo("AKTIV", "Links", x) == 1:
+		if checktime.match(common.getinfo("VONBIS", "Links", x),common.datum.now()) and common.getinfo("AKTIV", "Links", x):
 			timeL = True
-		if checktime.match(common.getinfo("VONBIS", "Rechts", x),common.datum.now()) == True and common.getinfo("AKTIV", "Rechts", x) == 1:
+		if checktime.match(common.getinfo("VONBIS", "Rechts", x),common.datum.now()) and common.getinfo("AKTIV", "Rechts", x):
 			timeR = True
-		else:
-			pass
-		if timeL == True and timeR == True:
+		if timeL and timeR:
 			break
 		x = x + 1
 
-	if "1" in common.getgeteilt("Links") and "1" in common.getgeteilt("Rechts") and timeL == True and timeR == True:
+	if linksgeteilt and rechtsgeteilt and timeL and timeR:
 		geteilt = True
 
-	if geteilt == True:
+	if geteilt:
 		disp = """\
 	<frameset frameborder="0" rows="*,0">
 		<frameset frameborder="0" cols="50,50">
@@ -45,22 +45,12 @@ try:
 			<frame scrolling="no" src="contentset.py?seite=2" name="rechts" />
 		</frameset> 
 	</frameset>"""
-	elif "1" in common.getgeteilt("Links") and "0" in common.getgeteilt("Rechts") and timeL == True:
+	elif (linksgeteilt and not rechtsgeteilt and timeL) or (linksgeteilt and rechtsgeteilt and timeL and not timeR):
 		disp = """\
 	<frameset frameborder="0" rows="*,0">
 		<frame scrolling="no" src="contentset.py?seite=1" name="links" />
 	</frameset>"""
-	elif "1" in common.getgeteilt("Rechts") and "0" in common.getgeteilt("Links") and timeR == True:
-		disp = """\
-	<frameset frameborder="0" rows="*,0">
-		<frame scrolling="no" src="contentset.py?seite=2" name="rechts" />
-	</frameset>"""
-	elif "1" in common.getgeteilt("Links") and "1" in common.getgeteilt("Rechts") and timeL == True:
-		disp = """\
-	<frameset frameborder="0" rows="*,0">
-		<frame scrolling="no" src="contentset.py?seite=1" name="links" />
-	</frameset>"""
-	elif "1" in common.getgeteilt("Rechts") and "1" in common.getgeteilt("Links") and timeR == True:
+	elif (rechtsgeteilt and not linksgeteilt and timeR) or (rechtsgeteilt and linksgeteilt and timeR and not timeL):
 		disp = """\
 	<frameset frameborder="0" rows="*,0">
 		<frame scrolling="no" src="contentset.py?seite=2" name="rechts" />
