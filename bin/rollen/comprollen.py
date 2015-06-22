@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 # Copyright (c) 2015 Steffen Deusch
+# Beilage zu MonitorNjus, 22.06.2015 (Version 0.7.6)
 
 try:
 	import cgi, cgitb 

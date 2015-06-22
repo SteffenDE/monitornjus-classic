@@ -3,7 +3,7 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 18.06.2015 (Version 0.7.5)
+# Beilage zu MonitorNjus, 22.06.2015 (Version 0.7.6)
 
 try:
 	import os
@@ -32,10 +32,10 @@ try:
 				REFRESH 		INT,
 				REFRESHAKTIV 	INT,
 				VONBIS			TEXT,
-				MARGINLEFT		INT,
-				MARGINRIGHT		INT,
-				MARGINTOP		INT,
-				MARGINBOTTOM	INT);''')
+				MARGINLEFT		TEXT,
+				MARGINRIGHT		TEXT,
+				MARGINTOP		TEXT,
+				MARGINBOTTOM	TEXT);''')
 		conn.execute('''CREATE TABLE WIDGETS
 			(ID INT PRIMARY KEY,
 				NAME			TEXT,
@@ -51,10 +51,10 @@ try:
 		def widgets(NAME, AKTIV, URLw, valign, align, vmargin, margin, width, height):
 			conn.execute("INSERT INTO WIDGETS (NAME,AKTIV,URL,valign,align,vmargin,margin,width,height) values (\'"+NAME+"\',"+str(AKTIV)+",\'"+URLw+"\',\'"+valign+"\',\'"+str(align)+"\',\'"+vmargin+"\',\'"+str(margin)+"\',\'"+str(width)+"\',\'"+str(height)+"\')");
 
-		common.write("Links", 1, "placeholder.html", 1, 1, 60, "*|*|*|*", 0, 0, 0, 0)
-		common.write("Rechts", 1, "placeholder.html", 1, 1, 60, "*|*|*|*", 0, 0, 0, 0)
-		common.write("globalmon", 0, "placeholder.html", 1, 0, 600, "*|*|*|*", 0, 0, 0, 0)
-		common.write("global", 0, "placeholder.html", 1, 0, 300, "*|*|*|*", 0, 0, 0, 0)
+		common.write("Links", 1, "placeholder.html", 1, 1, 60, "*|*|*|*", "0px", "0px", "0px", "0px")
+		common.write("Rechts", 1, "placeholder.html", 1, 1, 60, "*|*|*|*", "0px", "0px", "0px", "0px")
+		common.write("globalmon", 0, "placeholder.html", 1, 0, 600, "*|*|*|*", "0px", "0px", "0px", "0px")
+		common.write("global", 0, "placeholder.html", 1, 0, 300, "*|*|*|*", "0px", "0px", "0px", "0px")
 
 		widgets("Admin-Link", 1, "placeholder", "bottom", "0px", "center", "0px", "0", "0")
 		widgets("Uhr", 0, "resources/uhr1.swf", "bottom", "0px", "center", "0px", "auto", "96px")

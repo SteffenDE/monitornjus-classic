@@ -3,7 +3,7 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 18.06.2015 (Version 0.7.5)
+# Beilage zu MonitorNjus, 22.06.2015 (Version 0.7.6)
 
 try:
 	import cgi, cgitb

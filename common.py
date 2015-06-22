@@ -3,14 +3,14 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 18.06.2015 (Version 0.7.5)
+# Beilage zu MonitorNjus, 22.06.2015 (Version 0.7.6)
 
 import os
 import datetime
 import sqlite3
 
 datum = datetime.datetime.now()
-version = "0.7.5&beta;"
+version = "0.7.6&beta;"
 workingdir = os.getcwd()
 
 ############################## Settings ##############################
@@ -156,8 +156,8 @@ def write(Seite, Nummer, URL, Aktiv, Refreshaktiv, Refresh, vonbis, marginleft, 
 	conn.commit()
 
 def createrow(Nummer):
-	write("Links", Nummer, "placeholder.html", 1, 1, 60, "*|*|*|*", 0, 0, 0, 0)
-	write("Rechts", Nummer, "placeholder.html", 1, 1, 60, "*|*|*|*", 0, 0, 0, 0)
+	write("Links", Nummer, "placeholder.html", 1, 1, 60, "*|*|*|*", "0px", "0px", "0px", "0px")
+	write("Rechts", Nummer, "placeholder.html", 1, 1, 60, "*|*|*|*", "0px", "0px", "0px", "0px")
 
 def delrow(Nummer):
 	rows = getrows()
@@ -189,12 +189,12 @@ def checkfiletype(datei):
 		return "unknown"
 
 def addpx(string):
-	if "px" in string:
-		return string
-	elif "auto" in string:
-		return string
+	if "px" in str(string):
+		return str(string)
+	elif "auto" in str(string):
+		return str(string)
 	else:
-		return string+"px"
+		return str(string)+"px"
 
 def isfirstrun():
 	import os

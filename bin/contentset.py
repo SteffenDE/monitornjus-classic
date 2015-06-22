@@ -3,7 +3,7 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 18.06.2015 (Version 0.7.5)
+# Beilage zu MonitorNjus, 22.06.2015 (Version 0.7.6)
 
 try:
 	import os
@@ -183,9 +183,9 @@ try:
 	else:
 		print "	<style>"
 	print style
-	print "\
-	</style>\n\
-</head>"
+	print """\
+	</style>
+</head>"""
 	#print checktime.match(common.getinfo("VONBIS", mseite, int(common.minaktiv(mseite))),common.datum.now())
 	#print nextanumma
 	#print nextnummer

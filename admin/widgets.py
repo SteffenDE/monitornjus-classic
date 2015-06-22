@@ -3,7 +3,7 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 18.06.2015 (Version 0.7.5)
+# Beilage zu MonitorNjus, 22.06.2015 (Version 0.7.6)
 
 try:
 	import colors
@@ -185,7 +185,7 @@ try:
 								<label for="widgetaktiv">Widget aktiviert</label>
 								<div class="row">
 									<div class="input-field col s12">
-										<input style="color:black;" placeholder=\'"""+checkvalues.widgetlink+"""\' name="widgetlink" id="widgetlink" type="text"/>
+										<textarea style="color:black;" name="widgetlink" id="widgetlink" class="materialize-textarea">"""+checkvalues.widgetlink+"""</textarea>
 										<label for="widgetlink">Widget-URL</label>
 									</div>
 								</div>
