@@ -145,8 +145,8 @@ try:
 				updateaktiv("rightenabled-"+str(x), "AKTIV", "Rechts", x, "")
 				updateaktiv("refreshleftenabled-"+str(x), "REFRESHAKTIV", "Links", x, "")
 				updateaktiv("refreshrightenabled-"+str(x), "REFRESHAKTIV", "Rechts", x, "")
-				if "uhrzeit-Links-"+str(x) in form: updatetime("Links", x)
-				if "uhrzeit-Rechts-"+str(x) in form: updatetime("Rechts", x)
+				updatetime("Links", x)
+				updatetime("Rechts", x)
 			x += 1
 
 		if "refreshall" in form: updateurl_refresh("refreshall", "REFRESH", "global", 0, "")
@@ -217,7 +217,7 @@ Content-Type: text/html
 <html lang="de">
 <head>"""
 	#for item in form:
-		#print item
+		#print item+": "+form[item].value+"<br>"
 	print refresh
 	print """\
 </head>
