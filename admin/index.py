@@ -49,7 +49,7 @@ try:
 												<input type="checkbox" name="leftenabled-"""+str(x)+"""" id="leftenabled-"""+str(x)+"""" """+checkvalues.aktiv("AKTIV", "Links", x)+"""/>
 												<label for="leftenabled-"""+str(x)+"""">Links aktiviert</label>&nbsp;&nbsp;&nbsp;&nbsp;
 												<input type="checkbox" name="refreshleftenabled-"""+str(x)+"""" id="refreshleftenabled-"""+str(x)+"""" """+checkvalues.aktiv("REFRESHAKTIV", "Links", x)+"""/>
-												<label for="refreshleftenabled-"""+str(x)+"""">Links neuladen</label>
+												<label for="refreshleftenabled-"""+str(x)+"""">Links neu laden</label>
 											</div>
 											<!--<div>
 												<input type="checkbox" name="vonbisaktivl-"""+str(x)+"""" id="vonbisaktivl-"""+str(x)+"""" """+checkvalues.aktiv("VONBISAKTIV", "Links", x)+"""/>
@@ -112,7 +112,7 @@ try:
 												<input type="checkbox" name="rightenabled-"""+str(x)+"""" id="rightenabled-"""+str(x)+"""" """+checkvalues.aktiv("AKTIV", "Rechts", x)+"""/>
 												<label for="rightenabled-"""+str(x)+"""">Rechts aktiviert</label>&nbsp;&nbsp;&nbsp;&nbsp;
 												<input type="checkbox" name="refreshrightenabled-"""+str(x)+"""" id="refreshrightenabled-"""+str(x)+"""" """+checkvalues.aktiv("REFRESHAKTIV", "Rechts", x)+"""/>
-												<label for="refreshrightenabled-"""+str(x)+"""">Rechts neuladen</label>
+												<label for="refreshrightenabled-"""+str(x)+"""">Rechts neu laden</label>
 											</div>
 											<!--<div>
 												<input type="checkbox" name="vonbisaktivr-"""+str(x)+"""" id="vonbisaktivr-"""+str(x)+"""" """+checkvalues.aktiv("VONBISAKTIV", "Rechts", x)+"""/>
@@ -243,12 +243,12 @@ try:
 										<div class="row">
 											<div class="input-field col s12">
 												<input style="color:black;" placeholder=\""""+str(checkvalues.refreshall)+"""\" name="refreshall" id="refreshall" type="text">
-												<label for="refreshall">Alle Seiten neuladen</label>
+												<label for="refreshall">Alle Seiten neu laden</label>
 											</div>
 										</div>
 										<div>
 											<input type="checkbox" name="refreshallenabled" id="refreshallenabled" """+checkvalues.refreshallenabled+"""/>
-											<label for="refreshallenabled">Globales neuladen aktiviert</label>
+											<label for="refreshallenabled">Globales neu laden aktiviert</label>
 										</div>
 									</div>
 								</div>
@@ -260,12 +260,12 @@ try:
 										<div class="row">
 											<div class="input-field col s12">
 												<input style="color:black;" placeholder=\""""+str(checkvalues.refreshmon)+"""\" name="refreshmon" id="refreshmon" type="text">
-												<label for="refreshmon">Monitornjus Frontend neuladen</label>
+												<label for="refreshmon">Monitornjus Frontend neu laden</label>
 											</div>
 										</div>
 										<div>
 											<input type="checkbox" name="refreshmonenabled" id="refreshmonenabled" """+checkvalues.refreshmonenabled+"""/>
-											<label for="refreshmonenabled">Monitornjus neuladen</label>
+											<label for="refreshmonenabled">Monitornjus neu laden</label>
 										</div>
 									</div>
 								</div>

@@ -243,7 +243,7 @@ try:
 								<div class="row">
 									<div class="input-field col s12">
 										<input style="color:black;" placeholder=\""""+checkvalues.logolink+"""\" name="logolink" id="logolink" type="text"/>
-										<label for="logolink">logo-URL</label>
+										<label for="logolink">Logo-URL</label>
 									</div>
 								</div>
 								<div class="row">
