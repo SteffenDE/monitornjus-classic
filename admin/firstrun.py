@@ -42,24 +42,24 @@ try:
 				AKTIV			INT,
 				URL				TEXT,
 				valign			TEXT,
-				align			INT,
+				align			TEXT,
 				vmargin 		TEXT,
-				margin			INT,
+				margin			TEXT,
 				width			TEXT,
 				height			TEXT);''')
 
 		def widgets(NAME, AKTIV, URLw, valign, align, vmargin, margin, width, height):
-			conn.execute("INSERT INTO WIDGETS (NAME,AKTIV,URL,valign,align,vmargin,margin,width,height) values (\'"+NAME+"\',"+str(AKTIV)+",\'"+URLw+"\',\'"+valign+"\',"+str(align)+",\'"+vmargin+"\',"+str(margin)+",\'"+str(width)+"\',\'"+str(height)+"\')");
+			conn.execute("INSERT INTO WIDGETS (NAME,AKTIV,URL,valign,align,vmargin,margin,width,height) values (\'"+NAME+"\',"+str(AKTIV)+",\'"+URLw+"\',\'"+valign+"\',\'"+str(align)+"\',\'"+vmargin+"\',\'"+str(margin)+"\',\'"+str(width)+"\',\'"+str(height)+"\')");
 
 		common.write("Links", 1, "placeholder.html", 1, 1, 60, "*|*|*|*", 0, 0, 0, 0)
 		common.write("Rechts", 1, "placeholder.html", 1, 1, 60, "*|*|*|*", 0, 0, 0, 0)
 		common.write("globalmon", 0, "placeholder.html", 1, 0, 600, "*|*|*|*", 0, 0, 0, 0)
 		common.write("global", 0, "placeholder.html", 1, 0, 300, "*|*|*|*", 0, 0, 0, 0)
 
-		widgets("Admin-Link", 1, "placeholder", "bottom", 0, "center", 0, "0", "0")
-		widgets("Uhr", 0, "resources/uhr1.swf", "bottom", 0, "center", 0, "", "96px")
-		widgets("Logo", 0, "placeholder", "bottom", 0, "center", 0, "100%", "100%")
-		widgets("Freies-Widget", 0, "placeholder", "bottom", 0, "center", 0, "0px", "0px")
+		widgets("Admin-Link", 1, "placeholder", "bottom", "0px", "center", "0px", "0", "0")
+		widgets("Uhr", 0, "resources/uhr1.swf", "bottom", "0px", "center", "0px", "auto", "96px")
+		widgets("Logo", 0, "placeholder", "bottom", "0px", "left", "0px", "100%", "100%")
+		widgets("Freies-Widget", 0, """<iframe name="flipe" scrolling="no" src="http://www.daswetter.com/getwid/ef3e15e299d279eec78fbfc75d5190f6" id="ef3e15e299d279eec78fbfc75d5190f6" style="width: 250px; color: rgb(128, 128, 128); height: 142px;" frameborder="0"></iframe>""", "bottom", "-90px", "right", "145px", "100px", "200px")
 
 		conn.commit()
 		conn.close()

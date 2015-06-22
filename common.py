@@ -15,13 +15,13 @@ workingdir = os.getcwd()
 
 ############################## Settings ##############################
 
-debugv = 1		  # Verbosity: 0,1,2 (0 = off, 1 = basic, 2 = high)
+debugv = 2		  		# Verbosity: 0,1,2 (0 = off, 1 = basic, 2 = high)
 
 ###### Windows-Authentifizierung ######
 ### Art ###
 
-listauth = False     # Wenn True, Benutzer in "userliste" eintragen. Benutzer benötigen Schreibrechte im ADMIN Verzeichnis!
-groupauth = False     # Wenn True, muss pywin32 installiert sein! Gruppe für die Authentifizierung unter group = "xy" festlegen!
+listauth = False     	# Wenn True, Benutzer in "userliste" eintragen. Benutzer benötigen Schreibrechte im ADMIN Verzeichnis!
+groupauth = False     	# Wenn True, muss pywin32 installiert sein! Gruppe für die Authentifizierung unter group = "xy" festlegen!
 
 ### Userliste ###
 
@@ -187,6 +187,14 @@ def checkfiletype(datei):
 		return "youtube"
 	else:
 		return "unknown"
+
+def addpx(string):
+	if "px" in string:
+		return string
+	elif "auto" in string:
+		return string
+	else:
+		return string+"px"
 
 def isfirstrun():
 	import os
