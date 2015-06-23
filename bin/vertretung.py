@@ -5,34 +5,29 @@
 # Licensed under the MIT license
 # Beilage zu MonitorNjus, 07.05.2015 (Version 0.7.1)
 
+######### Settings #########
+
 path = "sync/heute_und_morgen/"
 name_heute = "subst_001.htm"
 name_morgen = "subst_002.htm"
+
+############################
+
+actday_file = path + name_heute
+nxtday_file = path + name_morgen
 
 def replace_b(body):
 	end = body\
 		.replace("<style type=\"text/css\">","<!--<style>")\
 		.replace("<meta http-equiv=\"expires\" content=\"0\">","<meta http-equiv=\"expires\" content=\"0\"><link rel='stylesheet' type='text/css' href='css/vertretung.css'>")\
 		.replace("</head>","--></head>")\
-		.replace("width=\"14\"","")\
-		.replace("width=\"6\"","")\
-		.replace("width=\"8\"","")\
-		.replace("width=\"22\"","")\
-		.replace(">Kla.",">Klasse")\
-		.replace(">Rm.",">Raum")\
 		.replace("<!-- Info-Stundenplan -->","")\
-		.replace("<td align=\"right\"","<td ")\
-		.replace("background-color: #0080FF","background-color: #0080FF;color:#fff;")\
-		.replace("<title>","<!--<title>")\
-		.replace("</title>","</title>--><title>Aktueller Vertretungsplan des JVG Ehingen</title>")\
 		.replace('<table class="mon_head">','<!--<table class="mon_head">')\
 		.replace('<table class="mon_list" >', '--><table class="mon_list" >')\
 		.replace('<font size="3" face="Arial">', '<!--<font size="3" face="Arial">')\
 		.replace("</body>","--></body>")
 	print "Content-Type: text/html"
 	print
-	print """
-<!DOCTYPE html>"""
 	print end
 
 def replace_h(header):
@@ -40,83 +35,44 @@ def replace_h(header):
 		.replace("<style type=\"text/css\">","<!--<style>")\
 		.replace("<meta http-equiv=\"expires\" content=\"0\">","<meta http-equiv=\"expires\" content=\"0\"><link rel='stylesheet' type='text/css' href='css/vertretung.css'>")\
 		.replace("</head>","--></head>")\
-		.replace("width=\"14\"","")\
-		.replace("width=\"6\"","")\
-		.replace("width=\"8\"","")\
-		.replace("width=\"22\"","")\
-		.replace(">Kla.",">Klasse")\
-		.replace(">Rm.",">Raum")\
 		.replace("<!-- Info-Stundenplan -->","")\
-		.replace("<td align=\"right\"","<td ")\
-		.replace("background-color: #0080FF","background-color: #0080FF;color:#fff;")\
-		.replace("<title>","<!--<title>")\
-		.replace("</title>","</title>--><title>Aktueller Vertretungsplan des JVG Ehingen</title>")\
 		.replace('<table class="mon_list" >','<!--<table class="mon_list" >')\
 		.replace('<table class="mon_head">','<!--<table class="mon_head">')\
 		.replace("</body>","--></body>")\
 		.replace('<div class="mon_title">', '--><center><div class="mon_title">')
 	print "Content-Type: text/html"
 	print
-	print """
-<!DOCTYPE html>"""
 	print end
 
 try:
-	import cgi, cgitb 
+	import cgi
+	#import cgitb; cgitb.enable()
 
 	form = cgi.FieldStorage() 
 
-	nxtdayg = form.getvalue('nxtday')
-	actdayg = form.getvalue('actday')
-	headerg = form.getvalue('header')
-	bodyg = form.getvalue('body')
+	nxtday = int(form.getfirst('nxtday', "0"))
+	actday = int(form.getfirst('actday', "0"))
+	header = int(form.getfirst('header', "0"))
+	body = int(form.getfirst('body', "1"))
 
-	actdayarg = str(actdayg)
-	nxtdayarg = str(nxtdayg)
-	headerarg = str(headerg)
-	bodyarg = str(bodyg)
-
-	actday_file = path + name_heute
-	nxtday_file = path + name_morgen
-
-	monitornews = 0
-	if "1" in nxtdayarg or "10" in nxtdayarg:
-		actday = 0
-		nxtday = 1
-	else:
-		actday = 1
-		nxtday = 0
-
-	if "10" in nxtdayarg or "10" in actdayarg:
-		monitornews = 1
-
-	if "1" in headerarg:
-		header = 1
-		body = 0
-	elif headerg == None:
-		body = 1
-		header = 0
-	elif "1" in bodyarg:
-		body = 1
-		header = 0
-	elif bodyg == None:
-		header = 1
-		body = 0
-
-	syh = open(path + name_heute, "r")
-	sync_heute = syh.read()
-
-	sym = open(path + name_morgen, "r")
-	sync_morgen = sym.read()
-
-	if actday == 1 and header == 1:
+	if actday and header:
+		syh = open(path + name_heute, "r")
+		sync_heute = syh.read()
 		replace_h(sync_heute)
-	if nxtday == 1 and header == 1:
+	elif nxtday and header:
+		sym = open(path + name_morgen, "r")
+		sync_morgen = sym.read()
 		replace_h(sync_morgen)
-	if actday == 1 and body == 1:
+	elif actday and body:
+		syh = open(path + name_heute, "r")
+		sync_heute = syh.read()
 		replace_b(sync_heute)
-	if nxtday == 1 and body == 1:
+	elif nxtday and body:
+		sym = open(path + name_morgen, "r")
+		sync_morgen = sym.read()
 		replace_b(sync_morgen)
+	else:
+		raise Warning("No arguments passed!")
 
 except Exception as e:
 	import os

@@ -16,13 +16,12 @@ try:
 		common = imp.load_source('common', workingdir+"/common.py")
 		checktime = imp.load_source('checktime', workingdir+"/admin/checktime.py")
 	import cgi
-	import cgitb
+	#import cgitb; cgitb.enable()
 	import getytid
 
 	###########################
 
 	form = cgi.FieldStorage()
-	cgitb.enable()
 	gseite = form.getvalue('seite')
 	gnummer = form.getvalue('nummer')
 	rows = common.getrows()
@@ -57,15 +56,15 @@ try:
 
 	###########################
 
-	url = common.getinfo("URL", mseite, int(nummer))
-	refresh = common.getinfo("REFRESH", mseite, int(nummer))
+	url = common.getinfo("URL", mseite, nummer)
+	refresh = common.getinfo("REFRESH", mseite, nummer)
 	
 	###########################
 
 	x = 1
 	while x < rows or x == 1:
 		if nummer < rows and nummer+x <= rows:
-			if common.getinfo("AKTIV", mseite, nummer+x) == 1 and checktime.match(common.getinfo("VONBIS", mseite, nummer+x),common.datum.now()) == True:
+			if common.getinfo("AKTIV", mseite, nummer+x) and checktime.match(common.getinfo("VONBIS", mseite, nummer+x),common.datum.now()):
 				refreshon = True
 				nextnummer = nummer + x
 				break
@@ -77,8 +76,7 @@ try:
 			z = 0
 			while z < rows:
 				if checktime.match(common.getinfo("VONBIS", mseite, int(common.minaktiv(mseite))+z),common.datum.now()) == True:
-					nextanumma = int(common.minaktiv(mseite))+z
-					nextnummer = nextanumma
+					nextnummer = int(common.minaktiv(mseite))+z
 					break
 				else:
 					nextnummer = nummer

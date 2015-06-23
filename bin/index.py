@@ -14,17 +14,15 @@ else:
 	common = imp.load_source('common', workingdir+"/common.py")
 
 try:
-	import read_values
-
-	if int(read_values.read_refreshmonenabled) == 1:
-		refresh = "	<META HTTP-EQUIV=\"refresh\" CONTENT=\""+str(read_values.read_refreshmon)+"\" >"
+	if int(common.getinfo("REFRESHAKTIV", "globalmon", 0)) == 1:
+		refresh = "	<META HTTP-EQUIV=\"refresh\" CONTENT=\""+str(common.getinfo("REFRESH", "globalmon", 0))+"\" >"
 	else:
 		refresh = ""
 
-	uhraktiv = read_values.read_uhraktiv
-	logoaktiv = read_values.read_logoaktiv
-	widgetaktiv = read_values.read_widgetaktiv
-	adminlinkaktiv = read_values.read_adminlinkaktiv
+	uhraktiv = common.getwidgetinfo("Uhr", "AKTIV")
+	logoaktiv = common.getwidgetinfo("Logo", "AKTIV")
+	widgetaktiv = common.getwidgetinfo("Freies-Widget", "AKTIV")
+	adminlinkaktiv = common.getwidgetinfo("Admin-Link", "AKTIV")
 
 	print "Content-Type: text/html"
 	print
@@ -43,13 +41,13 @@ try:
 	##########################
 
 	if uhraktiv:
-		uhrheight = common.addpx(read_values.read_uhrheight)
-		uhrwidth = common.addpx(read_values.read_uhrwidth)
-		uhrvalign = read_values.read_uhrvalign
-		uhralign = common.addpx(read_values.read_uhralign)
-		uhrlink = read_values.read_uhrlink
-		uhrvmargin = read_values.read_uhrvmargin
-		uhrmargin = common.addpx(read_values.read_uhrmargin)
+		uhrheight = common.addpx(common.getwidgetinfo("Uhr", "height"))
+		uhrwidth = common.addpx(common.getwidgetinfo("Uhr", "width"))
+		uhrvalign = common.getwidgetinfo("Uhr", "vmargin")
+		uhralign = common.addpx(common.getwidgetinfo("Uhr", "valign"))
+		uhrlink = common.getwidgetinfo("Uhr", "URL")
+		uhrvmargin = common.getwidgetinfo("Uhr", "vmargin")
+		uhrmargin = common.addpx(common.getwidgetinfo("Uhr", "margin"))
 
 		if uhrvmargin == "center":
 			uhr = """\
@@ -71,11 +69,13 @@ try:
 	##########################
 
 	if logoaktiv:
-		logovmargin = read_values.read_logovmargin
-		logomargin = common.addpx(read_values.read_logomargin)
-		logovalign = read_values.read_logovalign
-		logoalign = common.addpx(read_values.read_logoalign)
-		logolink = read_values.read_logolink
+		logovmargin = common.getwidgetinfo("Logo", "vmargin")
+		logomargin = common.addpx(common.getwidgetinfo("Logo", "margin"))
+		logovalign = common.getwidgetinfo("Logo", "valign")
+		logoalign = common.addpx(common.getwidgetinfo("Logo", "align"))
+		logolink = common.getwidgetinfo("Logo", "URL")
+		logowidth = common.addpx(common.getwidgetinfo("Logo", "width"))
+		logoheight = common.addpx(common.getwidgetinfo("Logo", "height"))
 
 		if logovmargin == "left":
 			marginx = "margin-left:"+logomargin+";"
@@ -85,19 +85,19 @@ try:
 			marginx = ""
 		print """\
 	<div id="logo" style="""+logovalign+""":"""+logoalign+""";>
-		<a href="../" target="_parent"><img align="""+logovmargin+""" style=\""""+marginx+"""\" src=\""""+logolink+"""\" alt=""></a>
+		<img align="""+logovmargin+""" style=\""""+marginx+""" width="""+logowidth+"""; height="""+logoheight+"""\" src=\""""+logolink+"""\">
 	</div>"""
 
 	##########################
 
 	if widgetaktiv:
-		widgetcontent = read_values.read_widgetlink
-		widgetheight = common.addpx(read_values.read_widgetheight)
-		widgetwidth = common.addpx(read_values.read_widgetwidth)
-		widgetvalign = read_values.read_widgetvalign
-		widgetalign = common.addpx(read_values.read_widgetalign)
-		widgetvmargin = read_values.read_widgetvmargin
-		widgetmargin = common.addpx(read_values.read_widgetmargin)
+		widgetcontent = common.getwidgetinfo("Freies-Widget", "URL")
+		widgetheight = common.addpx(common.getwidgetinfo("Freies-Widget", "height"))
+		widgetwidth = common.addpx(common.getwidgetinfo("Freies-Widget", "width"))
+		widgetvalign = common.getwidgetinfo("Freies-Widget", "valign")
+		widgetalign = common.addpx(common.getwidgetinfo("Freies-Widget", "align"))
+		widgetvmargin = common.getwidgetinfo("Freies-Widget", "vmargin")
+		widgetmargin = common.addpx(common.getwidgetinfo("Freies-Widget", "margin"))
 
 		if widgetvmargin == "center":
 			print """	<div id="widget" style="height:"""+widgetheight+"""; width:"""+widgetwidth+"""; """+widgetvalign+""":"""+widgetalign+"""; position:absolute; left:0; right:0; margin-left:auto; margin-right:auto;">"""
@@ -111,10 +111,10 @@ try:
 	##########################
 
 	if adminlinkaktiv:
-		adminlinkvmargin = read_values.read_adminlinkvmargin
-		adminlinkmargin = common.addpx(read_values.read_adminlinkmargin)
-		adminlinkvalign = read_values.read_adminlinkvalign
-		adminlinkalign = common.addpx(read_values.read_adminlinkalign)
+		adminlinkvmargin = common.getwidgetinfo("Admin-Link", "vmargin")
+		adminlinkmargin = common.addpx(common.getwidgetinfo("Admin-Link", "margin"))
+		adminlinkvalign = common.getwidgetinfo("Admin-Link", "valign")
+		adminlinkalign = common.addpx(common.getwidgetinfo("Admin-Link", "align"))
 
 		if adminlinkvmargin == "center":
 			print """\

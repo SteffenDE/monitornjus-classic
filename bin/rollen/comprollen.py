@@ -4,12 +4,12 @@
 # Beilage zu MonitorNjus, 22.06.2015 (Version 0.7.6)
 
 try:
-	import cgi, cgitb 
+	import cgi
 	import os
 
 	form = cgi.FieldStorage() 
-	url = form.getvalue('url')
-	typ = form.getvalue("type")
+	url = form.getfirst('url', None)
+	typ = form.getfirst("type", None)
 
 	######### Settings #########
 
