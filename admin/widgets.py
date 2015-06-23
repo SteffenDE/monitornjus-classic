@@ -89,11 +89,11 @@ try:
 						<div class="card white darken-1">
 							<div class="card-content white-text">
 								<span class="card-title """+colors.color+"""-text text-darken-2">Admin-Link</span><br><br>
-								<input type="checkbox" name="adminlinkaktiv" id="adminlinkaktiv" """+checkvalues.adminlinkaktiv+"""/>
+								<input type="checkbox" name="adminlinkaktiv" id="adminlinkaktiv" """+checkvalues.widgaktiv("Admin-Link")+"""/>
 								<label for="adminlinkaktiv">Admin-Link aktiviert</label>
 								<div class="row">
 									<div class="col s6">
-										<select name="dropdown_adminlink_valign">"""+checkvalues.adminlinkvalign+"""
+										<select name="dropdown_adminlink_valign">"""+checkvalues.valign("Admin-Link", "valign")+"""
 										</select>
 									</div>
 									<div class="col s6">
@@ -105,7 +105,7 @@ try:
 										</div>
 									</div>
 									<div class="col s6">
-										<select name="dropdown_adminlink_vmargin">"""+checkvalues.adminlinkvmargin+"""
+										<select name="dropdown_adminlink_vmargin">"""+checkvalues.valign("Admin-Link", "vmargin")+"""
 										</select>
 									</div>
 									<div class="col s6">

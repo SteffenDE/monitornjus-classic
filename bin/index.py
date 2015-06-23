@@ -36,7 +36,7 @@ try:
 	print """\
 </head>
 <body>
-	<iframe src="show.py" style="position:absolute; height:100%; width:100%; right:0px; border-style:none; overflow:hidden" scrolling="no"></iframe>"""
+	<iframe src="show.py" style="position:absolute; height:100%; width:100%; top: 0px; right:0px; border-style:none; overflow:hidden" scrolling="no"></iframe>"""
 
 	##########################
 
@@ -119,13 +119,13 @@ try:
 		if adminlinkvmargin == "center":
 			print """\
 	<div id="admin_link" style="position: fixed; background:none; """+adminlinkvalign+""":"""+adminlinkalign+""";">
-		<small>"""+str(common.datum)+"""</small><br>
+		<small>"""+common.datum.strftime("%d.%m.%Y %H:%M:%S")+"""</small><br>
 		<a style="text-decoration: none;" href="../admin/">monitor<b>njus</b>"""+common.version+""" </a>&copy; Steffen Deusch
 	</div>"""
 		else:
 			print """\
 	<div id="admin_link" style="position: fixed; width: auto; background:none; """+adminlinkvalign+""":"""+adminlinkalign+"""; """+adminlinkvmargin+""":"""+adminlinkmargin+""";">
-		<small>"""+str(common.datum)+"""</small><br>
+		<small>"""+common.datum.strftime("%d.%m.%Y %H:%M:%S")+"""</small><br>
 		<a style="text-decoration: none;" href="../admin/">monitor<b>njus</b>"""+common.version+""" </a>&copy; Steffen Deusch
 	</div>"""
 	else:

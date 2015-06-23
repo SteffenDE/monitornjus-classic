@@ -242,12 +242,12 @@ try:
 										<span class="card-title """+colors.color+"""-text text-darken-2">Alle Seiten</span><br>
 										<div class="row">
 											<div class="input-field col s12">
-												<input style="color:black;" placeholder=\""""+str(checkvalues.refreshall)+"""\" name="refreshall" id="refreshall" type="text">
+												<input style="color:black;" placeholder=\""""+str(checkvalues.testexist("REFRESH", "global", 0))+"""\" name="refreshall" id="refreshall" type="text">
 												<label for="refreshall">Alle Seiten neu laden</label>
 											</div>
 										</div>
 										<div>
-											<input type="checkbox" name="refreshallenabled" id="refreshallenabled" """+checkvalues.refreshallenabled+"""/>
+											<input type="checkbox" name="refreshallenabled" id="refreshallenabled" """+checkvalues.aktiv("REFRESHAKTIV", "global", 0)+"""/>
 											<label for="refreshallenabled">Globales neu laden aktiviert</label>
 										</div>
 									</div>
@@ -259,12 +259,12 @@ try:
 										<span class="card-title """+colors.color+"""-text text-darken-2">Monitornjus Frontend</span><br>
 										<div class="row">
 											<div class="input-field col s12">
-												<input style="color:black;" placeholder=\""""+str(checkvalues.refreshmon)+"""\" name="refreshmon" id="refreshmon" type="text">
+												<input style="color:black;" placeholder=\""""+str(checkvalues.testexist("REFRESH", "globalmon", 0))+"""\" name="refreshmon" id="refreshmon" type="text">
 												<label for="refreshmon">Monitornjus Frontend neu laden</label>
 											</div>
 										</div>
 										<div>
-											<input type="checkbox" name="refreshmonenabled" id="refreshmonenabled" """+checkvalues.refreshmonenabled+"""/>
+											<input type="checkbox" name="refreshmonenabled" id="refreshmonenabled" """+checkvalues.aktiv("REFRESHAKTIV", "globalmon", 0)+"""/>
 											<label for="refreshmonenabled">Monitornjus neu laden</label>
 										</div>
 									</div>

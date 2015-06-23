@@ -3,13 +3,7 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 07.05.2015 (Version 0.7.1)
-
-"""
-	Was macht diese Datei?
-	Sie sorgt dafür, dass das Admin-Interface je nach Aufruf nicht den Inhalt der Datenbank überprüfen muss,
-	sondern beispielsweise wenn Refresh aktiviert ist nicht "1" sondern "checked='checked'" als antwort bekommt.
-"""
+# Beilage zu MonitorNjus, 22.06.2015 (Version 0.7.6)
 
 import os
 import imp
@@ -108,59 +102,3 @@ def getdate(value, Seite, Nummer):											# Splittet die Daten in der Datenba
 		return timespan[3]
 	else:
 		return "Fehler"
-
-url1 = testexist("URL", "Links", 1)											# Speicherung der Strings in Variablen zum einfachen Abruf aus anderen
-url2 = testexist("URL", "Rechts", 1)										# Scripts
-url1_2 = testexist("URL", "Links", 2)
-url2_2 = testexist("URL", "Rechts", 2)
-refresh1 = testexist("REFRESH", "Links", 1)
-refresh2 = testexist("REFRESH", "Rechts", 1)
-refresh1_2 = testexist("REFRESH", "Links", 2)
-refresh2_2 = testexist("REFRESH", "Rechts", 2)
-refreshmon = testexist("REFRESH", "globalmon", 0)
-refreshall = testexist("REFRESH", "global", 0)
-
-leftenabled = aktiv("AKTIV", "Links", 1)
-rightenabled = aktiv("AKTIV", "Rechts", 1)
-leftenabled_2 = aktiv("AKTIV", "Links", 2)
-rightenabled_2 = aktiv("AKTIV", "Rechts", 2)
-refreshleftenabled = aktiv("REFRESHAKTIV", "Links", 1)
-refreshrightenabled = aktiv("REFRESHAKTIV", "Rechts", 1)
-refreshleftenabled_2 = aktiv("REFRESHAKTIV", "Links", 2)
-refreshrightenabled_2 = aktiv("REFRESHAKTIV", "Rechts", 2)
-refreshmonenabled = aktiv("REFRESHAKTIV", "globalmon", 0)
-refreshallenabled = aktiv("REFRESHAKTIV", "global", 0)
-
-adminlinkaktiv = widgaktiv("Admin-Link")
-uhraktiv = widgaktiv("Uhr")
-logoaktiv = widgaktiv("Logo")
-widgetaktiv = widgaktiv("Freies-Widget")
-
-adminlinkvalign = valign("Admin-Link", "valign")
-adminlinkvmargin = valign("Admin-Link", "vmargin")
-uhrvalign = valign("Uhr", "valign")
-uhrvmargin = valign("Uhr", "vmargin")
-logovalign = valign("Logo", "valign")
-logovmargin = valign("Logo", "vmargin")
-widgetvalign = valign("Freies-Widget", "valign")
-widgetvmargin = valign("Freies-Widget", "vmargin")
-
-adminlinkalign = str(testexistwidg("align", "Admin-Link"))
-adminlinkmargin = str(testexistwidg("margin", "Admin-Link"))
-uhralign = str(testexistwidg("align", "Uhr"))
-uhrmargin = str(testexistwidg("margin", "Uhr"))
-logoalign = str(testexistwidg("align", "Logo"))
-logomargin = str(testexistwidg("margin", "Logo"))
-widgetalign = str(testexistwidg("align", "Freies-Widget"))
-widgetmargin = str(testexistwidg("margin", "Freies-Widget"))
-
-uhrlink = testexistwidg("URL", "Uhr")
-logolink = testexistwidg("URL", "Logo")
-widgetlink = testexistwidg("URL", "Freies-Widget")
-
-uhrwidth = str(testexistwidg("width", "Uhr"))
-uhrheight = str(testexistwidg("height", "Uhr"))
-logowidth = str(testexistwidg("width", "Logo"))
-logoheight = str(testexistwidg("height", "Logo"))
-widgetwidth = str(testexistwidg("width", "Freies-Widget"))
-widgetheight = str(testexistwidg("height", "Freies-Widget"))
