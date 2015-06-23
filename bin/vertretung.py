@@ -55,22 +55,17 @@ try:
 	header = int(form.getfirst('header', "0"))
 	body = int(form.getfirst('body', "1"))
 
+        syh = open(path + name_heute, "r")
+        sym = open(path + name_morgen, "r")
+
 	if actday and header:
-		syh = open(path + name_heute, "r")
-		sync_heute = syh.read()
-		replace_h(sync_heute)
+		replace_h(syh.read())
 	elif nxtday and header:
-		sym = open(path + name_morgen, "r")
-		sync_morgen = sym.read()
-		replace_h(sync_morgen)
+		replace_h(sym.read())
 	elif actday and body:
-		syh = open(path + name_heute, "r")
-		sync_heute = syh.read()
-		replace_b(sync_heute)
+		replace_b(syh.read())
 	elif nxtday and body:
-		sym = open(path + name_morgen, "r")
-		sync_morgen = sym.read()
-		replace_b(sync_morgen)
+		replace_b(sym.read())
 	else:
 		raise Warning("No arguments passed!")
 
