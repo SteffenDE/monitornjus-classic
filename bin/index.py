@@ -43,8 +43,8 @@ try:
 	if uhraktiv:
 		uhrheight = common.addpx(common.getwidgetinfo("Uhr", "height"))
 		uhrwidth = common.addpx(common.getwidgetinfo("Uhr", "width"))
-		uhrvalign = common.getwidgetinfo("Uhr", "vmargin")
-		uhralign = common.addpx(common.getwidgetinfo("Uhr", "valign"))
+		uhrvalign = common.getwidgetinfo("Uhr", "valign")
+		uhralign = common.addpx(common.getwidgetinfo("Uhr", "align"))
 		uhrlink = common.getwidgetinfo("Uhr", "URL")
 		uhrvmargin = common.getwidgetinfo("Uhr", "vmargin")
 		uhrmargin = common.addpx(common.getwidgetinfo("Uhr", "margin"))
@@ -118,20 +118,27 @@ try:
 
 		if adminlinkvmargin == "center":
 			print """\
-	<div id="admin_link" style="position: fixed; background:none; """+adminlinkvalign+""":"""+adminlinkalign+""";">
-		<small>"""+common.datum.strftime("%d.%m.%Y %H:%M:%S")+"""</small><br>
-		<a style="text-decoration: none;" href="../admin/">monitor<b>njus</b>"""+common.version+""" </a>&copy; Steffen Deusch
+	<div id="admin_link" style="position: fixed; background:none; """+adminlinkvalign+""":"""+adminlinkalign+""";">"""
+			if adminlinkvalign == "top":
+				print """\
+			<a style="text-decoration: none;" href="../admin/">monitor<b>njus</b>"""+common.version+""" </a>&copy; Steffen Deusch<br>
+			<small>"""+common.datum.strftime("%d.%m.%Y %H:%M:%S")+"""</small>"""
+			else:
+				print """\
+			<small>"""+common.datum.strftime("%d.%m.%Y %H:%M:%S")+"""</small><br>
+			<a style="text-decoration: none;" href="../admin/">monitor<b>njus</b>"""+common.version+""" </a>&copy; Steffen Deusch
 	</div>"""
 		else:
 			print """\
-	<div id="admin_link" style="position: fixed; width: auto; background:none; """+adminlinkvalign+""":"""+adminlinkalign+"""; """+adminlinkvmargin+""":"""+adminlinkmargin+""";">
-		<small>"""+common.datum.strftime("%d.%m.%Y %H:%M:%S")+"""</small><br>
+	<div id="admin_link" style="position: fixed; width: auto; background:none; """+adminlinkvalign+""":"""+adminlinkalign+"""; """+adminlinkvmargin+""":"""+adminlinkmargin+""";">"""
+			if adminlinkvalign == "top":
+				print """\
+		<a style="text-decoration: none;" href="../admin/">monitor<b>njus</b>"""+common.version+""" </a>&copy; Steffen Deusch<br>
+		<small style=float:"""+adminlinkvmargin+""";>"""+common.datum.strftime("%d.%m.%Y %H:%M:%S")+"""</small>"""
+			else:
+				print """\
+		<small style=float:"""+adminlinkvmargin+""";>"""+common.datum.strftime("%d.%m.%Y %H:%M:%S")+"""</small><br>
 		<a style="text-decoration: none;" href="../admin/">monitor<b>njus</b>"""+common.version+""" </a>&copy; Steffen Deusch
-	</div>"""
-	else:
-		print """\
-	<div id="admin_link" style="background:none; bottom:0px;">
-		<small>KONFIGURATIONSFEHLER</small><br>
 	</div>"""
 
 	##########################
