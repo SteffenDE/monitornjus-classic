@@ -4,15 +4,25 @@
 -->
 <html>
 <head>
-	<script language="javascript" type="text/javascript">
-  function resizeIframe(obj) {
-    obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
-  }
+<style>
+iframe.head {
+	height: 0px;
+}
+html, body {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+</style>
+<script type="text/javascript">
+function resizeIframe(obj) {
+	obj.style.height = obj.contentWindow.document.body.scrollHeight + 7 + 'px';
+}
 </script>
 </head>
 <body>
 	<center>
-		<iframe src="vertretung.py?nxtday=1&header=1" name="Header" frameBorder="0" scrolling="no" seamless="seamless" onload='javascript:resizeIframe(this);' width="100%"  marginwidth="0" marginheight="1"></iframe>
-		<iframe src="rollen/comprollen.py?type=redir&url=../vertretung.py?nxtday=1" name="Body" width="100%" marginwidth="0" marginheight="1" height="100%" frameBorder="0" scrolling="no" seamless="seamless"></iframe>
+		<iframe class="head" src="vertretung.py?nxtday=1&header=1" frameBorder="0" scrolling="no" seamless="seamless" onload='javascript:resizeIframe(this);' width="100%"></iframe>
+		<iframe class="body" src="rollen/comprollen.py?type=redir&url=../vertretung.py?nxtday=1" frameBorder="0" scrolling="no" seamless="seamless" name="Body" width="100%" height="100%"></iframe>
 	</center>
 </body>

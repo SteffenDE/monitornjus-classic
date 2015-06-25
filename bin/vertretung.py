@@ -36,7 +36,7 @@ def replace_h(header):
 		.replace("<meta http-equiv=\"expires\" content=\"0\">","<meta http-equiv=\"expires\" content=\"0\"><link rel='stylesheet' type='text/css' href='css/vertretung.css'>")\
 		.replace("</head>","--></head>")\
 		.replace("<!-- Info-Stundenplan -->","")\
-		.replace('<table class="mon_list" >','<!--<table class="mon_list" >')\
+		.replace('<p>\n<table class="mon_list" >','<!--<table class="mon_list" >')\
 		.replace('<table class="mon_head">','<!--<table class="mon_head">')\
 		.replace("</body>","--></body>")\
 		.replace('<div class="mon_title">', '--><center><div class="mon_title">')
