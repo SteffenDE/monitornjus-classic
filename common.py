@@ -193,6 +193,8 @@ def addpx(string):
 		return str(string)
 	elif "auto" in str(string):
 		return str(string)
+	elif "%" in str(string):
+		return str(string)
 	else:
 		return str(string)+"px"
 
@@ -232,6 +234,7 @@ Content-Type: text/html
 
 def debug(e):
 	import os
+	import cgitb; cgitb.enable()
 	if "bin/index.py" in os.environ["SCRIPT_NAME"]:
 		isfirstrun()
 	else:
