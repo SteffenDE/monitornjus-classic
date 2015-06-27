@@ -3,13 +3,14 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 22.06.2015 (Version 0.7.6)
+# Beilage zu MonitorNjus, 27.06.2015 (Version 0.8)
+
+import os
+import imp
+workingdir = os.path.dirname(os.path.realpath(__file__))
+common = imp.load_source('common', workingdir+"/../common.py")
 
 try:
-	import os
-	workingdir = os.path.dirname(os.path.realpath(__file__))
-	import imp
-	common = imp.load_source('common', workingdir+"/../common.py")
 	rfr = open(workingdir+"/firstrun", "r")
 	read_firstrun = rfr.read()
 	rfr.close()

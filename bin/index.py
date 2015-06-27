@@ -3,15 +3,12 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 22.06.2015 (Version 0.7.6)
+# Beilage zu MonitorNjus, 27.06.2015 (Version 0.8)
 
 import os
 import imp
-workingdir = os.getcwd()
-if "bin" in workingdir:
-	common = imp.load_source('common', workingdir+"/../common.py")
-else:
-	common = imp.load_source('common', workingdir+"/common.py")
+workingdir = os.path.dirname(os.path.realpath(__file__))
+common = imp.load_source('common', workingdir+"/../common.py")
 
 try:
 	if int(common.getinfo("REFRESHAKTIV", "globalmon", 0)) == 1:

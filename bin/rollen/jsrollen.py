@@ -3,7 +3,7 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 07.05.2015 (Version 0.7.1)
+# Beilage zu MonitorNjus, 27.06.2015 (Version 0.8)
 
 try:
 	import cgi, cgitb 
@@ -102,7 +102,7 @@ objGo=setInterval('DM_ticken()',Interval);
 
 except Exception as e:
 	import os
-	workingdir = os.path.dirname(os.path.realpath(__file__))
 	import imp
+	workingdir = os.path.dirname(os.path.realpath(__file__))
 	common = imp.load_source('common', workingdir+"/../../common.py")
 	common.debug(e)
