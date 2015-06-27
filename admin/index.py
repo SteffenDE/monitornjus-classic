@@ -9,14 +9,10 @@ try:
 	import colors
 	import os
 	import firstrun
-	import checkvalues
 	import imp
 	
-	workingdir = os.getcwd()
-	if "admin" in workingdir:
-		common = imp.load_source('common', workingdir+"/../common.py")
-	else:
-		common = imp.load_source('common', workingdir+"/common.py")
+	workingdir = os.path.dirname(os.path.realpath(__file__))
+	common = imp.load_source('common', workingdir+"/../common.py")
 
 	common.authenticated()
 
@@ -37,39 +33,39 @@ try:
 											<span class="card-title """+colors.color+"""-text text-darken-2">Linke Seite</span><br>
 											<div class="row">
 												<div class="input-field col s6">
-													<input style="color:black;" placeholder=\""""+checkvalues.testexist("URL", "Links", x)+"""\" name="url1-"""+str(x)+"""" id="url1-"""+str(x)+"""" type="text">
+													<input style="color:black;" placeholder=\""""+common.testexist("URL", "Links", x)+"""\" name="url1-"""+str(x)+"""" id="url1-"""+str(x)+"""" type="text">
 													<label for="url1-"""+str(x)+"""">URL Links</label>
 												</div>
 												<div class="input-field col s6">
-													<input style="color:black;" placeholder=\""""+str(checkvalues.testexist("REFRESH", "Links", x))+"""\" name="refresh1-"""+str(x)+"""" id="refresh1-"""+str(x)+"""" type="text">
+													<input style="color:black;" placeholder=\""""+str(common.testexist("REFRESH", "Links", x))+"""\" name="refresh1-"""+str(x)+"""" id="refresh1-"""+str(x)+"""" type="text">
 													<label for="refresh1-"""+str(x)+"""">Refresh Links</label>
 												</div>
 											</div>
 											<div>
-												<input type="checkbox" name="leftenabled-"""+str(x)+"""" id="leftenabled-"""+str(x)+"""" """+checkvalues.aktiv("AKTIV", "Links", x)+"""/>
+												<input type="checkbox" name="leftenabled-"""+str(x)+"""" id="leftenabled-"""+str(x)+"""" """+common.aktiv("AKTIV", "Links", x)+"""/>
 												<label for="leftenabled-"""+str(x)+"""">Links aktiviert</label>&nbsp;&nbsp;&nbsp;&nbsp;
-												<input type="checkbox" name="refreshleftenabled-"""+str(x)+"""" id="refreshleftenabled-"""+str(x)+"""" """+checkvalues.aktiv("REFRESHAKTIV", "Links", x)+"""/>
+												<input type="checkbox" name="refreshleftenabled-"""+str(x)+"""" id="refreshleftenabled-"""+str(x)+"""" """+common.aktiv("REFRESHAKTIV", "Links", x)+"""/>
 												<label for="refreshleftenabled-"""+str(x)+"""">Links neu laden</label>
 											</div>
 											<!--<div>
-												<input type="checkbox" name="vonbisaktivl-"""+str(x)+"""" id="vonbisaktivl-"""+str(x)+"""" """+checkvalues.aktiv("VONBISAKTIV", "Links", x)+"""/>
+												<input type="checkbox" name="vonbisaktivl-"""+str(x)+"""" id="vonbisaktivl-"""+str(x)+"""" """+common.aktiv("VONBISAKTIV", "Links", x)+"""/>
 												<label for="vonbisaktivl-"""+str(x)+"""">Zeitangabe</label>
 											</div>-->
 											<div class="row">
 												<div class="input-field col s4">
-													<input style="color:black;" placeholder=\""""+checkvalues.getdate("uhrzeit", "Links", x)+"""\" name="uhrzeit-Links-"""+str(x)+"""" id="uhrzeit-Links-"""+str(x)+"""" type="text">
+													<input style="color:black;" placeholder=\""""+common.getdate("uhrzeit", "Links", x)+"""\" name="uhrzeit-Links-"""+str(x)+"""" id="uhrzeit-Links-"""+str(x)+"""" type="text">
 													<label for="uhrzeit-Links-"""+str(x)+"""">Uhrzeit</label>
 												</div>
 												<div class="input-field col s4">
-													<input style="color:black;" placeholder=\""""+checkvalues.getdate("wochentag", "Links", x)+"""\" name="wochentag-Links-"""+str(x)+"""" id="wochentag-Links-"""+str(x)+"""" type="text">
+													<input style="color:black;" placeholder=\""""+common.getdate("wochentag", "Links", x)+"""\" name="wochentag-Links-"""+str(x)+"""" id="wochentag-Links-"""+str(x)+"""" type="text">
 													<label for="wochentag-Links-"""+str(x)+"""">Wochentag</label>
 												</div>
 												<div class="input-field col s2">
-													<input style="color:black;" placeholder=\""""+checkvalues.getdate("tag", "Links", x)+"""\" name="tag-Links-"""+str(x)+"""" id="tag-Links-"""+str(x)+"""" type="text">
+													<input style="color:black;" placeholder=\""""+common.getdate("tag", "Links", x)+"""\" name="tag-Links-"""+str(x)+"""" id="tag-Links-"""+str(x)+"""" type="text">
 													<label for="tag-Links-"""+str(x)+"""">Tag</label>
 												</div>
 												<div class="input-field col s2">
-													<input style="color:black;" placeholder=\""""+checkvalues.getdate("monat", "Links", x)+"""\" name="monat-Links-"""+str(x)+"""" id="monat-Links-"""+str(x)+"""" type="text">
+													<input style="color:black;" placeholder=\""""+common.getdate("monat", "Links", x)+"""\" name="monat-Links-"""+str(x)+"""" id="monat-Links-"""+str(x)+"""" type="text">
 													<label for="monat-Links-"""+str(x)+"""">Monat</label>
 												</div>
 											</div>
@@ -100,39 +96,39 @@ try:
 											<span class="card-title """+colors.color+"""-text text-darken-2">Rechte Seite</span><br>
 											<div class="row">
 												<div class="input-field col s6">
-													<input style="color:black;" placeholder=\""""+checkvalues.testexist("URL", "Rechts", x)+"""\" name="url2-"""+str(x)+"""" id="url2-"""+str(x)+"""" type="text">
+													<input style="color:black;" placeholder=\""""+common.testexist("URL", "Rechts", x)+"""\" name="url2-"""+str(x)+"""" id="url2-"""+str(x)+"""" type="text">
 													<label for="url2-"""+str(x)+"""">URL Rechts</label>
 												</div>
 												<div class="input-field col s6">
-													<input style="color:black;" placeholder=\""""+str(checkvalues.testexist("REFRESH", "Rechts", x))+"""\" name="refresh2-"""+str(x)+"""" id="refresh2-"""+str(x)+"""" type="text">
+													<input style="color:black;" placeholder=\""""+str(common.testexist("REFRESH", "Rechts", x))+"""\" name="refresh2-"""+str(x)+"""" id="refresh2-"""+str(x)+"""" type="text">
 													<label for="refresh2-"""+str(x)+"""">Refresh Rechts</label>
 												</div>
 											</div>
 											<div>
-												<input type="checkbox" name="rightenabled-"""+str(x)+"""" id="rightenabled-"""+str(x)+"""" """+checkvalues.aktiv("AKTIV", "Rechts", x)+"""/>
+												<input type="checkbox" name="rightenabled-"""+str(x)+"""" id="rightenabled-"""+str(x)+"""" """+common.aktiv("AKTIV", "Rechts", x)+"""/>
 												<label for="rightenabled-"""+str(x)+"""">Rechts aktiviert</label>&nbsp;&nbsp;&nbsp;&nbsp;
-												<input type="checkbox" name="refreshrightenabled-"""+str(x)+"""" id="refreshrightenabled-"""+str(x)+"""" """+checkvalues.aktiv("REFRESHAKTIV", "Rechts", x)+"""/>
+												<input type="checkbox" name="refreshrightenabled-"""+str(x)+"""" id="refreshrightenabled-"""+str(x)+"""" """+common.aktiv("REFRESHAKTIV", "Rechts", x)+"""/>
 												<label for="refreshrightenabled-"""+str(x)+"""">Rechts neu laden</label>
 											</div>
 											<!--<div>
-												<input type="checkbox" name="vonbisaktivr-"""+str(x)+"""" id="vonbisaktivr-"""+str(x)+"""" """+checkvalues.aktiv("VONBISAKTIV", "Rechts", x)+"""/>
+												<input type="checkbox" name="vonbisaktivr-"""+str(x)+"""" id="vonbisaktivr-"""+str(x)+"""" """+common.aktiv("VONBISAKTIV", "Rechts", x)+"""/>
 												<label for="vonbisaktivr-"""+str(x)+"""">Zeitangabe</label>
 											</div>-->
 											<div class="row">
 												<div class="input-field col s4">
-													<input style="color:black;" placeholder=\""""+checkvalues.getdate("uhrzeit", "Rechts", x)+"""\" name="uhrzeit-Rechts-"""+str(x)+"""" id="uhrzeit-Rechts-"""+str(x)+"""" type="text">
+													<input style="color:black;" placeholder=\""""+common.getdate("uhrzeit", "Rechts", x)+"""\" name="uhrzeit-Rechts-"""+str(x)+"""" id="uhrzeit-Rechts-"""+str(x)+"""" type="text">
 													<label for="uhrzeit-Rechts-"""+str(x)+"""">Uhrzeit</label>
 												</div>
 												<div class="input-field col s4">
-													<input style="color:black;" placeholder=\""""+checkvalues.getdate("wochentag", "Rechts", x)+"""\" name="wochentag-Rechts-"""+str(x)+"""" id="wochentag-Rechts-"""+str(x)+"""" type="text">
+													<input style="color:black;" placeholder=\""""+common.getdate("wochentag", "Rechts", x)+"""\" name="wochentag-Rechts-"""+str(x)+"""" id="wochentag-Rechts-"""+str(x)+"""" type="text">
 													<label for="wochentag-Rechts-"""+str(x)+"""">Wochentag</label>
 												</div>
 												<div class="input-field col s2">
-													<input style="color:black;" placeholder=\""""+checkvalues.getdate("tag", "Rechts", x)+"""\" name="tag-Rechts-"""+str(x)+"""" id="tag-Rechts-"""+str(x)+"""" type="text">
+													<input style="color:black;" placeholder=\""""+common.getdate("tag", "Rechts", x)+"""\" name="tag-Rechts-"""+str(x)+"""" id="tag-Rechts-"""+str(x)+"""" type="text">
 													<label for="tag-Rechts-"""+str(x)+"""">Tag</label>
 												</div>
 												<div class="input-field col s2">
-													<input style="color:black;" placeholder=\""""+checkvalues.getdate("monat", "Rechts", x)+"""\" name="monat-Rechts-"""+str(x)+"""" id="monat-Rechts-"""+str(x)+"""" type="text">
+													<input style="color:black;" placeholder=\""""+common.getdate("monat", "Rechts", x)+"""\" name="monat-Rechts-"""+str(x)+"""" id="monat-Rechts-"""+str(x)+"""" type="text">
 													<label for="monat-Rechts-"""+str(x)+"""">Monat</label>
 												</div>
 											</div>
@@ -242,12 +238,12 @@ try:
 										<span class="card-title """+colors.color+"""-text text-darken-2">Alle Seiten</span><br>
 										<div class="row">
 											<div class="input-field col s12">
-												<input style="color:black;" placeholder=\""""+str(checkvalues.testexist("REFRESH", "global", 0))+"""\" name="refreshall" id="refreshall" type="text">
+												<input style="color:black;" placeholder=\""""+str(common.testexist("REFRESH", "global", 0))+"""\" name="refreshall" id="refreshall" type="text">
 												<label for="refreshall">Alle Seiten neu laden</label>
 											</div>
 										</div>
 										<div>
-											<input type="checkbox" name="refreshallenabled" id="refreshallenabled" """+checkvalues.aktiv("REFRESHAKTIV", "global", 0)+"""/>
+											<input type="checkbox" name="refreshallenabled" id="refreshallenabled" """+common.aktiv("REFRESHAKTIV", "global", 0)+"""/>
 											<label for="refreshallenabled">Globales neu laden aktiviert</label>
 										</div>
 									</div>
@@ -259,12 +255,12 @@ try:
 										<span class="card-title """+colors.color+"""-text text-darken-2">Monitornjus Frontend</span><br>
 										<div class="row">
 											<div class="input-field col s12">
-												<input style="color:black;" placeholder=\""""+str(checkvalues.testexist("REFRESH", "globalmon", 0))+"""\" name="refreshmon" id="refreshmon" type="text">
+												<input style="color:black;" placeholder=\""""+str(common.testexist("REFRESH", "globalmon", 0))+"""\" name="refreshmon" id="refreshmon" type="text">
 												<label for="refreshmon">Monitornjus Frontend neu laden</label>
 											</div>
 										</div>
 										<div>
-											<input type="checkbox" name="refreshmonenabled" id="refreshmonenabled" """+checkvalues.aktiv("REFRESHAKTIV", "globalmon", 0)+"""/>
+											<input type="checkbox" name="refreshmonenabled" id="refreshmonenabled" """+common.aktiv("REFRESHAKTIV", "globalmon", 0)+"""/>
 											<label for="refreshmonenabled">Monitornjus neu laden</label>
 										</div>
 									</div>
@@ -318,4 +314,7 @@ try:
 </html>""" % (common.datum.year)
 
 except Exception as e:
+	import imp
+	workingdir = os.path.dirname(os.path.realpath(__file__))
+	common = imp.load_source('common', workingdir+"/../common.py")
 	common.debug(e)

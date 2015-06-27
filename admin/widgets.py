@@ -8,13 +8,9 @@
 try:
 	import colors
 	import os
+	workingdir = os.path.dirname(os.path.realpath(__file__))
 	import imp
-	workingdir = os.getcwd()
-	if "admin" in workingdir:
-		common = imp.load_source('common', workingdir+"/../common.py")
-	else:
-		common = imp.load_source('common', workingdir+"/common.py")
-	import checkvalues
+	common = imp.load_source('common', workingdir+"/../common.py")
 
 	common.authenticated()
 
@@ -89,11 +85,11 @@ try:
 						<div class="card white darken-1">
 							<div class="card-content white-text">
 								<span class="card-title """+colors.color+"""-text text-darken-2">Admin-Link</span><br><br>
-								<input type="checkbox" name="adminlinkaktiv" id="adminlinkaktiv" """+checkvalues.widgaktiv("Admin-Link")+"""/>
+								<input type="checkbox" name="adminlinkaktiv" id="adminlinkaktiv" """+common.widgaktiv("Admin-Link")+"""/>
 								<label for="adminlinkaktiv">Admin-Link aktiviert</label>
 								<div class="row">
 									<div class="col s6">
-										<select name="dropdown_adminlink_valign">"""+checkvalues.valign("Admin-Link", "valign")+"""
+										<select name="dropdown_adminlink_valign">"""+common.valign("Admin-Link", "valign")+"""
 										</select>
 									</div>
 									<div class="col s6">
@@ -105,7 +101,7 @@ try:
 										</div>
 									</div>
 									<div class="col s6">
-										<select name="dropdown_adminlink_vmargin">"""+checkvalues.valign("Admin-Link", "vmargin")+"""
+										<select name="dropdown_adminlink_vmargin">"""+common.valign("Admin-Link", "vmargin")+"""
 										</select>
 									</div>
 									<div class="col s6">
@@ -124,7 +120,7 @@ try:
 						<div class="card white darken-1">
 							<div class="card-content white-text">
 								<span class="card-title """+colors.color+"""-text text-darken-2">Uhr</span><br><br>
-								<input type="checkbox" name="uhraktiv" id="uhraktiv" """+checkvalues.widgaktiv("Uhr")+"""/>
+								<input type="checkbox" name="uhraktiv" id="uhraktiv" """+common.widgaktiv("Uhr")+"""/>
 								<label for="uhraktiv">Uhr aktiviert</label>
 								<div class="row">
 									<div class="input-field col s12">
@@ -150,7 +146,7 @@ try:
 										</div>
 									</div>
 									<div class="col s6">
-										<select name="dropdown_uhr_valign">"""+checkvalues.valign("Uhr", "valign")+"""
+										<select name="dropdown_uhr_valign">"""+common.valign("Uhr", "valign")+"""
 										</select>
 									</div>
 									<div class="col s6">
@@ -162,7 +158,7 @@ try:
 										</div>
 									</div>
 									<div class="col s6">
-										<select name="dropdown_uhr_vmargin">"""+checkvalues.valign("Uhr", "vmargin")+"""
+										<select name="dropdown_uhr_vmargin">"""+common.valign("Uhr", "vmargin")+"""
 										</select>
 									</div>
 									<div class="col s6">
@@ -181,7 +177,7 @@ try:
 						<div class="card white darken-1">
 							<div class="card-content white-text">
 								<span class="card-title """+colors.color+"""-text text-darken-2">Freies Widget</span><br><br>
-								<input type="checkbox" name="widgetaktiv" id="widgetaktiv" """+checkvalues.widgaktiv("Freies-Widget")+"""/>
+								<input type="checkbox" name="widgetaktiv" id="widgetaktiv" """+common.widgaktiv("Freies-Widget")+"""/>
 								<label for="widgetaktiv">Widget aktiviert</label>
 								<div class="row">
 									<div class="input-field col s12">
@@ -207,7 +203,7 @@ try:
 										</div>
 									</div>
 									<div class="col s6">
-										<select name="dropdown_widget_valign">"""+checkvalues.valign("Freies-Widget", "valign")+"""
+										<select name="dropdown_widget_valign">"""+common.valign("Freies-Widget", "valign")+"""
 										</select>
 									</div>
 									<div class="col s6">
@@ -219,7 +215,7 @@ try:
 										</div>
 									</div>
 									<div class="col s6">
-										<select name="dropdown_widget_vmargin">"""+checkvalues.valign("Freies-Widget", "vmargin")+"""
+										<select name="dropdown_widget_vmargin">"""+common.valign("Freies-Widget", "vmargin")+"""
 										</select>
 									</div>
 									<div class="col s6">
@@ -238,7 +234,7 @@ try:
 						<div class="card white darken-1">
 							<div class="card-content white-text">
 								<span class="card-title """+colors.color+"""-text text-darken-2">Logo</span><br><br>
-								<input type="checkbox" name="logoaktiv" id="logoaktiv" """+checkvalues.widgaktiv("Logo")+"""/>
+								<input type="checkbox" name="logoaktiv" id="logoaktiv" """+common.widgaktiv("Logo")+"""/>
 								<label for="logoaktiv">Logo aktiviert</label>
 								<div class="row">
 									<div class="input-field col s12">
@@ -264,7 +260,7 @@ try:
 										</div>
 									</div>
 									<div class="col s6">
-										<select name="dropdown_logo_valign">"""+checkvalues.valign("Logo", "valign")+"""
+										<select name="dropdown_logo_valign">"""+common.valign("Logo", "valign")+"""
 										</select>
 									</div>
 									<div class="col s6">
@@ -276,7 +272,7 @@ try:
 										</div>
 									</div>
 									<div class="col s6">
-										<select name="dropdown_logo_vmargin">"""+checkvalues.valign("Logo", "vmargin")+"""
+										<select name="dropdown_logo_vmargin">"""+common.valign("Logo", "vmargin")+"""
 										</select>
 									</div>
 									<div class="col s6">

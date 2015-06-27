@@ -154,11 +154,7 @@ objGo=setInterval('DM_ticken()',Interval);
 
 except Exception as e:
 	import os
-	workingdir = os.getcwd()
-	print workingdir
+	workingdir = os.path.dirname(os.path.realpath(__file__))
 	import imp
-	if "rollen" in workingdir:
-		common = imp.load_source('common', workingdir+"/../../common.py")
-	else:
-		common = imp.load_source('common', workingdir+"/../common.py")
+	common = imp.load_source('common', workingdir+"/../../common.py")
 	common.debug(e)

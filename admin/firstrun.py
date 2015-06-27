@@ -7,20 +7,13 @@
 
 try:
 	import os
-	workingdir = os.getcwd()
+	workingdir = os.path.dirname(os.path.realpath(__file__))
 	import imp
-	if "admin" in workingdir:
-		common = imp.load_source('common', workingdir+"/../common.py")
-		rfr = open(workingdir+"/firstrun", "r")
-		read_firstrun = rfr.read()
-		rfr.close()
-		conn = common.sqlite3.connect(workingdir+'/MonitorNjus.db')
-	else:
-		common = imp.load_source('common', workingdir+"/common.py")
-		rfr = open(workingdir+"/admin/firstrun", "r")
-		read_firstrun = rfr.read()
-		rfr.close()
-		conn = common.sqlite3.connect(workingdir+'/admin/MonitorNjus.db')
+	common = imp.load_source('common', workingdir+"/../common.py")
+	rfr = open(workingdir+"/firstrun", "r")
+	read_firstrun = rfr.read()
+	rfr.close()
+	conn = common.sqlite3.connect(workingdir+'/MonitorNjus.db')
 
 	if str(1) in read_firstrun:
 		conn.execute('''CREATE TABLE DISPLAYSETS
@@ -64,16 +57,10 @@ try:
 		conn.commit()
 		conn.close()
 
-		if "admin" in workingdir:
-			os.remove(workingdir+'/firstrun')
-			f = open(workingdir+'/firstrun','w')
-			f.write("0")
-			f.close()
-		else:
-			os.remove(workingdir+'/admin/firstrun')
-			f = open(workingdir+'/admin/firstrun','w')
-			f.write("0")
-			f.close()
+		os.remove(workingdir+'/firstrun')
+		f = open(workingdir+'/firstrun','w')
+		f.write("0")
+		f.close()
 	else:
 		pass
 

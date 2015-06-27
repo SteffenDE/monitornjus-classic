@@ -89,12 +89,7 @@ try:
 
 except Exception as e:
 	import os
-	workingdir = os.getcwd()
+	workingdir = os.path.dirname(os.path.realpath(__file__))
 	import imp
-	if "bin" in workingdir:
-		common = imp.load_source('common', workingdir+"/../common.py")
-		checktime = imp.load_source('checktime', workingdir+"/../admin/checktime.py")
-	else:
-		common = imp.load_source('common', workingdir+"/common.py")
-		checktime = imp.load_source('checktime', workingdir+"/admin/checktime.py")
+	common = imp.load_source('common', workingdir+"/../../common.py")
 	common.debug(e)

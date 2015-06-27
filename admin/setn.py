@@ -8,12 +8,9 @@
 try:
 	import cgi, cgitb
 	import os
+	workingdir = os.path.dirname(os.path.realpath(__file__))
 	import imp
-	workingdir = os.getcwd()
-	if "admin" in workingdir:
-			common = imp.load_source('common', workingdir+"/../common.py")
-	else:
-			common = imp.load_source('common', workingdir+"/common.py")
+	common = imp.load_source('common', workingdir+"/../common.py")
 
 	common.authenticated()
 

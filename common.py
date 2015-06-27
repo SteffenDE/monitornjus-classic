@@ -9,6 +9,7 @@ import os
 import datetime
 import sqlite3
 
+os.chdir(os.path.dirname(os.path.realpath(__file__)))
 datum = datetime.datetime.now()
 version = "0.7.6&beta;"
 workingdir = os.getcwd()
@@ -69,7 +70,7 @@ def authenticated():
 				import ad
 				import os
 				user = os.environ["REMOTE_USER"]
-				aduser = ad.find_user ()
+				aduser = ad.find_user()
 				if group.lower() in str(aduser.memberOf).lower() or "administrator" in user.lower():
 						pass
 				else:
@@ -88,12 +89,7 @@ def authenticated():
 
 ##########################################################################################
 
-if "admin" in workingdir:
-	conn = sqlite3.connect(workingdir+'/MonitorNjus.db')
-elif "bin" in workingdir:
-	conn = sqlite3.connect(workingdir+'/../admin/MonitorNjus.db')
-else:
-	conn = sqlite3.connect(workingdir+'/admin/MonitorNjus.db')
+conn = sqlite3.connect(workingdir+'/admin/MonitorNjus.db')
 
 def getinfo(Info, Seite, Nummer):
 	cursor = conn.execute("SELECT "+Info+" FROM DISPLAYSETS WHERE SEITE=\'"+Seite+"\' AND NUMMER="+str(Nummer)+";");
@@ -200,20 +196,12 @@ def addpx(string):
 
 def isfirstrun():
 	import os
+	os.chdir(os.path.dirname(os.path.realpath(__file__)))
 	workingdir = os.getcwd()
 	import imp
-	if "admin" in workingdir:
-		rfr = open(workingdir+"/firstrun", "r")
-		read_firstrun = rfr.read()
-		rfr.close()
-	elif "bin" in workingdir:
-		rfr = open(workingdir+"/../admin/firstrun", "r")
-		read_firstrun = rfr.read()
-		rfr.close()
-	else:
-		rfr = open(workingdir+"/admin/firstrun", "r")
-		read_firstrun = rfr.read()
-		rfr.close()
+	rfr = open(workingdir+"/admin/firstrun", "r")
+	read_firstrun = rfr.read()
+	rfr.close()
 	if int(read_firstrun) == 1:
 		print """\
 Content-Type: text/html
@@ -232,24 +220,116 @@ Content-Type: text/html
 	else:
 		pass
 
+############################################
+
+def testexist(GETNAME, Seite, Nummer):										# Daten aus der Datenbank lesen
+	try:
+		if getinfo(GETNAME, Seite, Nummer):
+			return getinfo(GETNAME, Seite, Nummer)
+	except:
+		return "Keine Daten"
+
+def aktiv(GETNAME, Seite, Nummer):											# Überprüft, ob eine Checkbox aktiviert ist
+	try:
+		if getinfo(GETNAME, Seite, Nummer) == 1:
+			return "checked=\"checked\""
+		else:
+			return ""
+	except:
+		return ""
+
+def testexistwidg(GETNAME, widgname):										# Widget Daten aus der Datenbank lesen
+	try:
+		if getwidgetinfo(widgname, GETNAME) is not None:
+			if str(getwidgetinfo(widgname, GETNAME)).isdigit():
+				return int(getwidgetinfo(widgname, GETNAME))
+			else: 
+				return str(getwidgetinfo(widgname, GETNAME))
+	except:
+		return "Fehler in checkvalues.testexistwidg"
+
+def widgaktiv(widgname):													# Dasselbe wie testexist(), nur für Widgets
+	try:
+		if getwidgetinfo(widgname, "Aktiv") == 1:
+			return "checked=\"checked\""
+		else:
+			return ""
+	except:
+		return ""
+
+def valign(widgname, typ):													# Wichtig für die Dropdown Auswahl der Lage von Widgets
+	if typ == "valign":
+		try:
+			if getwidgetinfo(widgname, "valign") == "top":
+				return """
+										<option value="" disabled selected>top</option>
+										<option value="bottom">bottom</option>"""
+			elif getwidgetinfo(widgname, "valign") == "bottom":
+				return """
+										<option value="" disabled selected>bottom</option>
+										<option value="top">top</option>"""
+		except:
+			return """
+										<option value="" disabled selected>valign wählen...</option>
+										<option value="top">top</option>
+										<option value="bottom">bottom</option>"""
+	elif typ == "vmargin":
+		try:
+			if "left" in getwidgetinfo(widgname, "vmargin"):
+				return """
+												<option value="" disabled selected>left</option>
+												<option value="center">center</option>
+												<option value="right">right</option>"""
+			elif "center" in getwidgetinfo(widgname, "vmargin"):
+				return """
+												<option value="" disabled selected>center</option>
+												<option value="left">left</option>
+												<option value="right">right</option>"""
+			elif "right" in getwidgetinfo(widgname, "vmargin"):
+				return """
+												<option value="" disabled selected>right</option>
+												<option value="center">center</option>
+												<option value="left">left</option>"""
+		except:
+			return """
+												<option value="" disabled selected>valign w&aumlhlen...</option>
+												<option value="left">left</option>
+												<option value="center">center</option>
+												<option value="right">right</option>"""
+	else:
+		pass
+
+def getdate(value, Seite, Nummer):											# Splittet die Daten in der Datenbank mit Anordnung nach (*|*|*|*)
+	timespan = getinfo("VONBIS", Seite, Nummer).split("|")			# in einzelne Werte für Uhrzeit, Wochentag, usw auf, um im Interface
+	if value == "uhrzeit":													# getrennt angezeigt zu werden
+		return timespan[0]
+	elif value == "wochentag":
+		return timespan[1]
+	elif value == "tag":
+		return timespan[2]
+	elif value == "monat":
+		return timespan[3]
+	else:
+		return "Fehler"
+
+############################################
+
 def debug(e):
 	import os
+	scrname = os.environ["SCRIPT_NAME"]
 	import cgitb; cgitb.enable()
-	if "bin/index.py" in os.environ["SCRIPT_NAME"]:
+	if "bin/index.py" in scrname:
 		isfirstrun()
 	else:
 		pass
-	if "bin" in workingdir:
+	if "bin" in scrname:
 		css = "css/"
-	elif "admin" in workingdir:
+	elif "admin" in scrname:
 		css = "../bin/css/"
+	elif "bin" and "rollen" in scrname:
+		css = "../../bin/css/"
 	else:
-		if "bin" in os.environ["SCRIPT_NAME"]:
-			css = "css/"
-		elif "admin" in os.environ["SCRIPT_NAME"]:
-			css = "../bin/css/"
-		else:
-			css = "bin/css/"
+		css = "bin/css/"
 	print "Content-Type: text/html"
 	print
 	print """<!DOCTYPE html>
@@ -280,7 +360,7 @@ def debug(e):
 		print """<h3>Es ist ein Fehler aufgetreten.<br>Weitere Informationen über "debug" in common.py!</h3>"""
 	print """\
 	<small>Seite wird in 30 Sekunden neu geladen.</small><br>
-	<small>Script: """+os.environ["SCRIPT_NAME"]+"""</small>
+	<small>Script: """+scrname+"""</small>
 	</div>
 </body>
 </html>"""
