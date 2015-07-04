@@ -221,8 +221,7 @@ try:
 		refresh = ""
 
 	print """\
-Content-Type: text/html
-
+Content-Type: text/html\n
 <!DOCTYPE html>
 <html lang="de">
 <head>"""
@@ -232,8 +231,10 @@ Content-Type: text/html
 	print """\
 </head>
 <body>
-</body>
-</html>"""
+</body>"""
+	import sys
+	sys.stdout.write("</html>")
+	del sys
 
 except Exception as e:
 	common.debug(e)

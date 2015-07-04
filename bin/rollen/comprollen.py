@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 # Copyright (c) 2015 Steffen Deusch
-# Beilage zu MonitorNjus, 27.06.2015 (Version 0.8)
+# Beilage zu MonitorNjus, 04.07.2015 (Version 0.8.1)
 
 try:
 	import cgi
@@ -19,8 +19,7 @@ try:
 
 	############################
 
-	print "Content-Type: text/html"
-	print
+	print "Content-Type: text/html\n"
 
 	if typ == "redir":
 		print """\
@@ -62,13 +61,16 @@ function autoresize_frames()
 <body onload="autoresize_frames()">
 <iframe src=\""""+url+"""\" style="display: none; position:absolute; width:100%; height:100%; top:0px; left:0px; margin-left:2px; border-style:none; overflow:hidden" frameborder="0" scrolling="no" id="fest" onload="javascript:resizeIframe(this);"></iframe>
 </body>"""
+		import sys
+		sys.stdout.write("</html>")
+		del sys
 
 	elif typ == "rollen":
 		print """\
 <!DOCTYPE html>
 <html>
 <head>
-<script type="text/javascript" src="../js/jquery-2.1.3.min.js"></script>
+<script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function () {$('#content').css('display', 'none');$('#content').fadeIn(1000);});
 </script>
@@ -77,29 +79,8 @@ function autoresize_frames()
 		obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
 	}
 </script>
-"""
-# <script language="text/javascript">
-# var framefenster = document.getElementsByTagName("iFrame");
-# var auto_resize_timer = window.setInterval("autoresize_frames()", 400);
-# function autoresize_frames()
-#     {
-#     for (var i = 0; i < framefenster.length; ++i)
-#         {
-#         if(framefenster[i].contentWindow.document.body)
-#             {
-#             var framefenster_size = framefenster[i].contentWindow.document.body.offsetHeight;
-#             if(document.all && !window.opera)
-#                 {
-#                 framefenster_size = framefenster[i].contentWindow.document.body.scrollHeight;
-#                 }
-#             framefenster[i].style.height = framefenster_size + 'px';
-#             }
-#         }
-#     }
-# </script>
-		print """\
 </head>
-<body>
+<body id="content">
 <script type="text/javascript">
 //Laufrichtung(up,down)
 var frame = '<iframe src=\""""+url+"""\" style="width:100%; height:100%;" frameborder="0" name="links" scrolling="no" onload="javascript:resizeIframe(this);"></iframe>'
@@ -107,7 +88,7 @@ var strDir      ='"""+direction+"""';
 	//Interval in ms
 var Interval = """+str(speed)+""";
 	//Falls Leeraum zwischen News...hier Wert erhoehen...minimum:1
-var intRepeat   = 3;
+var intRepeat   = 2;
 	//Background-color
 var strBgc      ='#fff';
 	//Text-color
@@ -147,7 +128,10 @@ intPos+=intStep*arrDir[strDir][0];
 }
 objGo=setInterval('DM_ticken()',Interval);
 </script>
-</body></html>"""
+</body>"""
+		import sys
+		sys.stdout.write("</html>")
+		del sys
 
 	else:
 		raise Exception("Falscher oder fehlender Queryparameter: type")

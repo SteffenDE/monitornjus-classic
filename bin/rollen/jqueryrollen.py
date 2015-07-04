@@ -3,7 +3,7 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 27.06.2015 (Version 0.8)
+# Beilage zu MonitorNjus, 04.07.2015 (Version 0.8.1)
 
 try:
 	import cgi, cgitb 
@@ -19,7 +19,7 @@ try:
 <head>
 <title>MonitorNjus Autorollen</title>
 <meta charset="UTF-8">
-<script type="text/javascript" src="../js/jquery-2.1.3.min.js"></script>
+<script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
 <script type="text/javascript" src="../js/jquery.simplyscroll.js"></script>
 <script type="text/javascript">
 	 

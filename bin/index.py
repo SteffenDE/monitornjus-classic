@@ -3,7 +3,7 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 27.06.2015 (Version 0.8)
+# Beilage zu MonitorNjus, 04.07.2015 (Version 0.8.1)
 
 import os
 import imp
@@ -21,9 +21,9 @@ try:
 	widgetaktiv = common.getwidgetinfo("Freies-Widget", "AKTIV")
 	adminlinkaktiv = common.getwidgetinfo("Admin-Link", "AKTIV")
 
-	print "Content-Type: text/html"
-	print
-	print """<!DOCTYPE html>
+	print "Content-Type: text/html\n"
+	print """\
+<!DOCTYPE html>
 <html style="overflow: hidden;" lang="de">
 <head>
 	<title>MonitorNjus</title>
@@ -140,9 +140,10 @@ try:
 
 	##########################
 
-	print """\
-</body>
-</html>"""
+	print "</body>"
+	import sys
+	sys.stdout.write("</html>")
+	del sys
 
 except Exception as e:
 	common.debug(e)

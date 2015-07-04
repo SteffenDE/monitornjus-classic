@@ -12,58 +12,24 @@ common = imp.load_source('common', workingdir+"/../common.py")
 
 try:
 	import colors
+	import cgi
 
 	common.authenticated()
 
-	print "Content-Type: text/html"
-	print
-	print """
+	print "Content-Type: text/html\n"
+	print """\
 <!DOCTYPE html>
 <html lang="de">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
 	<link href="../bin/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-	<title>MonitorNjus Admin-Panel</title>
-	<style type="text/css">
-	.input-field label { opacity: 0; }
-
-	.secondary-content, .input-field .prefix.active, .input-field input[type=text]:focus + label, .input-field input[type=password]:focus + label, .input-field input[type=email]:focus + label, .input-field input[type=url]:focus + label, .input-field input[type=date]:focus + label, .input-field input[type=tel]:focus + label, .input-field input[type=number]:focus + label, .input-field input[type=search]:focus + label, .input-field textarea:focus.materialize-textarea + label, .dropdown-content li > a, .dropdown-content li > span { 
-		color: """+colors.hexa+"""; opacity: 1; 
-	}
-
-	.switch label input[type=checkbox]:first-child:checked + .lever { 
-		background-color: """+colors.hexa+"""; opacity: 1; 
-	}
-
-	input[type=text] {
-		color: grey
-	}
-
-	input[type=text]:focus, input[type=password]:focus, input[type=email]:focus, input[type=url]:focus, input[type=date]:focus, input[type=tel]:focus, input[type=number]:focus, input[type=search]:focus, textarea:focus.materialize-textarea { 
-		border-bottom: 1px solid """+colors.hexa+""";
-		-webkit-box-shadow: 0 1px 0 0 """+colors.hexa+""";
-		-moz-box-shadow: 0 1px 0 0 """+colors.hexa+""";
-		box-shadow: 0 1px 0 0 """+colors.hexa+"""; 
-		color: black;
-	}
-
-	[type="checkbox"]:checked + label:before {
-		border-right: 2px solid """+colors.hexa+""";
-		border-bottom: 2px solid """+colors.hexa+"""; 
-	}
-
-	.btn:hover, .btn-large:hover { 
-		background-color: """+colors.hexa+"""; opacity: 1; 
-	}
-	.btn, .btn-large, .btn-floating { 
-		background-color: """+colors.hexa+"""; opacity: 0.8; 
-	}
-
-	</style>
+	<title>MonitorNjus Admin-Panel</title>"""
+	print colors.adminstyles
+	print """\
 </head>
 <body>
-	<script type="text/javascript" src="../bin/js/jquery-2.1.3.min.js"></script>
+	<script type="text/javascript" src="../bin/js/jquery-2.1.4.min.js"></script>
 	<script type="text/javascript" src="../bin/js/materialize.min.js"></script>
 	<nav class=\""""+colors.color+"""\"="navigation">
 		<div class="container">
@@ -187,7 +153,7 @@ try:
 								<label for="widgetaktiv">Widget aktiviert</label>
 								<div class="row">
 									<div class="input-field col s12">
-										<textarea style="color:black;" name="widgetlink" id="widgetlink" class="materialize-textarea">"""+common.getwidgetinfo("Freies-Widget", "URL")+"""</textarea>
+										<textarea style="color:black;" name="widgetlink" id="widgetlink" class="materialize-textarea">"""+cgi.escape(common.getwidgetinfo("Freies-Widget", "URL"))+"""</textarea>
 										<label for="widgetlink">Widget-URL</label>
 									</div>
 								</div>
@@ -315,8 +281,10 @@ try:
 </footer>
 <!--  Scripts-->
 <script src="../bin/js/init.js"></script>
-</body>
-</html>""" % (common.datum.year)
+</body>""" % (common.datum.year)
+	import sys
+	sys.stdout.write("</html>")
+	del sys
 
 except Exception as e:
 	common.debug(e)

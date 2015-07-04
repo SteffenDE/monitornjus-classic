@@ -3,12 +3,15 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 27.06.2015 (Version 0.8)
+# Beilage zu MonitorNjus, 04.07.2015 (Version 0.8.1)
 
 import os
+import sys
 import imp
 workingdir = os.path.dirname(os.path.realpath(__file__))
 common = imp.load_source('common', workingdir+"/../common.py")
+
+fadeinzeit = 1000
 
 try:
 	checktime = imp.load_source('checktime', workingdir+"/../admin/checktime.py")
@@ -126,9 +129,9 @@ try:
 <html lang="de">
 <head>
 	<meta charset="UTF-8">
-	<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
+	<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 	<script type="text/javascript">
-	$(document).ready(function () {$('#content').css('display', 'none');$('#content').fadeIn(1000);});
+	$(document).ready(function () {$('#content').css('display', 'none');$('#content').fadeIn("""+str(fadeinzeit)+""");});
 	</script>"""
 	if prrefresh is not None:
 		print prrefresh
@@ -166,7 +169,7 @@ try:
 	else:
 		style = ""
 	if rand:
-		print """\
+		sys.stdout.write("""\
 	<style>
 	iframe {
 		padding-left: """+common.addpx(common.getinfo("MARGINLEFT", mseite, nummer))+""";
@@ -174,24 +177,26 @@ try:
 		padding-top: """+common.addpx(common.getinfo("MARGINTOP", mseite, nummer))+""";
 		padding-bottom: """+common.addpx(common.getinfo("MARGINBOTTOM", mseite, nummer))+""";
 		box-sizing: border-box;
-	}"""
+	}""")
 	else:
 		print "	<style>"
 	print style
 	print """\
 	</style>
 </head>"""
-	#print checktime.match(common.getinfo("VONBIS", mseite, int(common.minaktiv(mseite))),common.datum.now())
-	#print nextanumma
-	#print nextnummer
 	print "\
 <body id=\"content\">"
+	####     # = debug     ####
+	#print checktime.match(common.getinfo("VONBIS", mseite, int(common.minaktiv(mseite))),common.datum.now())
+	#print nextnummer
 	#print common.getinfo("VONBIS", mseite, nummer)
 	#print checktime.match(common.getinfo("VONBIS", mseite, nummer),common.datum.now())
 	print output
 	print "\
-</body>\n\
-</html>"
+</body>"
+	import sys
+	sys.stdout.write("</html>")
+	del sys
 
 except Exception as e:
 	common.debug(e)

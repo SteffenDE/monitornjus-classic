@@ -62,13 +62,14 @@ try:
 		</div>
 	</div>"""
 
-	print "Content-Type: text/html"
 	if common.getinfo("REFRESHAKTIV", "global", 0) == 1:
 		refresh = "	<META HTTP-EQUIV=\"refresh\" CONTENT=\""+str(common.getinfo("REFRESH", "global", 0))+"\">"
 	else:
 		refresh = ""
-	print
-	print """<!DOCTYPE html>
+
+	print "Content-Type: text/html\n"
+	print """\
+<!DOCTYPE html>
 <html lang="de">
 <head>
 	<meta charset="UTF-8">
@@ -78,12 +79,14 @@ try:
 	print """\
 	<title>MonitorNjus</title>
 </head>"""
+	####     # = debug     ####
 	#print timeL
 	#print timeR
 	#print geteilt
 	print disp
-	print """\
-</html>"""
+	import sys
+	sys.stdout.write("</html>")
+	del sys
 
 except Exception as e:
 	common.debug(e)

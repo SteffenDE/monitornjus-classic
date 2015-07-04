@@ -83,6 +83,7 @@ def authenticated():
 </body>
 </html>""" % user
 						exit(0)
+				del sys
 		else:
 			pass
 
@@ -332,6 +333,7 @@ def getdate(value, Seite, Nummer):											# Splittet die Daten in der Datenba
 
 def debug(e):
 	import os
+	import sys
 	scrname = os.environ["SCRIPT_NAME"]
 	#import cgitb; cgitb.enable()
 	import traceback
@@ -372,7 +374,7 @@ def debug(e):
 	<h3>Es ist ein Fehler aufgetreten!</h3>
 	<h4>Details:</h4>
 	<pre><code>"""
-		print cgi.escape(trace)
+		sys.stdout.write(cgi.escape(trace))
 		print "	</code></pre>"
 	elif debugv == 1:
 		print """\
@@ -387,6 +389,7 @@ def debug(e):
 	<small>Script: """+scrname+"""</small><br>
 	<small>"""+datum.strftime("%d.%m.%Y %H:%M:%S")+"""</small>
 	</div>
-</body>
-</html>"""
+</body>"""
+	sys.stdout.write("</html>")
+	del sys
 	exit(1)

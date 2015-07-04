@@ -3,7 +3,9 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 27.06.2015 (Version 0.8)
+# Beilage zu MonitorNjus, 04.07.2015 (Version 0.8.1)
+
+import sys
 
 ######### Settings #########
 
@@ -26,9 +28,8 @@ def replace_b(body):
 		.replace('<table class="mon_list" >', '--><table class="mon_list" >')\
 		.replace('<font size="3" face="Arial">', '<!--<font size="3" face="Arial">')\
 		.replace("</body>","--></body>")
-	print "Content-Type: text/html"
-	print
-	print end
+	print "Content-Type: text/html\n"
+	sys.stdout.write(end)
 
 def replace_h(header):
 	end = header\
@@ -40,9 +41,8 @@ def replace_h(header):
 		.replace('<table class="mon_head">','<!--<table class="mon_head">')\
 		.replace("</body>","--></body>")\
 		.replace('<div class="mon_title">', '--><center><div class="mon_title">')
-	print "Content-Type: text/html"
-	print
-	print end
+	print "Content-Type: text/html\n"
+	sys.stdout.write(end)
 
 try:
 	import cgi
