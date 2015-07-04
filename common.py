@@ -45,7 +45,7 @@ group = "G_Projekt_MonitorNjus"
 
 def authenticated():
 		if groupauth and listauth:
-			raise Exception("listauth und groupauth können nicht gleichzeitig aktiv sein.")
+			raise Exception("listauth und groupauth können (noch) nicht gleichzeitig aktiv sein.")
 		if listauth:
 				import os
 				user = os.environ["REMOTE_USER"]
@@ -314,7 +314,8 @@ def getdate(value, Seite, Nummer):											# Splittet die Daten in der Datenba
 def debug(e):
 	import os
 	scrname = os.environ["SCRIPT_NAME"]
-	import cgitb; cgitb.enable()
+	#import cgitb; cgitb.enable()
+	import traceback
 	if "bin/index.py" in scrname:
 		isfirstrun()
 	else:
@@ -339,13 +340,20 @@ def debug(e):
 </head>
 <body>
 	<div class="container">"""
+	trace = traceback.format_exc()
+	if "OperationalError" in trace:
+		print """\
+	<center style="color: #ffffff; background: #a60c0d; border: 2px solid black; margin-top: 3%; padding-bottom: 3%;">
+		<h1>Hier stimmt was nicht!</h1>
+		Manuell an der Datenbank gespielt, was?
+	</center>"""
 	if debugv >= 2:
-		import traceback
+		import cgi
 		print """\
 	<h3>Es ist ein Fehler aufgetreten!</h3>
 	<h4>Details:</h4>
 	<pre><code>"""
-		print traceback.format_exc().replace(">","&gt;").replace("<",'&lt;').replace("\"",'&quot;')
+		print cgi.escape(trace)
 		print "	</code></pre>"
 	elif debugv == 1:
 		print """\
@@ -357,7 +365,8 @@ def debug(e):
 		print """<h3>Es ist ein Fehler aufgetreten.<br>Weitere Informationen über "debug" in common.py!</h3>"""
 	print """\
 	<small>Seite wird in 30 Sekunden neu geladen.</small><br>
-	<small>Script: """+scrname+"""</small>
+	<small>Script: """+scrname+"""</small><br>
+	<small>"""+datum.strftime("%d.%m.%Y %H:%M:%S")+"""</small>
 	</div>
 </body>
 </html>"""

@@ -36,11 +36,16 @@ try:
 		background-color: """+colors.hexa+"""; opacity: 1; 
 	}
 
+	input[type=text] {
+		color: grey
+	}
+
 	input[type=text]:focus, input[type=password]:focus, input[type=email]:focus, input[type=url]:focus, input[type=date]:focus, input[type=tel]:focus, input[type=number]:focus, input[type=search]:focus, textarea:focus.materialize-textarea { 
 		border-bottom: 1px solid """+colors.hexa+""";
 		-webkit-box-shadow: 0 1px 0 0 """+colors.hexa+""";
 		-moz-box-shadow: 0 1px 0 0 """+colors.hexa+""";
 		box-shadow: 0 1px 0 0 """+colors.hexa+"""; 
+		color: black;
 	}
 
 	[type="checkbox"]:checked + label:before {
@@ -96,7 +101,7 @@ try:
 									<div class="col s6">
 										<div class="row">
 											<div class="input-field col s12">
-												<input style="color:black;" placeholder=\'"""+common.getwidgetinfo("Admin-Link", "align")+"""\' name="adminlinkalign" id="adminlinkalign" type="text"/>
+												<input value=\'"""+common.getwidgetinfo("Admin-Link", "align")+"""\' name="adminlinkalign" id="adminlinkalign" type="text"/>
 												<label for="adminlinkalign">Vertikaler Abstand</label>
 											</div>
 										</div>
@@ -108,7 +113,7 @@ try:
 									<div class="col s6">
 										<div class="row">
 											<div class="input-field col s12">
-												<input style="color:black;" placeholder=\'"""+common.getwidgetinfo("Admin-Link", "margin")+"""\' name="adminlinkmargin" id="adminlinkmargin" type="text"/>
+												<input value=\'"""+common.getwidgetinfo("Admin-Link", "margin")+"""\' name="adminlinkmargin" id="adminlinkmargin" type="text"/>
 												<label for="adminlinkmargin">Horizontaler Abstand</label>
 											</div>
 										</div>
@@ -125,7 +130,7 @@ try:
 								<label for="uhraktiv">Uhr aktiviert</label>
 								<div class="row">
 									<div class="input-field col s12">
-										<input style="color:black;" placeholder=\""""+common.getwidgetinfo("Uhr", "URL")+"""\" name="uhrlink" id="uhrlink" type="text"/>
+										<input value=\""""+common.getwidgetinfo("Uhr", "URL")+"""\" name="uhrlink" id="uhrlink" type="text"/>
 										<label for="uhrlink">Uhr-URL</label>
 									</div>
 								</div>
@@ -133,7 +138,7 @@ try:
 									<div class="col s6">
 										<div class="row">
 											<div class="input-field col s12">
-												<input style="color:black;" placeholder=\'"""+common.getwidgetinfo("Uhr", "height")+"""\' name="uhrheight" id="uhrheight" type="text"/>
+												<input value=\'"""+common.getwidgetinfo("Uhr", "height")+"""\' name="uhrheight" id="uhrheight" type="text"/>
 												<label for="uhrheight">Uhr-H&ouml;he</label>
 											</div>
 										</div>
@@ -141,7 +146,7 @@ try:
 									<div class="col s6">
 										<div class="row">
 											<div class="input-field col s12">
-												<input style="color:black;" placeholder=\'"""+common.getwidgetinfo("Uhr", "width")+"""\' name="uhrwidth" id="uhrwidth" type="text"/>
+												<input value=\'"""+common.getwidgetinfo("Uhr", "width")+"""\' name="uhrwidth" id="uhrwidth" type="text"/>
 												<label for="uhrwidth">Uhr-Breite</label>
 											</div>
 										</div>
@@ -153,7 +158,7 @@ try:
 									<div class="col s6">
 										<div class="row">
 											<div class="input-field col s12">
-												<input style="color:black;" placeholder=\'"""+common.getwidgetinfo("Uhr", "align")+"""\' name="uhralign" id="uhralign" type="text"/>
+												<input value=\'"""+common.getwidgetinfo("Uhr", "align")+"""\' name="uhralign" id="uhralign" type="text"/>
 												<label for="uhralign">Vertikaler Abstand</label>
 											</div>
 										</div>
@@ -165,7 +170,7 @@ try:
 									<div class="col s6">
 										<div class="row">
 											<div class="input-field col s12">
-												<input style="color:black;" placeholder=\'"""+common.getwidgetinfo("Uhr", "margin")+"""\' name="uhrmargin" id="uhrmargin" type="text"/>
+												<input value=\'"""+common.getwidgetinfo("Uhr", "margin")+"""\' name="uhrmargin" id="uhrmargin" type="text"/>
 												<label for="uhrmargin">Horizontaler Abstand</label>
 											</div>
 										</div>
@@ -190,7 +195,7 @@ try:
 									<div class="col s6">
 										<div class="row">
 											<div class="input-field col s12">
-												<input style="color:black;" placeholder=\'"""+common.getwidgetinfo("Freies-Widget", "height")+"""\' name="widgetheight" id="widgetheight" type="text"/>
+												<input value=\'"""+common.getwidgetinfo("Freies-Widget", "height")+"""\' name="widgetheight" id="widgetheight" type="text"/>
 												<label for="widgetheight">Widget-H&ouml;he</label>
 											</div>
 										</div>
@@ -198,7 +203,7 @@ try:
 									<div class="col s6">
 										<div class="row">
 											<div class="input-field col s12">
-												<input style="color:black;" placeholder=\'"""+common.getwidgetinfo("Freies-Widget", "width")+"""\' name="widgetwidth" id="widgetwidth" type="text"/>
+												<input value=\'"""+common.getwidgetinfo("Freies-Widget", "width")+"""\' name="widgetwidth" id="widgetwidth" type="text"/>
 												<label for="widgetwidth">Widget-Breite</label>
 											</div>
 										</div>
@@ -210,7 +215,7 @@ try:
 									<div class="col s6">
 										<div class="row">
 											<div class="input-field col s12">
-												<input style="color:black;" placeholder=\'"""+common.getwidgetinfo("Freies-Widget", "align")+"""\' name="widgetalign" id="widgetalign" type="text"/>
+												<input value=\'"""+common.getwidgetinfo("Freies-Widget", "align")+"""\' name="widgetalign" id="widgetalign" type="text"/>
 												<label for="widgetalign">Vertikaler Abstand</label>
 											</div>
 										</div>
@@ -222,7 +227,7 @@ try:
 									<div class="col s6">
 										<div class="row">
 											<div class="input-field col s12">
-												<input style="color:black;" placeholder=\'"""+common.getwidgetinfo("Freies-Widget", "margin")+"""\' name="widgetmargin" id="widgetmargin" type="text"/>
+												<input value=\'"""+common.getwidgetinfo("Freies-Widget", "margin")+"""\' name="widgetmargin" id="widgetmargin" type="text"/>
 												<label for="widgetmargin">Horizontaler Abstand</label>
 											</div>
 										</div>
@@ -239,7 +244,7 @@ try:
 								<label for="logoaktiv">Logo aktiviert</label>
 								<div class="row">
 									<div class="input-field col s12">
-										<input style="color:black;" placeholder=\""""+common.getwidgetinfo("Logo", "URL")+"""\" name="logolink" id="logolink" type="text"/>
+										<input value=\""""+common.getwidgetinfo("Logo", "URL")+"""\" name="logolink" id="logolink" type="text"/>
 										<label for="logolink">Logo-URL</label>
 									</div>
 								</div>
@@ -247,7 +252,7 @@ try:
 									<div class="col s6">
 										<div class="row">
 											<div class="input-field col s12">
-												<input style="color:black;" placeholder=\'"""+common.getwidgetinfo("Logo", "height")+"""\' name="logoheight" id="logoheight" type="text"/>
+												<input value=\'"""+common.getwidgetinfo("Logo", "height")+"""\' name="logoheight" id="logoheight" type="text"/>
 												<label for="logoheight">Logo-H&ouml;he</label>
 											</div>
 										</div>
@@ -255,7 +260,7 @@ try:
 									<div class="col s6">
 										<div class="row">
 											<div class="input-field col s12">
-												<input style="color:black;" placeholder=\'"""+common.getwidgetinfo("Logo", "width")+"""\' name="logowidth" id="logowidth" type="text"/>
+												<input value=\'"""+common.getwidgetinfo("Logo", "width")+"""\' name="logowidth" id="logowidth" type="text"/>
 												<label for="logowidth">Logo-Breite</label>
 											</div>
 										</div>
@@ -267,7 +272,7 @@ try:
 									<div class="col s6">
 										<div class="row">
 											<div class="input-field col s12">
-												<input style="color:black;" placeholder=\'"""+common.getwidgetinfo("Logo", "align")+"""\' name="logoalign" id="logoalign" type="text"/>
+												<input value=\'"""+common.getwidgetinfo("Logo", "align")+"""\' name="logoalign" id="logoalign" type="text"/>
 												<label for="logoalign">Vertikaler Abstand</label>
 											</div>
 										</div>
@@ -279,7 +284,7 @@ try:
 									<div class="col s6">
 										<div class="row">
 											<div class="input-field col s12">
-												<input style="color:black;" placeholder=\'"""+common.getwidgetinfo("Logo", "margin")+"""\' name="logomargin" id="logomargin" type="text"/>
+												<input value=\'"""+common.getwidgetinfo("Logo", "margin")+"""\' name="logomargin" id="logomargin" type="text"/>
 												<label for="logomargin">Horizontaler Abstand</label>
 											</div>
 										</div>

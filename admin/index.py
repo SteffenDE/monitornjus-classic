@@ -33,11 +33,11 @@ try:
 											<span class="card-title """+colors.color+"""-text text-darken-2">Linke Seite</span><br>
 											<div class="row">
 												<div class="input-field col s6">
-													<input style="color:black;" placeholder=\""""+common.testexist("URL", "Links", x)+"""\" name="url1-"""+str(x)+"""" id="url1-"""+str(x)+"""" type="text">
+													<input value=\""""+common.testexist("URL", "Links", x)+"""\" name="url1-"""+str(x)+"""" id="url1-"""+str(x)+"""" type="text">
 													<label for="url1-"""+str(x)+"""">URL Links</label>
 												</div>
 												<div class="input-field col s6">
-													<input style="color:black;" placeholder=\""""+str(common.testexist("REFRESH", "Links", x))+"""\" name="refresh1-"""+str(x)+"""" id="refresh1-"""+str(x)+"""" type="text">
+													<input value=\""""+str(common.testexist("REFRESH", "Links", x))+"""\" name="refresh1-"""+str(x)+"""" id="refresh1-"""+str(x)+"""" type="number">
 													<label for="refresh1-"""+str(x)+"""">Refresh Links</label>
 												</div>
 											</div>
@@ -53,37 +53,37 @@ try:
 											</div>-->
 											<div class="row">
 												<div class="input-field col s4">
-													<input style="color:black;" placeholder=\""""+common.getdate("uhrzeit", "Links", x)+"""\" name="uhrzeit-Links-"""+str(x)+"""" id="uhrzeit-Links-"""+str(x)+"""" type="text">
+													<input value=\""""+common.getdate("uhrzeit", "Links", x)+"""\" name="uhrzeit-Links-"""+str(x)+"""" id="uhrzeit-Links-"""+str(x)+"""" type="text">
 													<label for="uhrzeit-Links-"""+str(x)+"""">Uhrzeit</label>
 												</div>
 												<div class="input-field col s4">
-													<input style="color:black;" placeholder=\""""+common.getdate("wochentag", "Links", x)+"""\" name="wochentag-Links-"""+str(x)+"""" id="wochentag-Links-"""+str(x)+"""" type="text">
+													<input value=\""""+common.getdate("wochentag", "Links", x)+"""\" name="wochentag-Links-"""+str(x)+"""" id="wochentag-Links-"""+str(x)+"""" type="text">
 													<label for="wochentag-Links-"""+str(x)+"""">Wochentag</label>
 												</div>
 												<div class="input-field col s2">
-													<input style="color:black;" placeholder=\""""+common.getdate("tag", "Links", x)+"""\" name="tag-Links-"""+str(x)+"""" id="tag-Links-"""+str(x)+"""" type="text">
+													<input value=\""""+common.getdate("tag", "Links", x)+"""\" name="tag-Links-"""+str(x)+"""" id="tag-Links-"""+str(x)+"""" type="text">
 													<label for="tag-Links-"""+str(x)+"""">Tag</label>
 												</div>
 												<div class="input-field col s2">
-													<input style="color:black;" placeholder=\""""+common.getdate("monat", "Links", x)+"""\" name="monat-Links-"""+str(x)+"""" id="monat-Links-"""+str(x)+"""" type="text">
+													<input value=\""""+common.getdate("monat", "Links", x)+"""\" name="monat-Links-"""+str(x)+"""" id="monat-Links-"""+str(x)+"""" type="text">
 													<label for="monat-Links-"""+str(x)+"""">Monat</label>
 												</div>
 											</div>
 											<div class="row">
 												<div class="input-field col s3">
-													<input style="color:black;" placeholder=\""""+str(common.getinfo("MARGINLEFT","Links",x))+"""\" name="marginleft-Links-"""+str(x)+"""" id="marginleft-Links-"""+str(x)+"""" type="text">
+													<input value=\""""+str(common.getinfo("MARGINLEFT","Links",x))+"""\" name="marginleft-Links-"""+str(x)+"""" id="marginleft-Links-"""+str(x)+"""" type="text">
 													<label for="marginleft-Links-"""+str(x)+"""">Rand-Links</label>
 												</div>
 												<div class="input-field col s3">
-													<input style="color:black;" placeholder=\""""+str(common.getinfo("MARGINRIGHT","Links",x))+"""\" name="marginright-Links-"""+str(x)+"""" id="marginright-Links-"""+str(x)+"""" type="text">
+													<input value=\""""+str(common.getinfo("MARGINRIGHT","Links",x))+"""\" name="marginright-Links-"""+str(x)+"""" id="marginright-Links-"""+str(x)+"""" type="text">
 													<label for="marginright-Links-"""+str(x)+"""">Rand-Rechts</label>
 												</div>
 												<div class="input-field col s3">
-													<input style="color:black;" placeholder=\""""+str(common.getinfo("MARGINTOP","Links",x))+"""\" name="margintop-Links-"""+str(x)+"""" id="margintop-Links-"""+str(x)+"""" type="text">
+													<input value=\""""+str(common.getinfo("MARGINTOP","Links",x))+"""\" name="margintop-Links-"""+str(x)+"""" id="margintop-Links-"""+str(x)+"""" type="text">
 													<label for="margintop-Links-"""+str(x)+"""">Rand-Oben</label>
 												</div>
 												<div class="input-field col s3">
-													<input style="color:black;" placeholder=\""""+str(common.getinfo("MARGINBOTTOM","Links",x))+"""\" name="marginbottom-Links-"""+str(x)+"""" id="marginbottom-Links-"""+str(x)+"""" type="text">
+													<input value=\""""+str(common.getinfo("MARGINBOTTOM","Links",x))+"""\" name="marginbottom-Links-"""+str(x)+"""" id="marginbottom-Links-"""+str(x)+"""" type="text">
 													<label for="marginbottom-Links-"""+str(x)+"""">Rand-Unten</label>
 												</div>
 											</div>
@@ -96,11 +96,11 @@ try:
 											<span class="card-title """+colors.color+"""-text text-darken-2">Rechte Seite</span><br>
 											<div class="row">
 												<div class="input-field col s6">
-													<input style="color:black;" placeholder=\""""+common.testexist("URL", "Rechts", x)+"""\" name="url2-"""+str(x)+"""" id="url2-"""+str(x)+"""" type="text">
+													<input value=\""""+common.testexist("URL", "Rechts", x)+"""\" name="url2-"""+str(x)+"""" id="url2-"""+str(x)+"""" type="text">
 													<label for="url2-"""+str(x)+"""">URL Rechts</label>
 												</div>
 												<div class="input-field col s6">
-													<input style="color:black;" placeholder=\""""+str(common.testexist("REFRESH", "Rechts", x))+"""\" name="refresh2-"""+str(x)+"""" id="refresh2-"""+str(x)+"""" type="text">
+													<input value=\""""+str(common.testexist("REFRESH", "Rechts", x))+"""\" name="refresh2-"""+str(x)+"""" id="refresh2-"""+str(x)+"""" type="number">
 													<label for="refresh2-"""+str(x)+"""">Refresh Rechts</label>
 												</div>
 											</div>
@@ -110,43 +110,39 @@ try:
 												<input type="checkbox" name="refreshrightenabled-"""+str(x)+"""" id="refreshrightenabled-"""+str(x)+"""" """+common.aktiv("REFRESHAKTIV", "Rechts", x)+"""/>
 												<label for="refreshrightenabled-"""+str(x)+"""">Rechts neu laden</label>
 											</div>
-											<!--<div>
-												<input type="checkbox" name="vonbisaktivr-"""+str(x)+"""" id="vonbisaktivr-"""+str(x)+"""" """+common.aktiv("VONBISAKTIV", "Rechts", x)+"""/>
-												<label for="vonbisaktivr-"""+str(x)+"""">Zeitangabe</label>
-											</div>-->
 											<div class="row">
 												<div class="input-field col s4">
-													<input style="color:black;" placeholder=\""""+common.getdate("uhrzeit", "Rechts", x)+"""\" name="uhrzeit-Rechts-"""+str(x)+"""" id="uhrzeit-Rechts-"""+str(x)+"""" type="text">
+													<input value=\""""+common.getdate("uhrzeit", "Rechts", x)+"""\" name="uhrzeit-Rechts-"""+str(x)+"""" id="uhrzeit-Rechts-"""+str(x)+"""" type="text">
 													<label for="uhrzeit-Rechts-"""+str(x)+"""">Uhrzeit</label>
 												</div>
 												<div class="input-field col s4">
-													<input style="color:black;" placeholder=\""""+common.getdate("wochentag", "Rechts", x)+"""\" name="wochentag-Rechts-"""+str(x)+"""" id="wochentag-Rechts-"""+str(x)+"""" type="text">
+													<input value=\""""+common.getdate("wochentag", "Rechts", x)+"""\" name="wochentag-Rechts-"""+str(x)+"""" id="wochentag-Rechts-"""+str(x)+"""" type="text">
 													<label for="wochentag-Rechts-"""+str(x)+"""">Wochentag</label>
 												</div>
 												<div class="input-field col s2">
-													<input style="color:black;" placeholder=\""""+common.getdate("tag", "Rechts", x)+"""\" name="tag-Rechts-"""+str(x)+"""" id="tag-Rechts-"""+str(x)+"""" type="text">
+													<input value=\""""+common.getdate("tag", "Rechts", x)+"""\" name="tag-Rechts-"""+str(x)+"""" id="tag-Rechts-"""+str(x)+"""" type="text">
 													<label for="tag-Rechts-"""+str(x)+"""">Tag</label>
 												</div>
 												<div class="input-field col s2">
-													<input style="color:black;" placeholder=\""""+common.getdate("monat", "Rechts", x)+"""\" name="monat-Rechts-"""+str(x)+"""" id="monat-Rechts-"""+str(x)+"""" type="text">
+													<input value=\""""+common.getdate("monat", "Rechts", x)+"""\" name="monat-Rechts-"""+str(x)+"""" id="monat-Rechts-"""+str(x)+"""" type="text">
 													<label for="monat-Rechts-"""+str(x)+"""">Monat</label>
 												</div>
 											</div>
 											<div class="row">
 												<div class="input-field col s3">
-													<input style="color:black;" placeholder=\""""+str(common.getinfo("MARGINLEFT","Rechts",x))+"""\" name="marginleft-Rechts-"""+str(x)+"""" id="marginleft-Rechts-"""+str(x)+"""" type="text">
+													<input value=\""""+str(common.getinfo("MARGINLEFT","Rechts",x))+"""\" name="marginleft-Rechts-"""+str(x)+"""" id="marginleft-Rechts-"""+str(x)+"""" type="text">
 													<label for="marginleft-Rechts-"""+str(x)+"""">Rand-Links</label>
 												</div>
 												<div class="input-field col s3">
-													<input style="color:black;" placeholder=\""""+str(common.getinfo("MARGINRIGHT","Rechts",x))+"""\" name="marginright-Rechts-"""+str(x)+"""" id="marginright-Rechts-"""+str(x)+"""" type="text">
+													<input value=\""""+str(common.getinfo("MARGINRIGHT","Rechts",x))+"""\" name="marginright-Rechts-"""+str(x)+"""" id="marginright-Rechts-"""+str(x)+"""" type="text">
 													<label for="marginright-Rechts-"""+str(x)+"""">Rand-Rechts</label>
 												</div>
 												<div class="input-field col s3">
-													<input style="color:black;" placeholder=\""""+str(common.getinfo("MARGINTOP","Rechts",x))+"""\" name="margintop-Rechts-"""+str(x)+"""" id="margintop-Rechts-"""+str(x)+"""" type="text">
+													<input value=\""""+str(common.getinfo("MARGINTOP","Rechts",x))+"""\" name="margintop-Rechts-"""+str(x)+"""" id="margintop-Rechts-"""+str(x)+"""" type="text">
 													<label for="margintop-Rechts-"""+str(x)+"""">Rand-Oben</label>
 												</div>
 												<div class="input-field col s3">
-													<input style="color:black;" placeholder=\""""+str(common.getinfo("MARGINBOTTOM","Rechts",x))+"""\" name="marginbottom-Rechts-"""+str(x)+"""" id="marginbottom-Rechts-"""+str(x)+"""" type="text">
+													<input value=\""""+str(common.getinfo("MARGINBOTTOM","Rechts",x))+"""\" name="marginbottom-Rechts-"""+str(x)+"""" id="marginbottom-Rechts-"""+str(x)+"""" type="text">
 													<label for="marginbottom-Rechts-"""+str(x)+"""">Rand-Unten</label>
 												</div>
 											</div>
@@ -154,7 +150,7 @@ try:
 									</div>
 								</div>"""
 				if rows != 1:
-					print """<center><a class="waves-effect waves-light btn" href="setn.py?referer=row&delrow=1&delnum="""+str(x)+"""">Displayset l&ouml;schen</a></center>"""
+					print """<center><a class="waves-effect waves-light btn" href="setn.py?referer=row&delnum="""+str(x)+"""">Displayset l&ouml;schen</a></center>"""
 				print """
 							</div>
 						</div>"""
@@ -184,11 +180,16 @@ try:
 		background-color: """+colors.hexa+"""; opacity: 1; 
 	}
 
+	input[type=text], input[type=number] {
+		color: grey
+	}
+
 	input[type=text]:focus, input[type=password]:focus, input[type=email]:focus, input[type=url]:focus, input[type=date]:focus, input[type=tel]:focus, input[type=number]:focus, input[type=search]:focus, textarea:focus.materialize-textarea { 
 		border-bottom: 1px solid """+colors.hexa+""";
 		-webkit-box-shadow: 0 1px 0 0 """+colors.hexa+""";
 		-moz-box-shadow: 0 1px 0 0 """+colors.hexa+""";
 		box-shadow: 0 1px 0 0 """+colors.hexa+"""; 
+		color: black;
 	}
 
 	[type="checkbox"]:checked + label:before {
@@ -229,7 +230,7 @@ try:
 	displaysets()
 	print """\
 					<div class="col s12">
-					<center><a class="btn waves-effect waves-light """+colors.color+"""" href=setn.py?referer=row&createrow=1&createnum="""+str(rowsone)+"""><i class="mdi-content-add"></i></a></center>
+					<center><a class="btn waves-effect waves-light """+colors.color+"""" href=setn.py?referer=row&createnum="""+str(rowsone)+"""><i class="mdi-content-add"></i></a></center>
 						<hr style="border-color: """+colors.hexa+""";border-style: solid;line-height: 1px;"><br>
 						<div class="row">
 							<div class="col s6">
@@ -238,7 +239,7 @@ try:
 										<span class="card-title """+colors.color+"""-text text-darken-2">Alle Seiten</span><br>
 										<div class="row">
 											<div class="input-field col s12">
-												<input style="color:black;" placeholder=\""""+str(common.testexist("REFRESH", "global", 0))+"""\" name="refreshall" id="refreshall" type="text">
+												<input value=\""""+str(common.testexist("REFRESH", "global", 0))+"""\" name="refreshall" id="refreshall" type="text">
 												<label for="refreshall">Alle Seiten neu laden</label>
 											</div>
 										</div>
@@ -255,7 +256,7 @@ try:
 										<span class="card-title """+colors.color+"""-text text-darken-2">Monitornjus Frontend</span><br>
 										<div class="row">
 											<div class="input-field col s12">
-												<input style="color:black;" placeholder=\""""+str(common.testexist("REFRESH", "globalmon", 0))+"""\" name="refreshmon" id="refreshmon" type="text">
+												<input value=\""""+str(common.testexist("REFRESH", "globalmon", 0))+"""\" name="refreshmon" id="refreshmon" type="text">
 												<label for="refreshmon">Monitornjus Frontend neu laden</label>
 											</div>
 										</div>
