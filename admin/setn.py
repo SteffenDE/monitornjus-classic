@@ -121,6 +121,17 @@ try:
 		else:
 			raise Warning("Function updatetime: This referer is not allowed.")
 
+	def updateteilung():
+		if "index" in referer:
+			teilung = form.getfirst("teilung", None)
+			if teilung is not None:
+				if teilung == common.readsettings("TEILUNG"):
+					pass
+				else:
+					common.updatesettings("TEILUNG", teilung)
+		else:
+			raise Warning("Function updateteilung: This referer is not allowed.")
+
 	if "index" in referer:
 		refresh = "<meta http-equiv=\"refresh\" content=\"0; URL=../admin/index.py\">"
 
@@ -151,6 +162,7 @@ try:
 		if "refreshmon" in form: updateurl_refresh("refreshmon", "REFRESH", "globalmon", 0, "")
 		updateaktiv("refreshallenabled", "REFRESHAKTIV", "global", 0, "")
 		updateaktiv("refreshmonenabled", "REFRESHAKTIV", "globalmon", 0, "")
+		if "teilung" in form: updateteilung()
 
 	elif "widgets" in referer:
 		refresh = "<meta http-equiv=\"refresh\" content=\"0; URL=../admin/widgets.py\">"

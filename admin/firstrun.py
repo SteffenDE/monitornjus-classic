@@ -41,6 +41,10 @@ try:
 				margin			TEXT,
 				width			TEXT,
 				height			TEXT);''')
+		conn.execute('''CREATE TABLE SETTINGS
+			(ID INT PRIMARY KEY,
+				NAME			TEXT,
+				VALUE			TEXT);''')
 
 		def widgets(NAME, AKTIV, URLw, valign, align, vmargin, margin, width, height):
 			conn.execute("INSERT INTO WIDGETS (NAME,AKTIV,URL,valign,align,vmargin,margin,width,height) values (\'"+NAME+"\',"+str(AKTIV)+",\'"+URLw+"\',\'"+valign+"\',\'"+str(align)+"\',\'"+vmargin+"\',\'"+str(margin)+"\',\'"+str(width)+"\',\'"+str(height)+"\')");
@@ -49,6 +53,8 @@ try:
 		common.write("Rechts", 1, "placeholder.html", 1, 1, 60, "*|*|*|*", "0px", "0px", "0px", "0px")
 		common.write("globalmon", 0, "placeholder.html", 1, 0, 600, "*|*|*|*", "0px", "0px", "0px", "0px")
 		common.write("global", 0, "placeholder.html", 1, 0, 300, "*|*|*|*", "0px", "0px", "0px", "0px")
+
+		common.writesettings("TEILUNG", "50")
 
 		widgets("Admin-Link", 1, "placeholder", "bottom", "0px", "center", "0px", "0", "0")
 		widgets("Uhr", 0, "resources/uhr1.swf", "bottom", "0px", "center", "0px", "auto", "96px")

@@ -15,6 +15,8 @@ try:
 
 	rows = common.getrows()
 
+	teilung = int(common.readsettings("TEILUNG"))
+
 	timeL = False
 	timeR = False
 	geteilt = False
@@ -37,7 +39,7 @@ try:
 	if geteilt:
 		disp = """\
 	<frameset frameborder="0" rows="*,0">
-		<frameset frameborder="0" cols="50,50">
+		<frameset frameborder="0" cols="""+str(teilung)+""","""+str(100-teilung)+""">
 			<frame scrolling="no" src="contentset.py?seite=1" name="links" />
 			<frame scrolling="no" src="contentset.py?seite=2" name="rechts" />
 		</frameset> 

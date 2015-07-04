@@ -90,6 +90,8 @@ def authenticated():
 
 conn = sqlite3.connect(workingdir+'/admin/MonitorNjus.db')
 
+######################### basics #########################
+
 def getinfo(Info, Seite, Nummer):
 	cursor = conn.execute("SELECT "+Info+" FROM DISPLAYSETS WHERE SEITE=\'"+Seite+"\' AND NUMMER="+str(Nummer)+";");
 	return cursor.fetchone()[0]
@@ -131,7 +133,7 @@ def allaktiv(Seite):
 	val = cursor.fetchall()
 	return val
 
-##########################################################################################
+######################### rows #########################
 
 def getrows():
 	cursor = conn.execute("SELECT NUMMER FROM DISPLAYSETS WHERE SEITE=\"Links\";");
@@ -145,9 +147,11 @@ def getallrows():
 	liste = " ".join(val)
 	return liste
 
+######################### firstrun #########################
+
 def write(Seite, Nummer, URL, Aktiv, Refreshaktiv, Refresh, vonbis, marginleft, marginright, margintop, marginbottom):
-	conn.execute("DELETE FROM DISPLAYSETS where SEITE=\'"+Seite+"\' AND NUMMER="+str(Nummer)+"");
-	conn.execute("INSERT INTO DISPLAYSETS (SEITE,NUMMER,URL,AKTIV,REFRESHAKTIV,REFRESH,VONBIS,MARGINLEFT,MARGINRIGHT,MARGINTOP,MARGINBOTTOM) values (\'"+Seite+"\',"+str(Nummer)+",\'"+URL+"\',"+str(Aktiv)+","+str(Refreshaktiv)+","+str(Refresh)+",\'"+vonbis+"\',\'"+str(marginleft)+"\',\'"+str(marginright)+"\',\'"+str(margintop)+"\',\'"+str(marginbottom)+"\')");
+	conn.execute("DELETE FROM DISPLAYSETS where SEITE=\'"+Seite+"\' AND NUMMER="+str(Nummer)+";");
+	conn.execute("INSERT INTO DISPLAYSETS (SEITE,NUMMER,URL,AKTIV,REFRESHAKTIV,REFRESH,VONBIS,MARGINLEFT,MARGINRIGHT,MARGINTOP,MARGINBOTTOM) values (\'"+Seite+"\',"+str(Nummer)+",\'"+URL+"\',"+str(Aktiv)+","+str(Refreshaktiv)+","+str(Refresh)+",\'"+vonbis+"\',\'"+str(marginleft)+"\',\'"+str(marginright)+"\',\'"+str(margintop)+"\',\'"+str(marginbottom)+"\');");
 	conn.commit()
 
 def createrow(Nummer):
@@ -157,19 +161,34 @@ def createrow(Nummer):
 def delrow(Nummer):
 	rows = getrows()
 	if Nummer is not rows:
-		conn.execute("DELETE FROM DISPLAYSETS where NUMMER="+str(Nummer)+"");
+		conn.execute("DELETE FROM DISPLAYSETS where NUMMER="+str(Nummer)+";");
 		x = rows
 		diff = rows - Nummer
 		z = 0
 		while z < diff:
-			conn.execute("UPDATE DISPLAYSETS SET NUMMER = "+str(Nummer+z)+" where NUMMER="+str(Nummer+z+1)+"");
+			conn.execute("UPDATE DISPLAYSETS SET NUMMER = "+str(Nummer+z)+" where NUMMER="+str(Nummer+z+1)+";");
 			conn.commit()
 			z = z + 1
 	elif Nummer == rows:
-		conn.execute("DELETE FROM DISPLAYSETS where NUMMER="+str(Nummer)+"");
+		conn.execute("DELETE FROM DISPLAYSETS where NUMMER="+str(Nummer)+";");
 		conn.commit()
 	else:
 		pass
+
+def writesettings(NAME, VAL):
+	conn.execute("DELETE FROM SETTINGS where NAME=\'"+NAME+"\';");
+	conn.execute("INSERT INTO SETTINGS (NAME,VALUE) values (\'"+NAME+"\',\'"+VAL+"\');");
+	conn.commit()
+
+def updatesettings(NAME, VAL):
+	conn.execute("UPDATE SETTINGS SET VALUE=\'"+VAL+"\' where NAME=\'"+NAME+"\';");
+	conn.commit()
+
+def readsettings(NAME):
+	cursor = conn.execute("SELECT VALUE FROM SETTINGS WHERE NAME=\'"+NAME+"\';");
+	return cursor.fetchone()[0]
+
+######################### other functions #########################
 
 def checkfiletype(datei):
 	if ".png" in datei or ".jpg" in datei or ".gif" in datei or ".bmp" in datei:
@@ -217,7 +236,7 @@ Content-Type: text/html
 	else:
 		pass
 
-############################################
+######################### checkvalues #########################
 
 def testexist(GETNAME, Seite, Nummer):										# Daten aus der Datenbank lesen
 	try:
@@ -309,7 +328,7 @@ def getdate(value, Seite, Nummer):											# Splittet die Daten in der Datenba
 	else:
 		return "Fehler"
 
-############################################
+######################### debug #########################
 
 def debug(e):
 	import os
@@ -370,3 +389,4 @@ def debug(e):
 	</div>
 </body>
 </html>"""
+	exit(1)

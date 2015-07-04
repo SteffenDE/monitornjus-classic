@@ -192,6 +192,18 @@ try:
 		color: black;
 	}
 
+	input[type=range]::-webkit-slider-thumb {
+		background-color: """+colors.hexa+""";
+	}
+
+	input[type=range]::-moz-range-thumb {
+		background: """+colors.hexa+""";
+	}
+
+	input[type=range] + .thumb {
+		background-color: """+colors.hexa+""";
+	}
+
 	[type="checkbox"]:checked + label:before {
 		border-right: 2px solid """+colors.hexa+""";
 		border-bottom: 2px solid """+colors.hexa+"""; 
@@ -231,7 +243,7 @@ try:
 	print """\
 					<div class="col s12">
 					<center><a class="btn waves-effect waves-light """+colors.color+"""" href=setn.py?referer=row&createnum="""+str(rowsone)+"""><i class="mdi-content-add"></i></a></center>
-						<hr style="border-color: """+colors.hexa+""";border-style: solid;line-height: 1px;"><br>
+						<p class="range-field"><input type="range" id="teilung" name="teilung" min="1" max="99" value=\""""+common.readsettings("TEILUNG")+"""\" /></p>
 						<div class="row">
 							<div class="col s6">
 								<div class="card white darken-1">
