@@ -1,4 +1,4 @@
-#navigation, a, a:visited {font: 120%; text-decoration:none; font-weight: bold;}
+#navigation, a, a:visited {font-size: 120%; text-decoration:none; font-weight: bold;}
 a.linkaktiv, a.link {color: #ccc; width:200px;margin-left:10px;margin-right:10px; margin-bottom:5px;}
 .linkaktiv, a.linkaktiv { width:200px;background: #c2000b; color: #fff;}
 #kopf {width: 100%;}

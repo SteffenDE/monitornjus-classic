@@ -70,6 +70,7 @@ function autoresize_frames()
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function () {$('#content').css('display', 'none');$('#content').fadeIn(1000);});
