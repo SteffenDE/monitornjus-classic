@@ -27,7 +27,7 @@ try:
 <html style="overflow: hidden;" lang="de">
 <head>
 	<title>MonitorNjus</title>
-	<meta charset="utf-8">
+	<meta charset="UTF-8">
 	<link href="css/mnews.css" type="text/css" rel="stylesheet" media="screen,projection"/>"""
 	print refresh
 	print """\

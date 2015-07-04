@@ -224,7 +224,8 @@ try:
 Content-Type: text/html\n
 <!DOCTYPE html>
 <html lang="de">
-<head>"""
+<head>
+<meta charset="UTF-8">"""
 	#for item in form:
 		#print item+": "+form[item].value+"<br>"
 	print refresh
