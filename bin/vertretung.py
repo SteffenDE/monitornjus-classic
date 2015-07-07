@@ -34,7 +34,7 @@ def replace_b(body):
 def replace_h(header):
 	end = header\
 		.replace("<style type=\"text/css\">","<!--<style>")\
-		.replace("<meta http-equiv=\"expires\" content=\"0\">","<meta http-equiv=\"expires\" content=\"0\"><link rel='stylesheet' type='text/css' href='css/vertretung.css'>")\
+		.replace("<meta http-equiv=\"expires\" content=\"0\">","<meta http-equiv=\"expires\" content=\"0\">\n<link rel='stylesheet' type='text/css' href='css/vertretung.css'>")\
 		.replace("</head>","--></head>")\
 		.replace("<!-- Info-Stundenplan -->","")\
 		.replace('<p>\n<table class="mon_list" >','<!--<table class="mon_list" >')\
@@ -55,16 +55,17 @@ try:
 	header = int(form.getfirst('header', "0"))
 	body = int(form.getfirst('body', "1"))
 
-        syh = open(path + name_heute, "r")
-        sym = open(path + name_morgen, "r")
-
 	if actday and header:
+		syh = open(path + name_heute, "r")
 		replace_h(syh.read())
 	elif nxtday and header:
+		sym = open(path + name_morgen, "r")
 		replace_h(sym.read())
 	elif actday and body:
+		syh = open(path + name_heute, "r")
 		replace_b(syh.read())
 	elif nxtday and body:
+		sym = open(path + name_morgen, "r")
 		replace_b(sym.read())
 	else:
 		raise Warning("No arguments passed!")
