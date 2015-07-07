@@ -38,22 +38,14 @@ try:
 
 	if geteilt:
 		disp = """\
-	<frameset frameborder="0" rows="*,0">
-		<frameset frameborder="0" cols="""+str(teilung)+""","""+str(100-teilung)+""">
-			<frame scrolling="no" src="contentset.py?seite=1" name="links" />
-			<frame scrolling="no" src="contentset.py?seite=2" name="rechts" />
-		</frameset> 
-	</frameset>"""
+	<iframe scrolling="no" frameborder="0" src="contentset.py?seite=1" name="links" style="float: left; position:static; width: """+str(teilung)+"""%;" ></iframe>
+	<iframe scrolling="no" frameborder="0" src="contentset.py?seite=2" name="rechts" style="float: right; position:static; width: """+str(100-teilung)+"""%;" ></iframe>"""
 	elif (linksgeteilt and not rechtsgeteilt and timeL) or (linksgeteilt and rechtsgeteilt and timeL and not timeR):
 		disp = """\
-	<frameset frameborder="0" rows="*,0">
-		<frame scrolling="no" src="contentset.py?seite=1" name="links" />
-	</frameset>"""
+	<iframe scrolling="no" frameborder="0" src="contentset.py?seite=1" name="links" style="position:static; width: 100%;" ></iframe>"""
 	elif (rechtsgeteilt and not linksgeteilt and timeR) or (rechtsgeteilt and linksgeteilt and timeR and not timeL):
 		disp = """\
-	<frameset frameborder="0" rows="*,0">
-		<frame scrolling="no" src="contentset.py?seite=2" name="rechts" />
-	</frameset>"""
+	<iframe scrolling="no" frameborder="0" src="contentset.py?seite=2" name="rechts" style="position:static; width: 100%;" ></iframe>"""
 	else:
 		disp = """\
 	<div class="row">
@@ -78,12 +70,17 @@ try:
 	print refresh
 	print """\
 	<title>MonitorNjus</title>
-</head>"""
+	<style>
+	html, body, iframe { height: 100%; }
+	</style>
+</head>
+<body>"""
 	####     # = debug     ####
 	#print timeL
 	#print timeR
 	#print geteilt
 	print disp
+	print "</body>"
 	import sys
 	sys.stdout.write("</html>")
 	del sys
