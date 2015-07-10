@@ -14,8 +14,9 @@ try:
 	######### Settings #########
 
 	schritte = 1        # Pixel pro Step
-	speed = 10          # Millisekundeb pro Step
+	speed = 15          # Millisekundeb pro Step
 	direction = "up"    # up / down
+	groesserals = 980
 
 	############################
 
@@ -46,7 +47,7 @@ function autoresize_frames()
 				framefenster_size = framefenster[i].contentWindow.document.body.scrollHeight;
 				}
 			framefenster[i].style.height = framefenster_size + 'px';
-			if(framefenster_size > 950)
+			if(framefenster_size > """+str(groesserals)+""")
 				{
 				window.location.href = \""""+os.environ["SCRIPT_NAME"]+"?type=rollen&url="""+url+"""\";
 				}

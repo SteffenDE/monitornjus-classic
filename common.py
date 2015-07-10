@@ -341,11 +341,11 @@ def debug(e):
 		isfirstrun()
 	else:
 		pass
-	if "bin" in scrname:
+	if "bin" and not "rollen" in scrname:
 		css = "css/"
 	elif "admin" in scrname:
 		css = "../bin/css/"
-	elif "bin" and "rollen" in scrname:
+	elif "rollen" in scrname:
 		css = "../../bin/css/"
 	else:
 		css = "bin/css/"
