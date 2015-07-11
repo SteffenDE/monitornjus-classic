@@ -16,7 +16,6 @@ try:
 	schritte = 1        # Pixel pro Step
 	speed = 15          # Millisekundeb pro Step
 	direction = "up"    # up / down
-	groesserals = 980
 
 	############################
 
@@ -29,6 +28,58 @@ try:
 <head>
 <title>MonitorNjus scrollredirect</title>
 <meta charset="UTF-8">
+<script type="text/javascript">
+</script>
+</head>
+<body onload="autoresize_frames()">
+<iframe src=\""""+url+"""\" style="display: none; position:absolute; width:100%; height:100%; top:0px; left:0px; margin-left:2px; border-style:none; overflow:hidden" frameborder="0" scrolling="no" id="fest" onload="javascript:resizeIframe(this);"></iframe>
+<script type="text/javascript">
+function resizeIframe(obj) {
+	obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+}
+var height = "innerHeight" in window 
+               ? window.innerHeight
+               : document.documentElement.offsetHeight; 
+var framefenster = document.getElementsByTagName("iFrame");
+var auto_resize_timer = window.setInterval("autoresize_frames()", 400);
+function autoresize_frames()
+	{
+	for (var i = 0; i < framefenster.length; ++i)
+		{
+		if(framefenster[i].contentWindow.document.body)
+			{
+			var framefenster_size = framefenster[i].contentWindow.document.body.offsetHeight;
+			if(document.all && !window.opera)
+				{
+				framefenster_size = framefenster[i].contentWindow.document.body.scrollHeight;
+				}
+			framefenster[i].style.height = framefenster_size + 'px';
+			if(framefenster_size <= height)
+				{
+				framefenster[i].style.display = "block"
+				}
+			else {
+				window.location.href = \""""+os.environ["SCRIPT_NAME"]+"?type=rollen&url="""+url+"""\";
+			}
+			}
+		}
+	}
+</script>
+</body>"""
+		import sys
+		sys.stdout.write("</html>")
+		del sys
+
+	elif typ == "rollen":
+		print """\
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function () {$('#content').css('display', 'none');$('#content').fadeIn(1000);});
+</script>
 <script type="text/javascript">
 function resizeIframe(obj) {
 	obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
@@ -47,45 +98,16 @@ function autoresize_frames()
 				framefenster_size = framefenster[i].contentWindow.document.body.scrollHeight;
 				}
 			framefenster[i].style.height = framefenster_size + 'px';
-			if(framefenster_size > """+str(groesserals)+""")
-				{
-				window.location.href = \""""+os.environ["SCRIPT_NAME"]+"?type=rollen&url="""+url+"""\";
-				}
-			else {
-				framefenster[i].style.display = "block"
-			}
+			framefenster_size = framefenster[i].contentWindow.document.body.scrollHeight;
 			}
 		}
 	}
 </script>
 </head>
-<body onload="autoresize_frames()">
-<iframe src=\""""+url+"""\" style="display: none; position:absolute; width:100%; height:100%; top:0px; left:0px; margin-left:2px; border-style:none; overflow:hidden" frameborder="0" scrolling="no" id="fest" onload="javascript:resizeIframe(this);"></iframe>
-</body>"""
-		import sys
-		sys.stdout.write("</html>")
-		del sys
-
-	elif typ == "rollen":
-		print """\
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
-<script type="text/javascript">
-	$(document).ready(function () {$('#content').css('display', 'none');$('#content').fadeIn(1000);});
-</script>
-<script>
-	function resizeIframe(obj) {
-		obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
-	}
-</script>
-</head>
-<body id="content">
+<body onload="autoresize_frames()" id="content">
 <script type="text/javascript">
 //Laufrichtung(up,down)
-var frame = '<iframe src=\""""+url+"""\" style="width:100%; height:100%;" frameborder="0" name="links" scrolling="no" onload="javascript:resizeIframe(this);"></iframe>'
+var frame = '<iframe src=\""""+url+"""\" style="width:100%; height:100%;" frameborder="0" name="links" scrolling="no"></iframe>'
 var strDir      ='"""+direction+"""';
 	//Interval in ms
 var Interval = """+str(speed)+""";
