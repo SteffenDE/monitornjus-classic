@@ -26,7 +26,7 @@ def replace_b(body):
 		.replace("<!-- Info-Stundenplan -->","")\
 		.replace('<table class="mon_head">','<!--<table class="mon_head">')\
 		.replace('<table class="mon_list" >', '--><table class="mon_list" >')\
-		.replace('<font size="3" face="Arial">', '<!--<font size="3" face="Arial">')\
+		.replace('<font size="3" face="Arial"', '<!--<font size="3" face="Arial"')\
 		.replace("</body>","--></body>")
 	print "Content-Type: text/html\n"
 	sys.stdout.write(end)
