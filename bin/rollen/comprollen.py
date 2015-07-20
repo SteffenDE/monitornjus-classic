@@ -29,11 +29,6 @@ try:
 <title>MonitorNjus scrollredirect</title>
 <meta charset="UTF-8">
 <script type="text/javascript">
-</script>
-</head>
-<body onload="autoresize_frames()">
-<iframe src=\""""+url+"""\" style="display: none; position:absolute; width:100%; height:100%; top:0px; left:0px; margin-left:2px; border-style:none; overflow:hidden" frameborder="0" scrolling="no" id="fest" onload="javascript:resizeIframe(this);"></iframe>
-<script type="text/javascript">
 function resizeIframe(obj) {
 	obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
 }
@@ -49,23 +44,23 @@ function autoresize_frames()
 		if(framefenster[i].contentWindow.document.body)
 			{
 			var framefenster_size = framefenster[i].contentWindow.document.body.offsetHeight;
-			if(document.all && !window.opera)
-				{
-				framefenster_size = framefenster[i].contentWindow.document.body.scrollHeight;
-				}
 			framefenster[i].style.height = framefenster_size + 'px';
 			if(framefenster_size <= height)
 				{
-				framefenster[i].style.display = "block"
+				framefenster[i].style.visibility = "visible"
 				}
 			else {
-				window.location.href = \""""+os.environ["SCRIPT_NAME"]+"?type=rollen&url="""+url+"""\";
+				window.location.href = \"comprollen.py?type=rollen&url="""+url+"""\";
 			}
 			}
 		}
 	}
 </script>
-</body>"""
+</head>
+<body onload="autoresize_frames()">
+<iframe src=\""""+url+"""\" style="visibility: hidden; position:absolute; width:100%; height:100%; top:0px; left:0px; margin-left:2px; border-style:none; overflow:hidden" frameborder="0" scrolling="no" id="fest"></iframe>
+</body>
+</html>"""
 		import sys
 		sys.stdout.write("</html>")
 		del sys

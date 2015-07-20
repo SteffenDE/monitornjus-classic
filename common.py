@@ -15,7 +15,7 @@ workingdir = os.path.dirname(os.path.realpath(__file__))
 
 ############################## Settings ##############################
 
-debugv = 2		# Verbosity: 0,1,2 (0 = off, 1 = basic, 2 = high)
+debugv = 2				# Verbosity: 0,1,2 (0 = off, 1 = basic, 2 = mit Anmerkungen, 3 = Traceback)
 
 ###### Windows-Authentifizierung ######
 ### Art ###
@@ -360,7 +360,8 @@ def debug(e):
 	<META HTTP-EQUIV="refresh" CONTENT="30">
 </head>
 <body>
-	<div class="container">"""
+	<div class="container">
+		<h3>Es ist ein Fehler aufgetreten!</h3>"""
 	trace = traceback.format_exc()
 	if "OperationalError" in trace:
 		print """\
@@ -370,8 +371,16 @@ def debug(e):
 	</center>"""
 	if debugv >= 2:
 		import cgi
+		if debugv == 2:
+			if "No such file or directory" and "vertretung.py" in str(trace):
+				print "<h4>Die Vertretungsdatei existiert nicht...</h4>"
+			elif "OperationalError" in trace:
+				print """\
+	<center style="color: #ffffff; background: #a60c0d; border: 2px solid black; margin-top: 3%; padding-bottom: 3%;">
+		<h1>Hier stimmt was nicht!</h1>
+		Manuell an der Datenbank gespielt, was?
+	</center>"""
 		print """\
-	<h3>Es ist ein Fehler aufgetreten!</h3>
 	<h4>Details:</h4>
 	<pre><code>"""
 		sys.stdout.write(cgi.escape(trace))
@@ -379,11 +388,11 @@ def debug(e):
 	elif debugv == 1:
 		print """\
 	<h3>Es ist ein Fehler aufgetreten!</h3>
-	<h4>Details:<br>"""
-		print e
-		print "	</h4>"
+	<h4>Details:<br><h5>"""
+		print str(e)
+		print "	</h5></h4>"
 	else:
-		print """<h3>Es ist ein Fehler aufgetreten.<br>Weitere Informationen über "debug" in common.py!</h3>"""
+		print """<br>Weitere Informationen über "debug" in common.py!</h3>"""
 	print """\
 	<small>Seite wird in 30 Sekunden neu geladen.</small><br>
 	<small>Script: """+scrname+"""</small><br>
