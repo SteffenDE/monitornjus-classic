@@ -3,7 +3,11 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 27.06.2015 (Version 0.8)
+# Beilage zu MonitorNjus, 22.07.2015 (Version 0.8.4)
+
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 import os
 import imp
@@ -16,7 +20,7 @@ try:
 	rfr.close()
 	conn = common.sqlite3.connect(workingdir+'/MonitorNjus.db')
 
-	if str(1) in read_firstrun:
+	if unicode(1) in read_firstrun:
 		conn.execute('''CREATE TABLE DISPLAYSETS
 			(ID INT PRIMARY KEY,
 				SEITE			TEXT,
@@ -47,7 +51,7 @@ try:
 				VALUE			TEXT);''')
 
 		def widgets(NAME, AKTIV, URLw, valign, align, vmargin, margin, width, height):
-			conn.execute("INSERT INTO WIDGETS (NAME,AKTIV,URL,valign,align,vmargin,margin,width,height) values (\'"+NAME+"\',"+str(AKTIV)+",\'"+URLw+"\',\'"+valign+"\',\'"+str(align)+"\',\'"+vmargin+"\',\'"+str(margin)+"\',\'"+str(width)+"\',\'"+str(height)+"\')");
+			conn.execute("INSERT INTO WIDGETS (NAME,AKTIV,URL,valign,align,vmargin,margin,width,height) values (\'"+NAME+"\',"+unicode(AKTIV)+",\'"+URLw+"\',\'"+valign+"\',\'"+unicode(align)+"\',\'"+vmargin+"\',\'"+unicode(margin)+"\',\'"+unicode(width)+"\',\'"+unicode(height)+"\')");
 
 		common.write("Links", 1, "placeholder.html", 1, 1, 60, "*|*|*|*", "0px", "0px", "0px", "0px")
 		common.write("Rechts", 1, "placeholder.html", 1, 1, 60, "*|*|*|*", "0px", "0px", "0px", "0px")

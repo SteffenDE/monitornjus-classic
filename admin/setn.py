@@ -3,7 +3,11 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 04.07.2015 (Version 0.8.1)
+# Beilage zu MonitorNjus, 22.07.2015 (Version 0.8.4)
+
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 import os
 import imp
@@ -35,10 +39,7 @@ try:
 				if val == common.getinfo(GETNAME, Seite, Nummer):
 					pass
 				else:
-					if str(gval).isdigit():
-						common.writeinfo(Seite, Nummer, GETNAME, int(val))
-					else:
-						common.writeinfo(Seite, Nummer, GETNAME, str(val))
+					common.writeinfo(Seite, Nummer, GETNAME, unicode(val))
 		elif "widgets" in referer:
 			gval = form.getfirst(Name, None)
 			if gval is not None:
@@ -49,10 +50,7 @@ try:
 				if val == common.getwidgetinfo(widgname, GETNAME):
 					pass
 				else:
-					if str(gval).isdigit():
-						common.writewidgetinfo(widgname, GETNAME, int(val))
-					else:
-						common.writewidgetinfo(widgname, GETNAME, str(val))
+					common.writewidgetinfo(widgname, GETNAME, unicode(val))
 		else:
 			raise Warning("Function updateurl_refresh: This referer does not exist.")
 
@@ -87,25 +85,27 @@ try:
 			else:
 				val = None
 			if val is not None:
-				if str(val).isdigit():
+				if unicode(val).isdigit():
 					if val == common.getwidgetinfo(widgname, GETNAME):
 						pass
 					else:
 						common.writewidgetinfo(widgname, GETNAME, int(val))
 				else:
-					if str(val) == common.getwidgetinfo(widgname, GETNAME):
+					if unicode(val) == common.getwidgetinfo(widgname, GETNAME):
 						pass
 					else:
-						common.writewidgetinfo(widgname, GETNAME, str(val))
+						common.writewidgetinfo(widgname, GETNAME, unicode(val))
 		else:
 			raise Warning("Function update_align: This referer is not allowed.")
 
 	def updatetime(Seite, Nummer):
 		if "index" in referer:
-			uhrzeit = form.getfirst("uhrzeit-"+Seite+"-"+str(Nummer), None)
-			wochentag = form.getfirst("wochentag-"+Seite+"-"+str(Nummer), None)
-			tag = form.getfirst("tag-"+Seite+"-"+str(Nummer), None)
-			monat = form.getfirst("monat-"+Seite+"-"+str(Nummer), None)
+			uhrzeit = form.getfirst("uhrzeit-"+Seite+"-"+unicode(Nummer), None)
+			wochentag = form.getfirst("wochentag-"+Seite+"-"+unicode(Nummer), None)
+			tag = form.getfirst("tag-"+Seite+"-"+unicode(Nummer), None)
+			monat = form.getfirst("monat-"+Seite+"-"+unicode(Nummer), None)
+			if (len(uhrzeit) or len(wochentag) or len(tag) or len(monat)) > 20:
+				raise Warning("Wieso sollte man so eine große Zahl in ein Feld für das Datum eintragen?")
 			if uhrzeit is None and wochentag is None and tag is None and monat is None:
 				pass
 			else:
@@ -137,23 +137,23 @@ try:
 
 		x = 1
 		while x <= common.getrows():
-			if str(x) in common.getallrows():
-				if "url1-"+str(x) in form: updateurl_refresh("url1-"+str(x), "URL", "Links", x, "")
-				if "url2-"+str(x) in form: updateurl_refresh("url2-"+str(x), "URL", "Rechts", x, "")
-				if "refresh1-"+str(x) in form: updateurl_refresh("refresh1-"+str(x), "REFRESH", "Links", x, "")
-				if "refresh2-"+str(x) in form: updateurl_refresh("refresh2-"+str(x), "REFRESH", "Rechts", x, "")
-				if "marginleft-Links-"+str(x) in form: updateurl_refresh("marginleft-Links-"+str(x), "MARGINLEFT", "Links", x, "")
-				if "marginright-Links-"+str(x) in form: updateurl_refresh("marginright-Links-"+str(x), "MARGINRIGHT", "Links", x, "")
-				if "margintop-Links-"+str(x) in form: updateurl_refresh("margintop-Links-"+str(x), "MARGINTOP", "Links", x, "")
-				if "marginbottom-Links-"+str(x) in form: updateurl_refresh("marginbottom-Links-"+str(x), "MARGINBOTTOM", "Links", x, "")
-				if "marginleft-Rechts-"+str(x) in form: updateurl_refresh("marginleft-Rechts-"+str(x), "MARGINLEFT", "Rechts", x, "")
-				if "marginright-Rechts-"+str(x) in form: updateurl_refresh("marginright-Rechts-"+str(x), "MARGINRIGHT", "Rechts", x, "")
-				if "margintop-Rechts-"+str(x) in form: updateurl_refresh("margintop-Rechts-"+str(x), "MARGINTOP", "Rechts", x, "")
-				if "marginbottom-Rechts-"+str(x) in form: updateurl_refresh("marginbottom-Rechts-"+str(x), "MARGINBOTTOM", "Rechts", x, "")
-				updateaktiv("leftenabled-"+str(x), "AKTIV", "Links", x, "")
-				updateaktiv("rightenabled-"+str(x), "AKTIV", "Rechts", x, "")
-				updateaktiv("refreshleftenabled-"+str(x), "REFRESHAKTIV", "Links", x, "")
-				updateaktiv("refreshrightenabled-"+str(x), "REFRESHAKTIV", "Rechts", x, "")
+			if unicode(x) in common.getallrows():
+				if "url1-"+unicode(x) in form: updateurl_refresh("url1-"+unicode(x), "URL", "Links", x, "")
+				if "url2-"+unicode(x) in form: updateurl_refresh("url2-"+unicode(x), "URL", "Rechts", x, "")
+				if "refresh1-"+unicode(x) in form: updateurl_refresh("refresh1-"+unicode(x), "REFRESH", "Links", x, "")
+				if "refresh2-"+unicode(x) in form: updateurl_refresh("refresh2-"+unicode(x), "REFRESH", "Rechts", x, "")
+				if "marginleft-Links-"+unicode(x) in form: updateurl_refresh("marginleft-Links-"+unicode(x), "MARGINLEFT", "Links", x, "")
+				if "marginright-Links-"+unicode(x) in form: updateurl_refresh("marginright-Links-"+unicode(x), "MARGINRIGHT", "Links", x, "")
+				if "margintop-Links-"+unicode(x) in form: updateurl_refresh("margintop-Links-"+unicode(x), "MARGINTOP", "Links", x, "")
+				if "marginbottom-Links-"+unicode(x) in form: updateurl_refresh("marginbottom-Links-"+unicode(x), "MARGINBOTTOM", "Links", x, "")
+				if "marginleft-Rechts-"+unicode(x) in form: updateurl_refresh("marginleft-Rechts-"+unicode(x), "MARGINLEFT", "Rechts", x, "")
+				if "marginright-Rechts-"+unicode(x) in form: updateurl_refresh("marginright-Rechts-"+unicode(x), "MARGINRIGHT", "Rechts", x, "")
+				if "margintop-Rechts-"+unicode(x) in form: updateurl_refresh("margintop-Rechts-"+unicode(x), "MARGINTOP", "Rechts", x, "")
+				if "marginbottom-Rechts-"+unicode(x) in form: updateurl_refresh("marginbottom-Rechts-"+unicode(x), "MARGINBOTTOM", "Rechts", x, "")
+				updateaktiv("leftenabled-"+unicode(x), "AKTIV", "Links", x, "")
+				updateaktiv("rightenabled-"+unicode(x), "AKTIV", "Rechts", x, "")
+				updateaktiv("refreshleftenabled-"+unicode(x), "REFRESHAKTIV", "Links", x, "")
+				updateaktiv("refreshrightenabled-"+unicode(x), "REFRESHAKTIV", "Rechts", x, "")
 				updatetime("Links", x)
 				updatetime("Rechts", x)
 			x += 1

@@ -3,7 +3,7 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 04.07.2015 (Version 0.8.1)
+# Beilage zu MonitorNjus, 22.07.2015 (Version 0.8.4)
 
 import os
 import imp
@@ -38,8 +38,8 @@ try:
 
 	if geteilt:
 		disp = """\
-	<iframe scrolling="no" frameborder="0" src="contentset.py?seite=1" name="links" style="float: left; position:static; width: """+str(teilung)+"""%;" ></iframe>
-	<iframe scrolling="no" frameborder="0" src="contentset.py?seite=2" name="rechts" style="float: right; position:static; width: """+str(100-teilung)+"""%;" ></iframe>"""
+	<iframe scrolling="no" frameborder="0" src="contentset.py?seite=1" name="links" style="float: left; position:static; width: """+unicode(teilung)+"""%;" ></iframe>
+	<iframe scrolling="no" frameborder="0" src="contentset.py?seite=2" name="rechts" style="float: right; position:static; width: """+unicode(100-teilung)+"""%;" ></iframe>"""
 	elif (linksgeteilt and not rechtsgeteilt and timeL) or (linksgeteilt and rechtsgeteilt and timeL and not timeR):
 		disp = """\
 	<iframe scrolling="no" frameborder="0" src="contentset.py?seite=1" name="links" style="position:static; width: 100%;" ></iframe>"""
@@ -55,7 +55,7 @@ try:
 	</div>"""
 
 	if common.getinfo("REFRESHAKTIV", "global", 0) == 1:
-		refresh = "	<META HTTP-EQUIV=\"refresh\" CONTENT=\""+str(common.getinfo("REFRESH", "global", 0))+"\">"
+		refresh = "	<META HTTP-EQUIV=\"refresh\" CONTENT=\""+unicode(common.getinfo("REFRESH", "global", 0))+"\">"
 	else:
 		refresh = ""
 

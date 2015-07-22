@@ -3,14 +3,14 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 04.07.2015 (Version 0.8.1)
+# Beilage zu MonitorNjus, 22.07.2015 (Version 0.8.4)
 
 import os
 import datetime
 import sqlite3
 
 datum = datetime.datetime.now()
-version = "0.8.1&beta;"
+version = "0.8.4&beta;"
 workingdir = os.path.dirname(os.path.realpath(__file__))
 
 ############################## Settings ##############################
@@ -70,7 +70,7 @@ def authenticated():
 				import os
 				user = os.environ["REMOTE_USER"]
 				aduser = ad.find_user()
-				if group.lower() in str(aduser.memberOf).lower() or "administrator" in user.lower():
+				if group.lower() in unicode(aduser.memberOf).lower() or "administrator" in user.lower():
 						pass
 				else:
 						print "Content-Type: text/html"
@@ -94,31 +94,25 @@ conn = sqlite3.connect(workingdir+'/admin/MonitorNjus.db')
 ######################### basics #########################
 
 def getinfo(Info, Seite, Nummer):
-	cursor = conn.execute("SELECT "+Info+" FROM DISPLAYSETS WHERE SEITE=\'"+Seite+"\' AND NUMMER="+str(Nummer)+";");
+	cursor = conn.execute("SELECT "+Info+" FROM DISPLAYSETS WHERE SEITE=\'"+Seite+"\' AND NUMMER="+unicode(Nummer)+";");
 	return cursor.fetchone()[0]
 
 def writeinfo(Seite, Nummer, Info, value):
-	if str(value).isdigit():
-		conn.execute("UPDATE DISPLAYSETS SET "+Info+"="+str(value)+" WHERE SEITE=\'"+Seite+"\' AND NUMMER="+str(Nummer)+";");
-	else:
-		conn.execute("UPDATE DISPLAYSETS SET "+Info+"=\'"+value+"\' WHERE SEITE=\'"+Seite+"\' AND NUMMER="+str(Nummer)+";");
+	conn.execute("UPDATE DISPLAYSETS SET "+Info+"= ? WHERE SEITE=\'"+Seite+"\' AND NUMMER="+unicode(Nummer)+"", [unicode(value)]);
 	conn.commit()
 
 def getwidgetinfo(NAME, Info):
-	cursor = conn.execute("SELECT "+Info+" FROM WIDGETS WHERE NAME=\'"+str(NAME)+"\';");
+	cursor = conn.execute("SELECT "+Info+" FROM WIDGETS WHERE NAME=\'"+unicode(NAME)+"\';");
 	widgetinfo = cursor.fetchone()[0]
 	return widgetinfo
 
 def writewidgetinfo(Name, Info, value):
-	if str(value).isdigit():
-		conn.execute("UPDATE WIDGETS SET "+Info+" = "+str(value)+" WHERE NAME=\'"+Name+"\';");
-	else:
-		conn.execute("UPDATE WIDGETS SET "+Info+" = \'"+value+"\' WHERE NAME=\'"+Name+"\';");
+	conn.execute("UPDATE WIDGETS SET "+Info+" = ? WHERE NAME=\'"+Name+"\'", [unicode(value)]);
 	conn.commit()
 
 def getgeteilt(Seite):
 	cursor = conn.execute("SELECT AKTIV FROM DISPLAYSETS WHERE SEITE=\'"+Seite+"\';");
-	val = str(cursor.fetchall())
+	val = unicode(cursor.fetchall())
 	liste = " ".join(val)
 	return liste
 
@@ -126,7 +120,7 @@ def minaktiv(Seite):
 	cursor = conn.execute("SELECT NUMMER FROM DISPLAYSETS WHERE AKTIV=1 and SEITE=\'"+Seite+"\';");
 	val = cursor.fetchall()
 	minval = min(val)
-	y = str(minval).replace('(','').replace(')','').replace(',','')
+	y = unicode(minval).replace('(','').replace(')','').replace(',','')
 	return y
 
 def allaktiv(Seite):
@@ -144,15 +138,15 @@ def getrows():
 
 def getallrows():
 	cursor = conn.execute("SELECT NUMMER FROM DISPLAYSETS WHERE SEITE=\"Links\";");
-	val = str(cursor.fetchall())
+	val = unicode(cursor.fetchall())
 	liste = " ".join(val)
 	return liste
 
 ######################### firstrun #########################
 
 def write(Seite, Nummer, URL, Aktiv, Refreshaktiv, Refresh, vonbis, marginleft, marginright, margintop, marginbottom):
-	conn.execute("DELETE FROM DISPLAYSETS where SEITE=\'"+Seite+"\' AND NUMMER="+str(Nummer)+";");
-	conn.execute("INSERT INTO DISPLAYSETS (SEITE,NUMMER,URL,AKTIV,REFRESHAKTIV,REFRESH,VONBIS,MARGINLEFT,MARGINRIGHT,MARGINTOP,MARGINBOTTOM) values (\'"+Seite+"\',"+str(Nummer)+",\'"+URL+"\',"+str(Aktiv)+","+str(Refreshaktiv)+","+str(Refresh)+",\'"+vonbis+"\',\'"+str(marginleft)+"\',\'"+str(marginright)+"\',\'"+str(margintop)+"\',\'"+str(marginbottom)+"\');");
+	conn.execute("DELETE FROM DISPLAYSETS where SEITE=\'"+Seite+"\' AND NUMMER="+unicode(Nummer)+";");
+	conn.execute("INSERT INTO DISPLAYSETS (SEITE,NUMMER,URL,AKTIV,REFRESHAKTIV,REFRESH,VONBIS,MARGINLEFT,MARGINRIGHT,MARGINTOP,MARGINBOTTOM) values (\'"+Seite+"\',"+unicode(Nummer)+",\'"+URL+"\',"+unicode(Aktiv)+","+unicode(Refreshaktiv)+","+unicode(Refresh)+",\'"+vonbis+"\',\'"+unicode(marginleft)+"\',\'"+unicode(marginright)+"\',\'"+unicode(margintop)+"\',\'"+unicode(marginbottom)+"\');");
 	conn.commit()
 
 def createrow(Nummer):
@@ -162,16 +156,16 @@ def createrow(Nummer):
 def delrow(Nummer):
 	rows = getrows()
 	if Nummer is not rows:
-		conn.execute("DELETE FROM DISPLAYSETS where NUMMER="+str(Nummer)+";");
+		conn.execute("DELETE FROM DISPLAYSETS where NUMMER="+unicode(Nummer)+";");
 		x = rows
 		diff = rows - Nummer
 		z = 0
 		while z < diff:
-			conn.execute("UPDATE DISPLAYSETS SET NUMMER = "+str(Nummer+z)+" where NUMMER="+str(Nummer+z+1)+";");
+			conn.execute("UPDATE DISPLAYSETS SET NUMMER = "+unicode(Nummer+z)+" where NUMMER="+unicode(Nummer+z+1)+";");
 			conn.commit()
 			z = z + 1
 	elif Nummer == rows:
-		conn.execute("DELETE FROM DISPLAYSETS where NUMMER="+str(Nummer)+";");
+		conn.execute("DELETE FROM DISPLAYSETS where NUMMER="+unicode(Nummer)+";");
 		conn.commit()
 	else:
 		pass
@@ -192,7 +186,7 @@ def readsettings(NAME):
 ######################### other functions #########################
 
 def checkfiletype(datei):
-	if ".png" in datei or ".jpg" in datei or ".gif" in datei or ".bmp" in datei:
+	if ".png" in datei or ".jpg" in datei or ".gif" in datei or ".bmp" in datei or ".jpeg" in datei:
 		return "image"
 	elif ".mp4" in datei or ".wmv" in datei:
 		return "video"
@@ -204,14 +198,14 @@ def checkfiletype(datei):
 		return "unknown"
 
 def addpx(string):
-	if "px" in str(string):
-		return str(string)
-	elif "auto" in str(string):
-		return str(string)
-	elif "%" in str(string):
-		return str(string)
+	if "px" in unicode(string):
+		return unicode(string)
+	elif "auto" in unicode(string):
+		return unicode(string)
+	elif "%" in unicode(string):
+		return unicode(string)
 	else:
-		return str(string)+"px"
+		return unicode(string)+"px"
 
 def isfirstrun():
 	import os
@@ -258,10 +252,10 @@ def aktiv(GETNAME, Seite, Nummer):											# Überprüft, ob eine Checkbox akt
 def testexistwidg(GETNAME, widgname):										# Widget Daten aus der Datenbank lesen
 	try:
 		if getwidgetinfo(widgname, GETNAME) is not None:
-			if str(getwidgetinfo(widgname, GETNAME)).isdigit():
+			if unicode(getwidgetinfo(widgname, GETNAME)).isdigit():
 				return int(getwidgetinfo(widgname, GETNAME))
 			else: 
-				return str(getwidgetinfo(widgname, GETNAME))
+				return unicode(getwidgetinfo(widgname, GETNAME))
 	except:
 		return "Fehler in checkvalues.testexistwidg"
 
@@ -341,10 +335,10 @@ def debug(e):
 		isfirstrun()
 	else:
 		pass
-	if "bin" and not "rollen" in scrname:
-		css = "css/"
-	elif "admin" in scrname:
+	if "admin" in scrname:
 		css = "../bin/css/"
+	elif "bin" and not "rollen" in scrname:
+		css = "css/"
 	elif "rollen" in scrname:
 		css = "../../bin/css/"
 	else:
@@ -372,7 +366,7 @@ def debug(e):
 	if debugv >= 2:
 		import cgi
 		if debugv == 2:
-			if "No such file or directory" and "vertretung.py" in str(trace):
+			if "No such file or directory" and "vertretung.py" in unicode(trace):
 				print "<h4>Die Vertretungsdatei existiert nicht...</h4>"
 			elif "OperationalError" in trace:
 				print """\
@@ -389,7 +383,7 @@ def debug(e):
 		print """\
 	<h3>Es ist ein Fehler aufgetreten!</h3>
 	<h4>Details:<br><h5>"""
-		print str(e)
+		print unicode(e)
 		print "	</h5></h4>"
 	else:
 		print """<br>Weitere Informationen über "debug" in common.py!</h3>"""

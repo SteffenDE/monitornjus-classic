@@ -3,7 +3,7 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 04.07.2015 (Version 0.8.1)
+# Beilage zu MonitorNjus, 22.07.2015 (Version 0.8.4)
 
 import os
 import imp
@@ -12,7 +12,7 @@ common = imp.load_source('common', workingdir+"/../common.py")
 
 try:
 	if int(common.getinfo("REFRESHAKTIV", "globalmon", 0)) == 1:
-		refresh = "	<META HTTP-EQUIV=\"refresh\" CONTENT=\""+str(common.getinfo("REFRESH", "globalmon", 0))+"\" >"
+		refresh = "	<META HTTP-EQUIV=\"refresh\" CONTENT=\""+unicode(common.getinfo("REFRESH", "globalmon", 0))+"\" >"
 	else:
 		refresh = ""
 

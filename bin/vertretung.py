@@ -3,9 +3,11 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 04.07.2015 (Version 0.8.1)
+# Beilage zu MonitorNjus, 22.07.2015 (Version 0.8.4)
 
 import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 ######### Settings #########
 
@@ -71,8 +73,11 @@ try:
 		raise Warning("No arguments passed!")
 
 except Exception as e:
-	import os
-	import imp
-	workingdir = os.path.dirname(os.path.realpath(__file__))
-	common = imp.load_source('common', workingdir+"/../common.py")
-	common.debug(e)
+	if ("No arguments passed" in unicode(e)) or header:
+		import os
+		import imp
+		workingdir = os.path.dirname(os.path.realpath(__file__))
+		common = imp.load_source('common', workingdir+"/../common.py")
+		common.debug(e)
+	else:
+		print "Content-Type: text/html\n\n"

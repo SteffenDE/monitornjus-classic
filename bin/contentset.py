@@ -3,7 +3,7 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 04.07.2015 (Version 0.8.1)
+# Beilage zu MonitorNjus, 22.07.2015 (Version 0.8.4)
 
 import os
 import sys
@@ -94,7 +94,7 @@ try:
 		
 	if refreshon:
 		prrefresh = '\
-	<meta http-equiv="refresh" content=\"'+str(refresh)+'; URL=contentset.py?seite='+str(seite)+';nummer='+str(nextnummer)+'\">'
+	<meta http-equiv="refresh" content=\"'+unicode(refresh)+'; URL=contentset.py?seite='+unicode(seite)+';nummer='+unicode(nextnummer)+'\">'
 	else:
 		prrefresh = None
 
@@ -131,7 +131,7 @@ try:
 	<meta charset="UTF-8">
 	<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 	<script type="text/javascript">
-	$(document).ready(function () {$('#content').css('display', 'none');$('#content').fadeIn("""+str(fadeinzeit)+""");});
+	$(document).ready(function () {$('#content').css('display', 'none');$('#content').fadeIn("""+unicode(fadeinzeit)+""");});
 	</script>"""
 	if prrefresh is not None:
 		print prrefresh

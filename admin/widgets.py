@@ -3,7 +3,11 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 27.06.2015 (Version 0.8)
+# Beilage zu MonitorNjus, 22.07.2015 (Version 0.8.4)
+
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 import os
 import imp
