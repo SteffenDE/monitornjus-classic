@@ -278,14 +278,15 @@ try:
 		</div>
 		<div class="footer-copyright">
 			<div class="container">
-				&copy; Steffen Deusch %d
+				&copy; Steffen Deusch """+str(common.datum.year)+"""
+				<a class="grey-text text-lighten-4 right" href="https://github.com/SteffenDE/monitornjus">"""+common.version+"""</a>
 			</div>
 		</div>
 	</row>
 </footer>
 <!--  Scripts-->
 <script src="../bin/js/init.js"></script>
-</body>""" % (common.datum.year)
+</body>"""
 	import sys
 	sys.stdout.write("</html>")
 	del sys
