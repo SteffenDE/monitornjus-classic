@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 # Copyright (c) 2015 Steffen Deusch
-# Beilage zu MonitorNjus, 04.07.2015 (Version 0.8.1)
+# Beilage zu MonitorNjus, 20.07.2015 (Version 0.8.3)
 
 try:
 	import cgi
@@ -71,10 +71,29 @@ function autoresize_frames()
 <html>
 <head>
 <meta charset="UTF-8">
-<script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
-<script type="text/javascript">
-	$(document).ready(function () {$('#content').css('display', 'none');$('#content').fadeIn(1000);});
-</script>
+<style>
+	.fadeIn {
+		opacity:0;
+		-webkit-animation:fadeIn ease-in 1;
+		-moz-animation:fadeIn ease-in 1;
+		-o-animation:fadeIn ease-in 1;
+		animation:fadeIn ease-in 1;
+		-webkit-animation-fill-mode:forwards;
+		-moz-animation-fill-mode:forwards;
+		-o-animation-fill-mode:forwards;
+		animation-fill-mode:forwards;
+	}
+	.fadeIn-animation {
+		-webkit-animation-duration:0.5s;
+		-moz-animation-duration:0.5s;
+		-o-animation-duration:0.5s;
+		animation-duration:0.5s;
+	}
+	@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+	@-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+	@-o-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+	@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+</style>
 <script type="text/javascript">
 function resizeIframe(obj) {
 	obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
@@ -99,13 +118,13 @@ function autoresize_frames()
 	}
 </script>
 </head>
-<body onload="autoresize_frames()" id="content">
+<body onload="autoresize_frames()" class=\"fadeIn fadeIn-animation\">
 <script type="text/javascript">
 //Laufrichtung(up,down)
 var frame = '<iframe src=\""""+url+"""\" style="width:100%; height:100%;" frameborder="0" name="links" scrolling="no"></iframe>'
 var strDir      ='"""+direction+"""';
 	//Interval in ms
-var Interval = """+str(speed)+""";
+var Interval = """+unicode(speed)+""";
 	//Falls Leeraum zwischen News...hier Wert erhoehen...minimum:1
 var intRepeat   = 2;
 	//Background-color
@@ -115,7 +134,7 @@ var strTxtc     ='#ffffff';
 	//Textausrichtung
 var strAlign    ='left';
 	//Schritt pro Durchlauf(px)
-var intStep="""+str(schritte)+""";
+var intStep="""+unicode(schritte)+""";
 /* * * * * * * * * * * * * * * * * * D E R  T I C K E R * * * * * * * * * * * * * * * * * * * * * */
 blnDir=(strDir=='up'||strDir=='down')?true:false;
 strAlign=(blnDir)?'text-align:'+strAlign+';':'';

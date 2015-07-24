@@ -11,7 +11,7 @@ import imp
 workingdir = os.path.dirname(os.path.realpath(__file__))
 common = imp.load_source('common', workingdir+"/../common.py")
 
-fadeinzeit = 1000
+fadeinzeit = 0.8
 
 try:
 	checktime = imp.load_source('checktime', workingdir+"/../admin/checktime.py")
@@ -128,11 +128,7 @@ try:
 <!DOCTYPE html>
 <html lang="de">
 <head>
-	<meta charset="UTF-8">
-	<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
-	<script type="text/javascript">
-	$(document).ready(function () {$('#content').css('display', 'none');$('#content').fadeIn("""+unicode(fadeinzeit)+""");});
-	</script>"""
+	<meta charset="UTF-8">"""
 	if prrefresh is not None:
 		print prrefresh
 	else:
@@ -168,6 +164,28 @@ try:
 	}"""
 	else:
 		style = ""
+	style += """
+	.fadeIn {
+		opacity:0;
+		-webkit-animation:fadeIn ease-in 1;
+		-moz-animation:fadeIn ease-in 1;
+		-o-animation:fadeIn ease-in 1;
+		animation:fadeIn ease-in 1;
+		-webkit-animation-fill-mode:forwards;
+		-moz-animation-fill-mode:forwards;
+		-o-animation-fill-mode:forwards;
+		animation-fill-mode:forwards;
+	}
+	.fadeIn-animation {
+		-webkit-animation-duration:"""+str(fadeinzeit)+"""s;
+		-moz-animation-duration:"""+str(fadeinzeit)+"""s;
+		-o-animation-duration:"""+str(fadeinzeit)+"""s;
+		animation-duration:"""+str(fadeinzeit)+"""s;
+	}
+	@-webkit-keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+	@-moz-keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+	@-o-keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+	@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }"""
 	if rand:
 		sys.stdout.write("""\
 	<style>
@@ -185,7 +203,7 @@ try:
 	</style>
 </head>"""
 	print "\
-<body id=\"content\">"
+<body class=\"fadeIn fadeIn-animation\">"
 	####     # = debug     ####
 	#print checktime.match(common.getinfo("VONBIS", mseite, int(common.minaktiv(mseite))),common.datum.now())
 	#print nextnummer
