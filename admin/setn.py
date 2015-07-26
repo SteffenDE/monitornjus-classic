@@ -204,18 +204,20 @@ try:
 
 	elif "row" in referer:
 		refresh = "<meta http-equiv=\"refresh\" content=\"0; URL=../admin/index.py\">"
-		cnum = form.getfirst("createnum", None)
-		dnum = form.getfirst("delnum", None)
-		if cnum is not None:
+		cnum = req.form.getfirst("createnum", None)
+		dnum = req.form.getfirst("delnum", None)
+		if cnum is not None and cnum.isdigit():
 			num = int(cnum)
-			common.createrow(num)
-		else:
-			pass
-		if dnum is not None:
+			if num == int(common.getrows())+1:
+				common.createrow(num)
+			else:
+				raise Warning("Neues Displayset - falsche Zahl: "+str(num))
+		elif dnum is not None and dnum.isdigit():
 			num = int(dnum)
-			common.delrow(num)
-		else:
-			pass
+			if num <= int(common.getrows()):
+				common.delrow(num)
+			else:
+				raise Warning("Displayset löschen - falsche Zahl: "+str(num))
 
 	else:
 		refresh = ""
