@@ -204,8 +204,8 @@ try:
 
 	elif "row" in referer:
 		refresh = "<meta http-equiv=\"refresh\" content=\"0; URL=../admin/index.py\">"
-		cnum = req.form.getfirst("createnum", None)
-		dnum = req.form.getfirst("delnum", None)
+		cnum = form.getfirst("createnum", None)
+		dnum = form.getfirst("delnum", None)
 		if cnum is not None and cnum.isdigit():
 			num = int(cnum)
 			if num == int(common.getrows())+1:

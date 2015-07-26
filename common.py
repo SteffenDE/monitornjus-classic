@@ -15,7 +15,7 @@ workingdir = os.path.dirname(os.path.realpath(__file__))
 
 ############################## Settings ##############################
 
-debugv = 2				# Verbosity: 0,1,2 (0 = off, 1 = basic, 2 = mit Anmerkungen, 3 = Traceback)
+debugv = 2				# Verbosity: 0,1,2 (0 = off, 1 = basic, 2 = mit Anmerkungen, 3 = Traceback, 707 = Easter Egg)
 
 ###### Windows-Authentifizierung ######
 ### Art ###
@@ -328,71 +328,123 @@ def getdate(value, Seite, Nummer):											# Splittet die Daten in der Datenba
 def debug(e):
 	import os
 	import sys
-	scrname = os.environ["SCRIPT_NAME"]
-	#import cgitb; cgitb.enable()
 	import traceback
+	import cgi
+	scrname = os.environ["SCRIPT_NAME"]
+	trace = traceback.format_exc()
+
+	#####################################################
+
 	if "bin/index.py" in scrname:
 		isfirstrun()
-	else:
-		pass
+
 	if "admin" in scrname:
-		css = "../bin/css/"
+		css = "../bin/css/materialize.css"
 	elif "bin" and not "rollen" in scrname:
-		css = "css/"
+		css = "css/materialize.css"
 	elif "rollen" in scrname:
-		css = "../../bin/css/"
+		css = "../../bin/css/materialize.css"
 	else:
-		css = "bin/css/"
-	print "Content-Type: text/html"
-	print
-	print """<!DOCTYPE html>
+		css = ""
+
+	#####################################################
+
+	if (debugv == 2 or debugv == 707)\
+	and (("No such file or directory" and "subst_" in trace)\
+	or ("OperationalError" in trace)\
+	or ("Warning" in trace)):
+		anmerkung = True
+	else:
+		anmerkung = False
+
+	#####################################################
+
+	print("""\
+<!DOCTYPE html>
 <html lang="de">
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-	<link href=\""""+css+"""materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-	<META HTTP-EQUIV="refresh" CONTENT="30">
+	<link href=\""""+css+"""\" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<meta http-equiv="refresh" content="30">""")
+
+	#####################################################
+
+	if debugv == 707 and not anmerkung:
+		print("""
+	<style>
+	html, body {
+		height: 100%;
+		overflow: hidden;
+	}
+	body {
+		background-image: url("""+css+"""../resources/error.jpg);
+		background-size: auto 40%;
+		background-position: right bottom;
+		background-repeat: no-repeat;
+	}
+	</style>""")
+
+	#####################################################
+
+	print("""
 </head>
 <body>
-	<div class="container">
-		<h3>Es ist ein Fehler aufgetreten!</h3>"""
-	trace = traceback.format_exc()
-	if "OperationalError" in trace:
-		print """\
-	<center style="color: #ffffff; background: #a60c0d; border: 2px solid black; margin-top: 3%; padding-bottom: 3%;">
-		<h1>Hier stimmt was nicht!</h1>
-		Manuell an der Datenbank gespielt, was?
-	</center>"""
-	if debugv >= 2:
-		import cgi
-		if debugv == 2:
-			if "No such file or directory" and "vertretung.py" in unicode(trace):
-				print "<h4>Die Vertretungsdatei existiert nicht...</h4>"
-			elif "OperationalError" in trace:
-				print """\
-	<center style="color: #ffffff; background: #a60c0d; border: 2px solid black; margin-top: 3%; padding-bottom: 3%;">
-		<h1>Hier stimmt was nicht!</h1>
-		Manuell an der Datenbank gespielt, was?
-	</center>"""
-		print """\
-	<h4>Details:</h4>
-	<pre><code>"""
-		sys.stdout.write(cgi.escape(trace))
-		print "	</code></pre>"
-	elif debugv == 1:
-		print """\
-	<h3>Es ist ein Fehler aufgetreten!</h3>
-	<h4>Details:<br><h5>"""
-		print unicode(e)
-		print "	</h5></h4>"
+	<div class="container">""")
+
+	#####################################################
+
+	if debugv == 707 and not anmerkung:
+		print("""
+		<h3>Oh nein! :(</h3>
+		<h4>Ein hochqualifizierter Techniker arbeitet bereits mit Hochdruck an dem Problem!</h4>""")
 	else:
-		print """<br>Weitere Informationen über "debug" in common.py!</h3>"""
-	print """\
-	<small>Seite wird in 30 Sekunden neu geladen.</small><br>
-	<small>Script: """+scrname+"""</small><br>
-	<small>"""+datum.strftime("%d.%m.%Y %H:%M:%S")+"""</small>
+		print("""
+		<h3>Es ist ein Fehler aufgetreten!</h3>""")
+
+	#####################################################
+
+	if debugv >= 2:
+
+		#################################################
+
+		if anmerkung:
+			if "No such file or directory" in trace and "subst_" in trace:
+				print("<h4>Die Vertretungsdatei existiert nicht...</h4>")
+
+			elif "OperationalError" in trace:
+				print("""\
+	<center style="color: #ffffff; background: #a60c0d; border: 2px solid black; margin-top: 3%; padding-bottom: 3%;">
+		<h1>Hier stimmt was nicht!</h1>
+		Manuell an der Datenbank gespielt, was?
+	</center>""")
+
+			elif "Warning" in trace:
+				print("""
+		<h4>Warnung: """+unicode(e)+"""</h4>""")
+
+		#################################################
+
+		print("""
+		<h5>Details:</h5>
+		<pre><code>""")
+		print(cgi.escape(trace))
+		print("		</code></pre>")
+
+	elif debugv == 1:
+		print("""
+		<h4>Details:<br><h5>""")
+		print(unicode(e))
+		print("	</h5></h4>")
+
+	else:
+		print("""Weitere Informationen über "debug" in common.py!</h3><br><br>""")
+
+	#####################################################
+
+	print("""
+		<small>Seite wird in 30 Sekunden neu geladen.</small><br>
+		<small>Script: """+scrname+"""</small><br>
+		<small>"""+datum.strftime("%d.%m.%Y %H:%M:%S")+"""</small>
 	</div>
-</body>"""
-	sys.stdout.write("</html>")
-	del sys
-	exit(1)
+</body>
+</html>""")
