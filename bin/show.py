@@ -55,12 +55,7 @@ try:
 		<frame scrolling="no" src="contentset.py?seite=2" name="rechts" />
 	</frameset>"""
 	else:
-		disp = """\
-	<div class="row">
-		<div class="col s12">
-			<h1>Konfigurationsfehler.</h1>
-		</div>
-	</div>"""
+		raise Warning("Keine Seite aktiv")
 
 	if common.getinfo("REFRESHAKTIV", "global", 0) == 1:
 		refresh = "	<META HTTP-EQUIV=\"refresh\" CONTENT=\""+unicode(common.getinfo("REFRESH", "global", 0))+"\">"

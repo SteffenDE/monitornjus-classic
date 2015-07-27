@@ -73,7 +73,7 @@ try:
 		raise Warning("No arguments passed!")
 
 except Exception as e:
-	if body:
+	if not header:
 		import os
 		import imp
 		workingdir = os.path.dirname(os.path.realpath(__file__))

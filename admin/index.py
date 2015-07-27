@@ -18,7 +18,7 @@ try:
 	import colors
 	import firstrun
 
-	common.authenticated()
+	#common.authenticated()
 
 	rows = int(common.getrows())
 	rowsone = rows + 1
@@ -39,54 +39,56 @@ try:
 									<span class="card-title """+colors.color+"""-text text-darken-2">Linke Seite</span><br>
 									<div class="row">
 										<div class="input-field col s6">
-											<input value=\""""+cgi.escape(unicode(common.testexist("URL", "Links", x)))+"""\" name="url1-"""+unicode(x)+"""" id="url1-"""+unicode(x)+"""" type="text">
-											<label for="url1-"""+unicode(x)+"""">URL Links</label>
+											<input value=\""""+cgi.escape(unicode(common.testexist("URL", "Links", x)))+"""\" name="URL-Links-"""+unicode(x)+"""\" id="URL-Links-"""+unicode(x)+"""\" type="text">
+											<label for="URL-Links-"""+unicode(x)+"""\">URL Links</label>
 										</div>
 										<div class="input-field col s6">
-											<input value=\""""+cgi.escape(unicode(common.testexist("REFRESH", "Links", x)))+"""\" name="refresh1-"""+unicode(x)+"""" id="refresh1-"""+unicode(x)+"""" type="number">
-											<label for="refresh1-"""+unicode(x)+"""">Refresh Links</label>
+											<input value=\""""+cgi.escape(unicode(common.testexist("REFRESH", "Links", x)))+"""\" name="REFRESH-Links-"""+unicode(x)+"""\" id="REFRESH-Links-"""+unicode(x)+"""\" type="number">
+											<label for="REFRESH-Links-"""+unicode(x)+"""\">Refresh Links</label>
 										</div>
 									</div>
 									<div>
-										<input type="checkbox" name="leftenabled-"""+unicode(x)+"""" id="leftenabled-"""+unicode(x)+"""" """+common.aktiv("AKTIV", "Links", x)+"""/>
-										<label for="leftenabled-"""+unicode(x)+"""">Links aktiviert</label>&nbsp;&nbsp;&nbsp;&nbsp;
-										<input type="checkbox" name="refreshleftenabled-"""+unicode(x)+"""" id="refreshleftenabled-"""+unicode(x)+"""" """+common.aktiv("REFRESHAKTIV", "Links", x)+"""/>
-										<label for="refreshleftenabled-"""+unicode(x)+"""">Links neu laden</label>
+										<input type="checkbox" name="AKTIV-Links-"""+unicode(x)+"""\" id="AKTIV-Links-"""+unicode(x)+"""\" """+common.aktiv("AKTIV", "Links", x)+"""/>
+										<label for="AKTIV-Links-"""+unicode(x)+"""\">Links aktiviert</label>&nbsp;&nbsp;&nbsp;&nbsp;
+										<input type="hidden" value="0" name="HIDDEN.AKTIV-Links-"""+unicode(x)+"""\">
+										<input type="checkbox" name="REFRESHAKTIV-Links-"""+unicode(x)+"""\" id="REFRESHAKTIV-Links-"""+unicode(x)+"""\" """+common.aktiv("REFRESHAKTIV", "Links", x)+"""/>
+										<label for="REFRESHAKTIV-Links-"""+unicode(x)+"""\">Links neu laden</label>
+										<input type="hidden" value="0" name="HIDDEN.REFRESHAKTIV-Links-"""+unicode(x)+"""\">
 									</div>
 									<div class="row">
 										<div class="input-field col s4">
-											<input value=\""""+cgi.escape(unicode(common.getdate("uhrzeit", "Links", x)))+"""\" name="uhrzeit-Links-"""+unicode(x)+"""" id="uhrzeit-Links-"""+unicode(x)+"""" type="text">
-											<label for="uhrzeit-Links-"""+unicode(x)+"""">Uhrzeit</label>
+											<input value=\""""+cgi.escape(unicode(common.getdate("uhrzeit", "Links", x)))+"""\" name="uhrzeit-Links-"""+unicode(x)+"""\" id="uhrzeit-Links-"""+unicode(x)+"""\" type="text">
+											<label for="uhrzeit-Links-"""+unicode(x)+"""\">Uhrzeit</label>
 										</div>
 										<div class="input-field col s4">
-											<input value=\""""+cgi.escape(unicode(common.getdate("wochentag", "Links", x)))+"""\" name="wochentag-Links-"""+unicode(x)+"""" id="wochentag-Links-"""+unicode(x)+"""" type="text">
-											<label for="wochentag-Links-"""+unicode(x)+"""">Wochentag</label>
+											<input value=\""""+cgi.escape(unicode(common.getdate("wochentag", "Links", x)))+"""\" name="wochentag-Links-"""+unicode(x)+"""\" id="wochentag-Links-"""+unicode(x)+"""\" type="text">
+											<label for="wochentag-Links-"""+unicode(x)+"""\">Wochentag</label>
 										</div>
 										<div class="input-field col s2">
-											<input value=\""""+cgi.escape(unicode(common.getdate("tag", "Links", x)))+"""\" name="tag-Links-"""+unicode(x)+"""" id="tag-Links-"""+unicode(x)+"""" type="text">
-											<label for="tag-Links-"""+unicode(x)+"""">Tag</label>
+											<input value=\""""+cgi.escape(unicode(common.getdate("tag", "Links", x)))+"""\" name="tag-Links-"""+unicode(x)+"""\" id="tag-Links-"""+unicode(x)+"""\" type="text">
+											<label for="tag-Links-"""+unicode(x)+"""\">Tag</label>
 										</div>
 										<div class="input-field col s2">
-											<input value=\""""+cgi.escape(unicode(common.getdate("monat", "Links", x)))+"""\" name="monat-Links-"""+unicode(x)+"""" id="monat-Links-"""+unicode(x)+"""" type="text">
-											<label for="monat-Links-"""+unicode(x)+"""">Monat</label>
+											<input value=\""""+cgi.escape(unicode(common.getdate("monat", "Links", x)))+"""\" name="monat-Links-"""+unicode(x)+"""\" id="monat-Links-"""+unicode(x)+"""\" type="text">
+											<label for="monat-Links-"""+unicode(x)+"""\">Monat</label>
 										</div>
 									</div>
 									<div class="row">
 										<div class="input-field col s3">
-											<input value=\""""+cgi.escape(unicode(common.getinfo("MARGINLEFT","Links",x)))+"""\" name="marginleft-Links-"""+unicode(x)+"""" id="marginleft-Links-"""+unicode(x)+"""" type="text">
-											<label for="marginleft-Links-"""+unicode(x)+"""">Rand-Links</label>
+											<input value=\""""+cgi.escape(unicode(common.getinfo("MARGINLEFT","Links",x)))+"""\" name="MARGINLEFT-Links-"""+unicode(x)+"""\" id="MARGINLEFT-Links-"""+unicode(x)+"""\" type="text">
+											<label for="MARGINLEFT-Links-"""+unicode(x)+"""\">Rand-Links</label>
 										</div>
 										<div class="input-field col s3">
-											<input value=\""""+cgi.escape(unicode(common.getinfo("MARGINRIGHT","Links",x)))+"""\" name="marginright-Links-"""+unicode(x)+"""" id="marginright-Links-"""+unicode(x)+"""" type="text">
-											<label for="marginright-Links-"""+unicode(x)+"""">Rand-Rechts</label>
+											<input value=\""""+cgi.escape(unicode(common.getinfo("MARGINRIGHT","Links",x)))+"""\" name="MARGINRIGHT-Links-"""+unicode(x)+"""\" id="MARGINRIGHT-Links-"""+unicode(x)+"""\" type="text">
+											<label for="MARGINRIGHT-Links-"""+unicode(x)+"""\">Rand-Rechts</label>
 										</div>
 										<div class="input-field col s3">
-											<input value=\""""+cgi.escape(unicode(common.getinfo("MARGINTOP","Links",x)))+"""\" name="margintop-Links-"""+unicode(x)+"""" id="margintop-Links-"""+unicode(x)+"""" type="text">
-											<label for="margintop-Links-"""+unicode(x)+"""">Rand-Oben</label>
+											<input value=\""""+cgi.escape(unicode(common.getinfo("MARGINTOP","Links",x)))+"""\" name="MARGINTOP-Links-"""+unicode(x)+"""\" id="MARGINTOP-Links-"""+unicode(x)+"""\" type="text">
+											<label for="MARGINTOP-Links-"""+unicode(x)+"""\">Rand-Oben</label>
 										</div>
 										<div class="input-field col s3">
-											<input value=\""""+cgi.escape(unicode(common.getinfo("MARGINBOTTOM","Links",x)))+"""\" name="marginbottom-Links-"""+unicode(x)+"""" id="marginbottom-Links-"""+unicode(x)+"""" type="text">
-											<label for="marginbottom-Links-"""+unicode(x)+"""">Rand-Unten</label>
+											<input value=\""""+cgi.escape(unicode(common.getinfo("MARGINBOTTOM","Links",x)))+"""\" name="MARGINBOTTOM-Links-"""+unicode(x)+"""\" id="MARGINBOTTOM-Links-"""+unicode(x)+"""\" type="text">
+											<label for="MARGINBOTTOM-Links-"""+unicode(x)+"""\">Rand-Unten</label>
 										</div>
 									</div>
 								</div>
@@ -98,61 +100,63 @@ try:
 									<span class="card-title """+colors.color+"""-text text-darken-2">Rechte Seite</span><br>
 									<div class="row">
 										<div class="input-field col s6">
-											<input value=\""""+cgi.escape(unicode(common.testexist("URL", "Rechts", x)))+"""\" name="url2-"""+unicode(x)+"""" id="url2-"""+unicode(x)+"""" type="text">
-											<label for="url2-"""+unicode(x)+"""">URL Rechts</label>
+											<input value=\""""+cgi.escape(unicode(common.testexist("URL", "Rechts", x)))+"""\" name="URL-Rechts-"""+unicode(x)+"""\" id="URL-Rechts-"""+unicode(x)+"""\" type="text">
+											<label for="URL-Rechts-"""+unicode(x)+"""\">URL Rechts</label>
 										</div>
 										<div class="input-field col s6">
-											<input value=\""""+cgi.escape(unicode(common.testexist("REFRESH", "Rechts", x)))+"""\" name="refresh2-"""+unicode(x)+"""" id="refresh2-"""+unicode(x)+"""" type="number">
-											<label for="refresh2-"""+unicode(x)+"""">Refresh Rechts</label>
+											<input value=\""""+cgi.escape(unicode(common.testexist("REFRESH", "Rechts", x)))+"""\" name="REFRESH-Rechts-"""+unicode(x)+"""\" id="REFRESH-Rechts-"""+unicode(x)+"""\" type="number">
+											<label for="REFRESH-Rechts-"""+unicode(x)+"""\">Refresh Rechts</label>
 										</div>
 									</div>
 									<div>
-										<input type="checkbox" name="rightenabled-"""+unicode(x)+"""" id="rightenabled-"""+unicode(x)+"""" """+common.aktiv("AKTIV", "Rechts", x)+"""/>
-										<label for="rightenabled-"""+unicode(x)+"""">Rechts aktiviert</label>&nbsp;&nbsp;&nbsp;&nbsp;
-										<input type="checkbox" name="refreshrightenabled-"""+unicode(x)+"""" id="refreshrightenabled-"""+unicode(x)+"""" """+common.aktiv("REFRESHAKTIV", "Rechts", x)+"""/>
-										<label for="refreshrightenabled-"""+unicode(x)+"""">Rechts neu laden</label>
+										<input type="checkbox" name="AKTIV-Rechts-"""+unicode(x)+"""\" id="AKTIV-Rechts-"""+unicode(x)+"""\" """+common.aktiv("AKTIV", "Rechts", x)+"""/>
+										<label for="AKTIV-Rechts-"""+unicode(x)+"""\">Rechts aktiviert</label>&nbsp;&nbsp;&nbsp;&nbsp;
+										<input type="hidden" value="0" name="HIDDEN.AKTIV-Rechts-"""+unicode(x)+"""\">
+										<input type="checkbox" name="REFRESHAKTIV-Rechts-"""+unicode(x)+"""\" id="REFRESHAKTIV-Rechts-"""+unicode(x)+"""\" """+common.aktiv("REFRESHAKTIV", "Rechts", x)+"""/>
+										<label for="REFRESHAKTIV-Rechts-"""+unicode(x)+"""\">Rechts neu laden</label>
+										<input type="hidden" value="0" name="HIDDEN.REFRESHAKTIV-Rechts-"""+unicode(x)+"""\">
 									</div>
 									<div class="row">
 										<div class="input-field col s4">
-											<input value=\""""+cgi.escape(unicode(common.getdate("uhrzeit", "Rechts", x)))+"""\" name="uhrzeit-Rechts-"""+unicode(x)+"""" id="uhrzeit-Rechts-"""+unicode(x)+"""" type="text">
-											<label for="uhrzeit-Rechts-"""+unicode(x)+"""">Uhrzeit</label>
+											<input value=\""""+cgi.escape(unicode(common.getdate("uhrzeit", "Rechts", x)))+"""\" name="uhrzeit-Rechts-"""+unicode(x)+"""\" id="uhrzeit-Rechts-"""+unicode(x)+"""\" type="text">
+											<label for="uhrzeit-Rechts-"""+unicode(x)+"""\">Uhrzeit</label>
 										</div>
 										<div class="input-field col s4">
-											<input value=\""""+cgi.escape(unicode(common.getdate("wochentag", "Rechts", x)))+"""\" name="wochentag-Rechts-"""+unicode(x)+"""" id="wochentag-Rechts-"""+unicode(x)+"""" type="text">
-											<label for="wochentag-Rechts-"""+unicode(x)+"""">Wochentag</label>
+											<input value=\""""+cgi.escape(unicode(common.getdate("wochentag", "Rechts", x)))+"""\" name="wochentag-Rechts-"""+unicode(x)+"""\" id="wochentag-Rechts-"""+unicode(x)+"""\" type="text">
+											<label for="wochentag-Rechts-"""+unicode(x)+"""\">Wochentag</label>
 										</div>
 										<div class="input-field col s2">
-											<input value=\""""+cgi.escape(unicode(common.getdate("tag", "Rechts", x)))+"""\" name="tag-Rechts-"""+unicode(x)+"""" id="tag-Rechts-"""+unicode(x)+"""" type="text">
-											<label for="tag-Rechts-"""+unicode(x)+"""">Tag</label>
+											<input value=\""""+cgi.escape(unicode(common.getdate("tag", "Rechts", x)))+"""\" name="tag-Rechts-"""+unicode(x)+"""\" id="tag-Rechts-"""+unicode(x)+"""\" type="text">
+											<label for="tag-Rechts-"""+unicode(x)+"""\">Tag</label>
 										</div>
 										<div class="input-field col s2">
-											<input value=\""""+cgi.escape(unicode(common.getdate("monat", "Rechts", x)))+"""\" name="monat-Rechts-"""+unicode(x)+"""" id="monat-Rechts-"""+unicode(x)+"""" type="text">
-											<label for="monat-Rechts-"""+unicode(x)+"""">Monat</label>
+											<input value=\""""+cgi.escape(unicode(common.getdate("monat", "Rechts", x)))+"""\" name="monat-Rechts-"""+unicode(x)+"""\" id="monat-Rechts-"""+unicode(x)+"""\" type="text">
+											<label for="monat-Rechts-"""+unicode(x)+"""\">Monat</label>
 										</div>
 									</div>
 									<div class="row">
 										<div class="input-field col s3">
-											<input value=\""""+cgi.escape(unicode(common.getinfo("MARGINLEFT","Rechts",x)))+"""\" name="marginleft-Rechts-"""+unicode(x)+"""" id="marginleft-Rechts-"""+unicode(x)+"""" type="text">
-											<label for="marginleft-Rechts-"""+unicode(x)+"""">Rand-Links</label>
+											<input value=\""""+cgi.escape(unicode(common.getinfo("MARGINLEFT","Rechts",x)))+"""\" name="MARGINLEFT-Rechts-"""+unicode(x)+"""\" id="MARGINLEFT-Rechts-"""+unicode(x)+"""\" type="text">
+											<label for="MARGINLEFT-Rechts-"""+unicode(x)+"""\">Rand-Links</label>
 										</div>
 										<div class="input-field col s3">
-											<input value=\""""+cgi.escape(unicode(common.getinfo("MARGINRIGHT","Rechts",x)))+"""\" name="marginright-Rechts-"""+unicode(x)+"""" id="marginright-Rechts-"""+unicode(x)+"""" type="text">
-											<label for="marginright-Rechts-"""+unicode(x)+"""">Rand-Rechts</label>
+											<input value=\""""+cgi.escape(unicode(common.getinfo("MARGINRIGHT","Rechts",x)))+"""\" name="MARGINRIGHT-Rechts-"""+unicode(x)+"""\" id="MARGINRIGHT-Rechts-"""+unicode(x)+"""\" type="text">
+											<label for="MARGINRIGHT-Rechts-"""+unicode(x)+"""\">Rand-Rechts</label>
 										</div>
 										<div class="input-field col s3">
-											<input value=\""""+cgi.escape(unicode(common.getinfo("MARGINTOP","Rechts",x)))+"""\" name="margintop-Rechts-"""+unicode(x)+"""" id="margintop-Rechts-"""+unicode(x)+"""" type="text">
-											<label for="margintop-Rechts-"""+unicode(x)+"""">Rand-Oben</label>
+											<input value=\""""+cgi.escape(unicode(common.getinfo("MARGINTOP","Rechts",x)))+"""\" name="MARGINTOP-Rechts-"""+unicode(x)+"""\" id="MARGINTOP-Rechts-"""+unicode(x)+"""\" type="text">
+											<label for="MARGINTOP-Rechts-"""+unicode(x)+"""\">Rand-Oben</label>
 										</div>
 										<div class="input-field col s3">
-											<input value=\""""+cgi.escape(unicode(common.getinfo("MARGINBOTTOM","Rechts",x)))+"""\" name="marginbottom-Rechts-"""+unicode(x)+"""" id="marginbottom-Rechts-"""+unicode(x)+"""" type="text">
-											<label for="marginbottom-Rechts-"""+unicode(x)+"""">Rand-Unten</label>
+											<input value=\""""+cgi.escape(unicode(common.getinfo("MARGINBOTTOM","Rechts",x)))+"""\" name="MARGINBOTTOM-Rechts-"""+unicode(x)+"""\" id="MARGINBOTTOM-Rechts-"""+unicode(x)+"""\" type="text">
+											<label for="MARGINBOTTOM-Rechts-"""+unicode(x)+"""\">Rand-Unten</label>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>"""
 				if rows != 1:
-					print """<center><a class="waves-effect waves-light btn" href="setn.py?referer=row&delnum="""+unicode(x)+"""">Displayset l&ouml;schen</a></center>"""
+					print """<center><a class="waves-effect waves-light btn" href="setn.py?referer=row&delnum="""+unicode(x)+"""\">Displayset l&ouml;schen</a></center>"""
 				print """\
 					</div>
 				</div>"""
@@ -198,7 +202,7 @@ try:
 	displaysets()
 	print """\
 					<div class="col s12">
-						<center><a class="btn waves-effect waves-light """+colors.color+"""" href=setn.py?referer=row&createnum="""+unicode(rowsone)+"""><i class="mdi-content-add"></i></a></center>
+						<center><a class="btn waves-effect waves-light """+colors.color+"""\" href=setn.py?referer=row&createnum="""+unicode(rowsone)+"""><i class="mdi-content-add"></i></a></center>
 						<p class="range-field"><input type="range" id="teilung" name="teilung" min="1" max="99" value=\""""+unicode(common.readsettings("TEILUNG"))+"""\" /></p>
 						<div class="row">
 							<div class="col s6">
@@ -207,13 +211,14 @@ try:
 										<span class="card-title """+colors.color+"""-text text-darken-2">Alle Seiten</span><br>
 										<div class="row">
 											<div class="input-field col s12">
-												<input value=\""""+cgi.escape(unicode(common.testexist("REFRESH", "global", 0)))+"""\" name="refreshall" id="refreshall" type="text">
-												<label for="refreshall">Alle Seiten neu laden</label>
+												<input value=\""""+cgi.escape(unicode(common.testexist("REFRESH", "global", 0)))+"""\" name="REFRESH-global-0" id="REFRESH-global-0" type="text">
+												<label for="REFRESH-global-0">Alle Seiten neu laden</label>
 											</div>
 										</div>
 										<div>
-											<input type="checkbox" name="refreshallenabled" id="refreshallenabled" """+common.aktiv("REFRESHAKTIV", "global", 0)+"""/>
-											<label for="refreshallenabled">Globales neu laden aktiviert</label>
+											<input type="checkbox" name="REFRESHAKTIV-global-0" id="REFRESHAKTIV-global-0" """+common.aktiv("REFRESHAKTIV", "global", 0)+"""/>
+											<label for="REFRESHAKTIV-global-0">Globales neu laden aktiviert</label>
+											<input type="hidden" value="0" name="HIDDEN.REFRESHAKTIV-global-0">
 										</div>
 									</div>
 								</div>
@@ -224,13 +229,14 @@ try:
 										<span class="card-title """+colors.color+"""-text text-darken-2">Monitornjus Frontend</span><br>
 										<div class="row">
 											<div class="input-field col s12">
-												<input value=\""""+cgi.escape(unicode(common.testexist("REFRESH", "globalmon", 0)))+"""\" name="refreshmon" id="refreshmon" type="text">
-												<label for="refreshmon">Monitornjus Frontend neu laden</label>
+												<input value=\""""+cgi.escape(unicode(common.testexist("REFRESH", "globalmon", 0)))+"""\" name="REFRESH-globalmon-0" id="REFRESH-globalmon-0" type="text">
+												<label for="REFRESH-globalmon-0">Monitornjus Frontend neu laden</label>
 											</div>
 										</div>
 										<div>
-											<input type="checkbox" name="refreshmonenabled" id="refreshmonenabled" """+common.aktiv("REFRESHAKTIV", "globalmon", 0)+"""/>
-											<label for="refreshmonenabled">Monitornjus neu laden</label>
+											<input type="checkbox" name="REFRESHAKTIV-globalmon-0" id="REFRESHAKTIV-globalmon-0" """+common.aktiv("REFRESHAKTIV", "globalmon", 0)+"""/>
+											<label for="REFRESHAKTIV-globalmon-0">Monitornjus neu laden</label>
+											<input type="hidden" value="0" name="HIDDEN.REFRESHAKTIV-globalmon-0">
 										</div>
 									</div>
 								</div>
