@@ -3,7 +3,7 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 22.07.2015 (Version 0.8.4)
+# Beilage zu MonitorNjus, 27.07.2015 (Version 0.9)
 
 import sys
 reload(sys)
@@ -50,12 +50,12 @@ def updateaktiv(Name, GETNAME, Seite, Nummer, widgname, hidden):
 		if val_flag == common.getinfo(GETNAME, Seite, Nummer):
 			pass
 		else:
-			common.writeinfo(Seite, Nummer, GETNAME, int(val_flag))
+			common.writeinfo(Seite, Nummer, GETNAME, unicode(val_flag))
 	elif "widgets" in referer:
 		if val_flag == common.getwidgetinfo(widgname, ID, GETNAME):
 			pass
 		else:
-			common.writewidgetinfo(widgname, Nummer, GETNAME, int(val_flag))
+			common.writewidgetinfo(widgname, Nummer, GETNAME, unicode(val_flag))
 	else:
 		raise Warning("Function updateaktiv: This referer does not exist.")
 
@@ -66,16 +66,10 @@ def update_align(Name, GETNAME, widgname, ID):
 		else:
 			val = None
 		if val is not None:
-			if unicode(val).isdigit():
-				if val == common.getwidgetinfo(widgname, ID, GETNAME):
-					pass
-				else:
-					common.writewidgetinfo(widgname, ID, GETNAME, int(val))
+			if unicode(val) == common.getwidgetinfo(widgname, ID, GETNAME):
+				pass
 			else:
-				if unicode(val) == common.getwidgetinfo(widgname, ID, GETNAME):
-					pass
-				else:
-					common.writewidgetinfo(widgname, ID, GETNAME, unicode(val))
+				common.writewidgetinfo(widgname, ID, GETNAME, unicode(val))
 	else:
 		raise Warning("Function update_align: This referer is not allowed.")
 
@@ -85,8 +79,6 @@ def updatetime(Seite, Nummer):
 		wochentag = form.getfirst("wochentag-"+Seite+"-"+unicode(Nummer), None)
 		tag = form.getfirst("tag-"+Seite+"-"+unicode(Nummer), None)
 		monat = form.getfirst("monat-"+Seite+"-"+unicode(Nummer), None)
-		if (len(uhrzeit) or len(wochentag) or len(tag) or len(monat)) > 20:
-			raise Warning("Wieso sollte man so eine große Zahl in ein Feld für das Datum eintragen?")
 		if uhrzeit is None and wochentag is None and tag is None and monat is None:
 			pass
 		else:

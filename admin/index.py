@@ -3,7 +3,7 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 22.07.2015 (Version 0.8.4)
+# Beilage zu MonitorNjus, 27.07.2015 (Version 0.9)
 
 import sys
 reload(sys)

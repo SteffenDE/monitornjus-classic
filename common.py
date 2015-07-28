@@ -61,8 +61,6 @@ def allaktiv(Seite):
 	val = cursor.fetchall()
 	return val
 
-######################### rows #########################
-
 def getrows():
 	cursor = conn.execute("SELECT NUMMER FROM DISPLAYSETS WHERE SEITE=\"Links\";");
 	val = cursor.fetchall()
@@ -81,6 +79,11 @@ def write(Seite, Nummer, URL, Aktiv, Refreshaktiv, Refresh, vonbis, marginleft, 
 	conn.execute("DELETE FROM DISPLAYSETS where SEITE=\'"+Seite+"\' AND NUMMER="+unicode(Nummer)+";");
 	conn.execute("INSERT INTO DISPLAYSETS (SEITE,NUMMER,URL,AKTIV,REFRESHAKTIV,REFRESH,VONBIS,MARGINLEFT,MARGINRIGHT,MARGINTOP,MARGINBOTTOM) values (?,?,?,?,?,?,?,?,?,?,?)", \
 	[unicode(Seite), unicode(Nummer), unicode(URL), unicode(Aktiv), unicode(Refreshaktiv), unicode(Refresh), unicode(vonbis), unicode(marginleft), unicode(marginright), unicode(margintop), unicode(marginbottom)]);
+	conn.commit()
+
+def newwidget(ID, NAME, TYP, AKTIV, URLw, valign, align, vmargin, margin, width, height):
+	conn.execute("DELETE FROM WIDGETS WHERE ID=?", [unicode(ID)]);
+	conn.execute("INSERT INTO WIDGETS (ID,NAME,TYP,AKTIV,URL,valign,align,vmargin,margin,width,height) values ("+str(ID)+",\'"+NAME+"\',\'"+TYP+"\',"+unicode(AKTIV)+",\'"+URLw+"\',\'"+valign+"\',\'"+unicode(align)+"\',\'"+vmargin+"\',\'"+unicode(margin)+"\',\'"+unicode(width)+"\',\'"+unicode(height)+"\')");
 	conn.commit()
 
 ######################### Displaysets #########################
@@ -119,7 +122,7 @@ def readsettings(NAME):
 	cursor = conn.execute("SELECT VALUE FROM SETTINGS WHERE NAME=\'"+NAME+"\';");
 	return cursor.fetchone()[0]
 
-######################### other functions #########################
+######################### Widgets #########################
 
 def getwidgets():
 	cursor = conn.execute("SELECT ID FROM WIDGETS;");
@@ -136,11 +139,6 @@ def getwidgTYPfromID(ID):
 def maxid():
 	cursor = conn.execute("SELECT MAX(ID) FROM WIDGETS;");
 	return cursor.fetchone()[0]
-
-def newwidget(ID, NAME, TYP, AKTIV, URLw, valign, align, vmargin, margin, width, height):
-	conn.execute("DELETE FROM WIDGETS WHERE ID=?", [unicode(ID)]);
-	conn.execute("INSERT INTO WIDGETS (ID,NAME,TYP,AKTIV,URL,valign,align,vmargin,margin,width,height) values ("+str(ID)+",\'"+NAME+"\',\'"+TYP+"\',"+unicode(AKTIV)+",\'"+URLw+"\',\'"+valign+"\',\'"+unicode(align)+"\',\'"+vmargin+"\',\'"+unicode(margin)+"\',\'"+unicode(width)+"\',\'"+unicode(height)+"\')");
-	conn.commit()
 
 def removewidget(ID):
 	anz = int(maxid())
