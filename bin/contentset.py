@@ -75,7 +75,7 @@ try:
 			refreshon = True
 			z = 0
 			while z < rows:
-				if checktime.match(common.getinfo("VONBIS", mseite, int(common.minaktiv(mseite))+z),common.datum.now()) == True:
+				if checktime.match(common.getinfo("VONBIS", mseite, int(common.minaktiv(mseite))+z),common.datum.now()) and common.getinfo("AKTIV", mseite, int(common.minaktiv(mseite))+z):
 					nextnummer = int(common.minaktiv(mseite))+z
 					break
 				else:
