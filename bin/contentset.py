@@ -3,7 +3,7 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 22.07.2015 (Version 0.8.4)
+# Beilage zu MonitorNjus, 05.08.2015 (Version 0.9.1)
 
 import os
 import sys
@@ -122,18 +122,17 @@ try:
 
 ################################ HTML ################################
 
-	print "Content-Type: text/html"
-	print
-	print """\
+	print u"Content-Type: text/html;charset=utf-8\n"
+	print u"""\
 <!DOCTYPE html>
 <html lang="de">
 <head>
 	<meta charset="UTF-8">"""
 	if prrefresh is not None:
-		print prrefresh
+		sys.stdout.write(unicode(prrefresh))
 	else:
 		pass
-	print "\
+	print u"\
 	<title>MonitorNjus</title>"
 	if typ == "video":
 		style = """\
@@ -187,7 +186,7 @@ try:
 	@-o-keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 	@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }"""
 	if rand:
-		sys.stdout.write("""\
+		sys.stdout.write(u"""\
 	<style>
 	iframe {
 		padding-left: """+common.addpx(common.getinfo("MARGINLEFT", mseite, nummer))+""";
@@ -197,24 +196,22 @@ try:
 		box-sizing: border-box;
 	}""")
 	else:
-		print "	<style>"
-	print style
-	print """\
+		print u"	<style>"
+	sys.stdout.write(unicode(style))
+	print u"""\
 	</style>
 </head>"""
-	print "\
+	print u"\
 <body class=\"fadeIn fadeIn-animation\">"
 	####     # = debug     ####
 	#print checktime.match(common.getinfo("VONBIS", mseite, int(common.minaktiv(mseite))),common.datum.now())
 	#print nextnummer
 	#print common.getinfo("VONBIS", mseite, nummer)
 	#print checktime.match(common.getinfo("VONBIS", mseite, nummer),common.datum.now())
-	print output
+	sys.stdout.write(unicode(output))
 	print "\
 </body>"
-	import sys
 	sys.stdout.write("</html>")
-	del sys
 
 except Exception as e:
 	common.debug(e)

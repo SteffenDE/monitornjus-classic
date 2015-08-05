@@ -6,6 +6,7 @@
 try:
 	import cgi
 	import os
+	import sys
 
 	form = cgi.FieldStorage() 
 	url = form.getfirst('url', None)
@@ -19,10 +20,10 @@ try:
 
 	############################
 
-	print "Content-Type: text/html\n"
+	print u"Content-Type: text/html;charset=utf-8\n"
 
 	if typ == "redir":
-		print """\
+		print u"""\
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,12 +62,10 @@ function autoresize_frames()
 <iframe src=\""""+url+"""\" style="visibility: hidden; position:absolute; width:100%; height:100%; top:0px; left:0px; margin-left:2px; border-style:none; overflow:hidden" frameborder="0" scrolling="no" id="fest"></iframe>
 </body>
 </html>"""
-		import sys
 		sys.stdout.write("</html>")
-		del sys
 
 	elif typ == "rollen":
-		print """\
+		print u"""\
 <!DOCTYPE html>
 <html>
 <head>
@@ -121,8 +120,8 @@ function autoresize_frames()
 <body onload="autoresize_frames()" class=\"fadeIn fadeIn-animation\">
 <script type="text/javascript">
 //Laufrichtung(up,down)
-var frame = '<iframe src=\""""+url+"""\" style="width:100%; height:100%;" frameborder="0" name="links" scrolling="no"></iframe>'
-var strDir      ='"""+direction+"""';
+var frame = '<iframe src=\""""+unicode(url)+"""\" style="width:100%; height:100%;" frameborder="0" name="links" scrolling="no"></iframe>'
+var strDir      ='"""+unicode(direction)+"""';
 	//Interval in ms
 var Interval = """+unicode(speed)+""";
 	//Falls Leeraum zwischen News...hier Wert erhoehen...minimum:1
@@ -167,9 +166,7 @@ intPos+=intStep*arrDir[strDir][0];
 objGo=setInterval('DM_ticken()',Interval);
 </script>
 </body>"""
-		import sys
 		sys.stdout.write("</html>")
-		del sys
 
 	else:
 		raise Exception("Falscher oder fehlender Queryparameter: type")

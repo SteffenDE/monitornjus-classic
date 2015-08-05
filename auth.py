@@ -1,8 +1,15 @@
-#!/usr/bin/env/python
-# -*- coding: utf-8 -*-
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+#
+# Copyright (c) 2015 Steffen Deusch
+# Licensed under the MIT license
+# Beilage zu MonitorNjus, 05.08.2015 (Version 0.9.1)
+
 import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
+
+############################## Settings ##############################
 
 ###### Windows-Authentifizierung ######
 ### Art ###
@@ -18,55 +25,53 @@ userliste = [
 "peter.praker"
 ]
 
-### Windows-Domäne ###
+### Windows-Domäne + Gruppe ###
 
 domain = "SCHULE"
-
-### Gruppe ###
-
 group = "G_Projekt_MonitorNjus"
 
 ######################################################################
 
 ###### Authentifizierungsfunktion ######
 
-def authenticated():
-		if groupauth and listauth:
-			raise Exception("listauth und groupauth können (noch) nicht gleichzeitig aktiv sein.")
-		if listauth:
-				import os
-				user = os.environ["REMOTE_USER"]
-				if user.lower().replace(domain.lower()+"\\", "") in userliste:
-						pass
-				else:
-						print "Content-Type: text/html"
-						print
-						print """\
-<!DOCTYPE html>
-<html>
-<body>
-<h1>Du (%s) hast hier nichts verloren!</h1>
-</body>
-</html>""" % user
-						exit(0)
-		elif groupauth:
-				import ad
-				import os
-				user = os.environ["REMOTE_USER"]
-				aduser = ad.find_user()
-				if group.lower() in unicode(aduser.memberOf).lower() or "administrator" in user.lower():
-						pass
-				else:
-						print "Content-Type: text/html"
-						print
-						print """\
-<!DOCTYPE html>
-<html>
-<body>
-<h1>Du (%s) hast hier nichts verloren!</h1>
-</body>
-</html>""" % user
-						exit(0)
-				del sys
-		else:
+def me():
+	if groupauth and listauth:
+		raise Exception("listauth und groupauth können (noch) nicht gleichzeitig aktiv sein.")
+
+	if listauth:
+		import os
+		user = os.environ["REMOTE_USER"]
+		if user.lower().replace(domain.lower()+"\\", "") in userliste:
 			pass
+		else:
+			print u"Content-Type: text/html;charset=utf-8\n"
+			print """\
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Du (%s) hast hier nichts verloren!</h1>
+</body>
+</html>""" % user
+			exit(0)
+
+	elif groupauth:
+		import ad
+		import os
+		user = os.environ["REMOTE_USER"]
+		aduser = ad.find_user()
+		if group.lower() in unicode(aduser.memberOf).lower() or "administrator" in user.lower():
+			pass
+		else:
+			print u"Content-Type: text/html;charset=utf-8\n"
+			print
+			print """\
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Du (%s) hast hier nichts verloren!</h1>
+</body>
+</html>""" % user
+			exit(0)
+
+	else:
+		pass

@@ -3,24 +3,23 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 22.07.2015 (Version 0.8.4)
+# Beilage zu MonitorNjus, 05.08.2015 (Version 0.9.1)
 
 import os
 import datetime
 import sqlite3
 
 datum = datetime.datetime.now()
-version = "0.9&beta;"
+version = "0.9.1&beta;"
 workingdir = os.path.dirname(os.path.realpath(__file__))
 
 ############################## Settings ##############################
 
 debugv = 2				# Verbosity: 0,1,2 (0 = off, 1 = basic, 2 = mit Anmerkungen, 3 = Traceback, 707 = Easter Egg)
+triggerrefresh = False	# Client checks for updates every few seconds (may cause high cpu usage when the server is slow)
+authentication = False	# Settings inside auth.py
 
-##########################################################################################
-
-def authenticated():
-	pass
+######################################################################
 
 conn = sqlite3.connect(workingdir+'/admin/MonitorNjus.db')
 
@@ -326,8 +325,8 @@ def debug(e):
 
 	#####################################################
 
-	print("""\
-Content-Type: text/html
+	print(u"""\
+Content-Type: text/html;charset=utf-8
 
 <!DOCTYPE html>
 <html lang="de">
@@ -339,7 +338,7 @@ Content-Type: text/html
 	#####################################################
 
 	if debugv == 707 and not anmerkung:
-		print("""
+		print(u"""
 	<style>
 	html, body {
 		height: 100%;
@@ -355,7 +354,7 @@ Content-Type: text/html
 
 	#####################################################
 
-	print("""
+	print(u"""
 </head>
 <body>
 	<div class="container">""")
@@ -363,11 +362,11 @@ Content-Type: text/html
 	#####################################################
 
 	if debugv == 707 and not anmerkung:
-		print("""
+		print(u"""
 		<h3>Oh nein! :(</h3>
 		<h4>Ein hochqualifizierter Techniker arbeitet bereits mit Hochdruck an dem Problem!</h4>""")
 	else:
-		print("""
+		print(u"""
 		<h3>Es ist ein Fehler aufgetreten!</h3>""")
 
 	#####################################################
@@ -378,39 +377,39 @@ Content-Type: text/html
 
 		if anmerkung:
 			if "No such file or directory" in trace and "subst_" in trace:
-				print("<h4>Die Vertretungsdatei existiert nicht...</h4>")
+				print(u"<h4>Die Vertretungsdatei existiert nicht...</h4>")
 
 			elif "OperationalError" in trace:
-				print("""\
+				print(u"""\
 	<center style="color: #ffffff; background: #a60c0d; border: 2px solid black; margin-top: 3%; padding-bottom: 3%;">
 		<h1>Hier stimmt was nicht!</h1>
 		Manuell an der Datenbank gespielt, was?
 	</center>""")
 
 			elif "Warning" in trace:
-				print("""
+				print(u"""
 		<h4>Warnung: """+unicode(e)+"""</h4>""")
 
 		#################################################
 
-		print("""
+		print(u"""
 		<h5>Details:</h5>
 		<pre><code>""")
 		print(cgi.escape(trace))
-		print("		</code></pre>")
+		print(u"		</code></pre>")
 
 	elif debugv == 1:
-		print("""
+		print(u"""
 		<h4>Details:<br><h5>""")
 		print(unicode(e))
-		print("	</h5></h4>")
+		print(u"	</h5></h4>")
 
 	else:
-		print("""Weitere Informationen über "debug" in common.py!</h3><br><br>""")
+		print(u"Weitere Informationen über \"debug\" in common.py!</h3><br><br>")
 
 	#####################################################
 
-	print("""
+	print(u"""
 		<small>Seite wird in 30 Sekunden neu geladen.</small><br>
 		<small>Script: """+scrname+"""</small><br>
 		<small>"""+datum.strftime("%d.%m.%Y %H:%M:%S")+"""</small>

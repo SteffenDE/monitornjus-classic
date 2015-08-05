@@ -108,7 +108,11 @@ def updateteilung():
 try:
 	import cgi, cgitb
 	#import cgitb; cgitb.enable()
-	common.authenticated()
+	
+	if common.authentication:
+		auth = imp.load_source("auth", workingdir+"/../auth.py")
+		auth.me()
+
 	form = cgi.FieldStorage()
 	referer = form.getfirst('referer', None)
 
@@ -199,6 +203,9 @@ try:
 		if num is not None:
 			common.removewidget(unicode(num))
 
+	elif "triggerrefresh" in referer:
+		refresh = "<meta http-equiv=\"refresh\" content=\"0; URL=../admin/index.py\">"
+
 	else:
 		refresh = ""
 
@@ -218,6 +225,11 @@ Content-Type: text/html\n
 	import sys
 	sys.stdout.write("</html>")
 	del sys
+
+	if common.triggerrefresh:
+		datei = open(workingdir+"/../bin/refresh", "w")
+		datei.write("1")
+		datei.close()
 
 except Exception as e:
 	common.debug(e)

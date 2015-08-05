@@ -3,7 +3,7 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 22.07.2015 (Version 0.8.4)
+# Beilage zu MonitorNjus, 05.08.2015 (Version 0.9.1)
 
 import sys
 reload(sys)
@@ -30,8 +30,8 @@ def replace_b(body):
 		.replace('<table class="mon_list" >', '--><table class="mon_list" >')\
 		.replace('<font size="3" face="Arial"', '<!--<font size="3" face="Arial"')\
 		.replace("</body>","--></body>")
-	print "Content-Type: text/html\n"
-	sys.stdout.write(end)
+	print u"Content-Type: text/html;charset=utf-8\n"
+	sys.stdout.write(unicode(end))
 
 def replace_h(header):
 	end = header\
@@ -43,8 +43,8 @@ def replace_h(header):
 		.replace('<table class="mon_head">','<!--<table class="mon_head">')\
 		.replace("</body>","--></body>")\
 		.replace('<div class="mon_title">', '--><center><div class="mon_title">')
-	print "Content-Type: text/html\n"
-	sys.stdout.write(end)
+	print u"Content-Type: text/html;charset=utf-8\n"
+	sys.stdout.write(unicode(end))
 
 try:
 	import cgi
@@ -80,4 +80,4 @@ except Exception as e:
 		common = imp.load_source('common', workingdir+"/../common.py")
 		common.debug(e)
 	else:
-		print "Content-Type: text/html\n\n"
+		print u"Content-Type: text/html;charset=utf-8\n"

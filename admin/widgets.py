@@ -3,7 +3,7 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 27.07.2015 (Version 0.9)
+# Beilage zu MonitorNjus, 05.08.2015 (Version 0.9.1)
 
 import sys
 reload(sys)
@@ -175,9 +175,9 @@ def widgets():
 							</div>"""
 		
 		if typ != "Adminlink":																									
-			out += """\
+			out += """
 							<center><a class="waves-effect waves-light btn" href="setn.py?referer=delwidget&delnum="""+unicode(item)+"""\">Widget l&ouml;schen</a></center>"""
-		out += """\
+		out += """
 						</div>
 					</li>\n"""
 	return out
@@ -186,7 +186,9 @@ try:
 	import colors
 	import cgi
 
-	common.authenticated()
+	if common.authentication:
+		auth = imp.load_source("auth", workingdir+"/../auth.py")
+		auth.me()
 
 	print u"Content-Type: text/html\n"
 	print u"""\
