@@ -69,19 +69,23 @@ try:
 	header = int(form.getfirst('header', "0"))
 	body = int(form.getfirst('body', "1"))
 
-	print "Content-Type: text/html;charset=utf-8\n"
+	httpheader = u"Content-Type: text/html;charset=utf-8\n"
 
 	if actday and header:
 		syh = open(path + name_heute, "r")
+		print httpheader
 		print replace_h(syh.read())
 	elif nxtday and header:
 		sym = open(path + name_morgen, "r")
+		print httpheader
 		print replace_h(sym.read())
 	elif actday and body:
 		syh = open(path + name_heute, "r")
+		print httpheader
 		print replace_b(syh.read())
 	elif nxtday and body:
 		sym = open(path + name_morgen, "r")
+		print httpheader
 		print replace_b(sym.read())
 	else:
 		raise Warning("No arguments passed!")
@@ -94,4 +98,4 @@ except Exception as e:
 		common = imp.load_source('common', workingdir+"/../common.py")
 		common.debug(e)
 	else:
-		print u"Content-Type: text/html;charset=utf-8\n"
+		print httpheader
