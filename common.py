@@ -315,11 +315,15 @@ def debug(e):
 	else:
 		anmerkung = False
 
+	notauthenticated = False
+	if "nichts verloren" in trace:
+		notauthenticated = True
+
 	#####################################################
 
-	print(u"""\
-Content-Type: text/html;charset=utf-8
-
+	print("Content-Type: text/html;charset=utf-8\n")
+	
+	print("""\
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -334,7 +338,7 @@ Content-Type: text/html;charset=utf-8
 	#####################################################
 
 	if debugv == 707 and not anmerkung:
-		print(u"""
+		print("""
 	<style>
 	html, body {
 		height: 100%;
@@ -350,7 +354,7 @@ Content-Type: text/html;charset=utf-8
 
 	#####################################################
 
-	print(u"""
+	print("""
 </head>
 <body>
 	<div class="container">""")
@@ -358,11 +362,12 @@ Content-Type: text/html;charset=utf-8
 	#####################################################
 
 	if debugv == 707 and not anmerkung:
-		print(u"""
+		print("""
 		<h3>Oh nein! :(</h3>
 		<h4>Ein hochqualifizierter Techniker arbeitet bereits mit Hochdruck an dem Problem!</h4>""")
 	else:
-		print(u"""
+		if not anmerkung:
+			print("""
 		<h3>Es ist ein Fehler aufgetreten!</h3>""")
 
 	#####################################################
@@ -373,42 +378,48 @@ Content-Type: text/html;charset=utf-8
 
 		if anmerkung:
 			if "No such file or directory" in trace and "subst_" in trace:
-				print(u"<h4>Die Vertretungsdatei existiert nicht...</h4>")
+				print("<h4>Die Vertretungsdatei existiert nicht...</h4>")
 
 			elif "OperationalError" in trace:
-				print(u"""\
+				print("""\
 	<center style="color: #ffffff; background: #a60c0d; border: 2px solid black; margin-top: 3%; padding-bottom: 3%;">
 		<h1>Hier stimmt was nicht!</h1>
 		Manuell an der Datenbank gespielt, was?
 	</center>""")
 
-			elif "Warning" in trace:
-				print(u"""
-		<h4>Warnung: """+unicode(e)+"""</h4>""")
+			elif "Warning" in trace and not notauthenticated:
+				print("""
+		<h3>Warnung: """+unicode(e)+"""</h3>""")
+			elif notauthenticated:
+				print("""
+		<h3>"""+unicode(e)+"""</h3>""")
 
 		#################################################
 
-		print(u"""
-		<h5>Details:</h5>
-		<pre><code>""")
-		print(cgi.escape(trace))
-		print(u"		</code></pre>")
+		if not notauthenticated:
+			print("""
+			<h5>Details:</h5>
+			<pre><code>""")
+			print(cgi.escape(trace))
+			print("		</code></pre>")
 
 	elif debugv == 1:
-		print(u"""
+		print("""
 		<h4>Details:<br><h5>""")
 		print(unicode(e))
-		print(u"	</h5></h4>")
+		print("	</h5></h4>")
 
 	else:
-		print(u"Weitere Informationen über \"debug\" in common.py!</h3><br><br>")
+		print("""Weitere Informationen über "debug" in common.py!</h3><br><br>""")
 
 	#####################################################
 
-	print(u"""
+	if not notauthenticated:
+		print("""
 		<small>Seite wird in 30 Sekunden neu geladen.</small><br>
 		<small>Script: """+scrname+"""</small><br>
-		<small>"""+datum.strftime("%d.%m.%Y %H:%M:%S")+"""</small>
+		<small>"""+datum.strftime("%d.%m.%Y %H:%M:%S")+"""</small>""")
+	print("""\
 	</div>
 </body>
 </html>""")

@@ -102,7 +102,7 @@ try:
 <head>
 	<meta charset="UTF-8">
 	<link href="css/mnews.css" type="text/css" rel="stylesheet" media="screen,projection"/>"""
-	sys.stdout.write(unicode(refresh))
+	print unicode(refresh)
 	print u"""\
 	<title>MonitorNjus</title>
 	<!-- MonitorNjus -->

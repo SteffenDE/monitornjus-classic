@@ -129,7 +129,7 @@ try:
 <head>
 	<meta charset="UTF-8">"""
 	if prrefresh is not None:
-		sys.stdout.write(unicode(prrefresh))
+		print unicode(prrefresh)
 	else:
 		pass
 	print u"""\

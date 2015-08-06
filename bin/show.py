@@ -70,7 +70,7 @@ try:
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
 	<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>"""
-	sys.stdout.write(unicode(refresh))
+	print unicode(refresh)
 	print u"""\
 	<title>MonitorNjus</title>
 	<!-- MonitorNjus -->

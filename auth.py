@@ -8,6 +8,7 @@
 import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
+import os
 
 ############################## Settings ##############################
 
@@ -34,7 +35,7 @@ group = "G_Projekt_MonitorNjus"
 
 ###### Authentifizierungsfunktion ######
 
-def me(Request, Response):
+def me():
 	if groupauth and listauth:
 		raise Exception("listauth und groupauth können (noch) nicht gleichzeitig aktiv sein.")
 	user = os.environ["LOGON_USER"]
