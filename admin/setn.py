@@ -209,21 +209,19 @@ try:
 	else:
 		refresh = ""
 
-	print """\
-Content-Type: text/html\n
+	print u"""\
+Content-Type: text/html;charset=utf-8\n
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">"""
+	<meta charset="UTF-8">"""
 	#for item in form:
 		#print item+": "+form[item].value
-	print refresh
-	print """\
-</head>
-<body>
-</body>"""
+	print "	"+unicode(refresh)
+	print u"""\
+</head>"""
 	import sys
-	sys.stdout.write("</html>")
+	sys.stdout.write(u"</html>")
 	del sys
 
 	if common.triggerrefresh:

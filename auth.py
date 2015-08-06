@@ -34,44 +34,20 @@ group = "G_Projekt_MonitorNjus"
 
 ###### Authentifizierungsfunktion ######
 
-def me():
+def me(Request, Response):
 	if groupauth and listauth:
 		raise Exception("listauth und groupauth können (noch) nicht gleichzeitig aktiv sein.")
-
+	user = os.environ["LOGON_USER"]
 	if listauth:
-		import os
-		user = os.environ["REMOTE_USER"]
 		if user.lower().replace(domain.lower()+"\\", "") in userliste:
 			pass
 		else:
-			print u"Content-Type: text/html;charset=utf-8\n"
-			print """\
-<!DOCTYPE html>
-<html>
-<body>
-<h1>Du (%s) hast hier nichts verloren!</h1>
-</body>
-</html>""" % user
-			exit(0)
-
+			raise Warning("Du, \""+user+"\", hast hier nichts verloren!")
 	elif groupauth:
-		import ad
-		import os
-		user = os.environ["REMOTE_USER"]
+		import imp
+		ad = imp.load_source("ad", workingdir+"/admin/ad.py")
 		aduser = ad.find_user()
 		if group.lower() in unicode(aduser.memberOf).lower() or "administrator" in user.lower():
 			pass
 		else:
-			print u"Content-Type: text/html;charset=utf-8\n"
-			print
-			print """\
-<!DOCTYPE html>
-<html>
-<body>
-<h1>Du (%s) hast hier nichts verloren!</h1>
-</body>
-</html>""" % user
-			exit(0)
-
-	else:
-		pass
+			raise Warning("Du, \""+user+"\", hast hier nichts verloren!")

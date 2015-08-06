@@ -105,8 +105,6 @@ def delrow(Nummer):
 	elif Nummer == rows:
 		conn.execute("DELETE FROM DISPLAYSETS where NUMMER=?", [unicode(Nummer)]);
 		conn.commit()
-	else:
-		pass
 
 def writesettings(NAME, VAL):
 	conn.execute("DELETE FROM SETTINGS where NAME=?", [unicode(NAME)]);
@@ -154,8 +152,6 @@ def removewidget(ID):
 	elif ID == anz:
 		conn.execute("DELETE FROM WIDGETS where ID = ?", [unicode(ID)]);
 		conn.commit()
-	else:
-		pass
 
 ######################### other functions #########################
 
@@ -202,8 +198,6 @@ Content-Type: text/html
 </body>
 </html>"""
 		exit(0)
-	else:
-		pass
 
 ######################### checkvalues #########################
 
@@ -273,8 +267,6 @@ def valign(widgname, ID, typ):												# Wichtig für die Dropdown Auswahl de
 												<option value="left">left</option>
 												<option value="center">center</option>
 												<option value="right">right</option>"""
-	else:
-		pass
 
 def getdate(value, Seite, Nummer):											# Splittet die Daten in der Datenbank mit Anordnung nach (*|*|*|*)
 	timespan = getinfo("VONBIS", Seite, Nummer).split("|")					# in einzelne Werte für Uhrzeit, Wochentag, usw auf, um im Interface
@@ -333,7 +325,11 @@ Content-Type: text/html;charset=utf-8
 <head>
 	<meta charset="UTF-8">
 	<link href=\""""+css+"""\" type="text/css" rel="stylesheet" media="screen,projection"/>
-	<meta http-equiv="refresh" content="30">""")
+	<meta http-equiv="refresh" content="30">
+	<title>debug</title>
+	<!-- MonitorNjus -->
+	<!-- Copyright (c) """+unicode(datum.year)+""" Steffen Deusch -->
+	<!-- https://github.com/SteffenDE/MonitorNjus -->""")
 
 	#####################################################
 

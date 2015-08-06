@@ -100,11 +100,14 @@ try:
 <!DOCTYPE html>
 <html style="overflow: hidden;" lang="de">
 <head>
-	<title>MonitorNjus</title>
 	<meta charset="UTF-8">
 	<link href="css/mnews.css" type="text/css" rel="stylesheet" media="screen,projection"/>"""
 	sys.stdout.write(unicode(refresh))
 	print u"""\
+	<title>MonitorNjus</title>
+	<!-- MonitorNjus -->
+	<!-- Copyright (c) """+unicode(common.datum.year)+""" Steffen Deusch -->
+	<!-- https://github.com/SteffenDE/MonitorNjus -->
 </head>
 <body>
 	<iframe src="show.py" style="z-index: -1000; position:absolute; height:100%; width:100%; top: 0px; right:0px; border-style:none; overflow:hidden" scrolling="no"></iframe>"""

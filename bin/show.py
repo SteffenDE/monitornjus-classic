@@ -15,7 +15,6 @@ try:
 	checktime = imp.load_source('checktime', workingdir+"/../admin/checktime.py")
 
 	rows = common.getrows()
-
 	teilung = int(common.readsettings("TEILUNG"))
 
 	timeL = False
@@ -39,22 +38,22 @@ try:
 
 	if geteilt:
 		disp = u"""\
-	<frameset frameborder="0" rows="*,0">
-		<frameset frameborder="0" cols="""+str(teilung)+""","""+str(100-teilung)+""">
-			<frame scrolling="no" src="contentset.py?seite=1" name="links" />
-			<frame scrolling="no" src="contentset.py?seite=2" name="rechts" />
-		</frameset> 
-	</frameset>"""
+<frameset frameborder="0" rows="*,0">
+	<frameset frameborder="0" cols="""+str(teilung)+""","""+str(100-teilung)+""">
+		<frame scrolling="no" src="contentset.py?seite=1" name="links" />
+		<frame scrolling="no" src="contentset.py?seite=2" name="rechts" />
+	</frameset> 
+</frameset>"""
 	elif (linksgeteilt and not rechtsgeteilt and timeL) or (linksgeteilt and rechtsgeteilt and timeL and not timeR):
 		disp = u"""\
-	<frameset frameborder="0" rows="*,0">
-		<frame scrolling="no" src="contentset.py?seite=1" name="links" />
-	</frameset>"""
+<frameset frameborder="0" rows="*,0">
+	<frame scrolling="no" src="contentset.py?seite=1" name="links" />
+</frameset>"""
 	elif (rechtsgeteilt and not linksgeteilt and timeR) or (rechtsgeteilt and linksgeteilt and timeR and not timeL):
 		disp = u"""\
-	<frameset frameborder="0" rows="*,0">
-		<frame scrolling="no" src="contentset.py?seite=2" name="rechts" />
-	</frameset>"""
+<frameset frameborder="0" rows="*,0">
+	<frame scrolling="no" src="contentset.py?seite=2" name="rechts" />
+</frameset>"""
 	else:
 		raise Warning("Keine Seite aktiv")
 
@@ -74,6 +73,9 @@ try:
 	sys.stdout.write(unicode(refresh))
 	print u"""\
 	<title>MonitorNjus</title>
+	<!-- MonitorNjus -->
+	<!-- Copyright (c) """+unicode(common.datum.year)+""" Steffen Deusch -->
+	<!-- https://github.com/SteffenDE/MonitorNjus -->
 </head>"""
 	####     # = debug     ####
 	#print timeL

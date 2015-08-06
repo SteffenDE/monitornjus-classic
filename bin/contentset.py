@@ -132,8 +132,11 @@ try:
 		sys.stdout.write(unicode(prrefresh))
 	else:
 		pass
-	print u"\
-	<title>MonitorNjus</title>"
+	print u"""\
+	<title>MonitorNjus</title>
+	<!-- MonitorNjus -->
+	<!-- Copyright (c) """+unicode(common.datum.year)+""" Steffen Deusch -->
+	<!-- https://github.com/SteffenDE/MonitorNjus -->"""
 	if typ == "video":
 		style = """\
 	.videocontainer 
@@ -176,10 +179,10 @@ try:
 		animation-fill-mode:forwards;
 	}
 	.fadeIn-animation {
-		-webkit-animation-duration:"""+str(fadeinzeit)+"""s;
-		-moz-animation-duration:"""+str(fadeinzeit)+"""s;
-		-o-animation-duration:"""+str(fadeinzeit)+"""s;
-		animation-duration:"""+str(fadeinzeit)+"""s;
+		-webkit-animation-duration:"""+unicode(fadeinzeit)+"""s;
+		-moz-animation-duration:"""+unicode(fadeinzeit)+"""s;
+		-o-animation-duration:"""+unicode(fadeinzeit)+"""s;
+		animation-duration:"""+unicode(fadeinzeit)+"""s;
 	}
 	@-webkit-keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 	@-moz-keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
