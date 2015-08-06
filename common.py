@@ -184,7 +184,7 @@ def isfirstrun():
 	read_firstrun = rfr.read()
 	rfr.close()
 	if int(read_firstrun) == 1:
-		print """\
+		print u"""\
 Content-Type: text/html
 
 <!DOCTYPE html>
@@ -323,7 +323,7 @@ def debug(e):
 
 	print("Content-Type: text/html;charset=utf-8\n")
 	
-	print("""\
+	print(u"""\
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -338,7 +338,7 @@ def debug(e):
 	#####################################################
 
 	if debugv == 707 and not anmerkung:
-		print("""
+		print(u"""
 	<style>
 	html, body {
 		height: 100%;
@@ -354,7 +354,7 @@ def debug(e):
 
 	#####################################################
 
-	print("""
+	print(u"""
 </head>
 <body>
 	<div class="container">""")
@@ -362,12 +362,12 @@ def debug(e):
 	#####################################################
 
 	if debugv == 707 and not anmerkung:
-		print("""
+		print(u"""
 		<h3>Oh nein! :(</h3>
 		<h4>Ein hochqualifizierter Techniker arbeitet bereits mit Hochdruck an dem Problem!</h4>""")
 	else:
 		if not anmerkung:
-			print("""
+			print(u"""
 		<h3>Es ist ein Fehler aufgetreten!</h3>""")
 
 	#####################################################
@@ -381,45 +381,45 @@ def debug(e):
 				print("<h4>Die Vertretungsdatei existiert nicht...</h4>")
 
 			elif "OperationalError" in trace:
-				print("""\
+				print(u"""\
 	<center style="color: #ffffff; background: #a60c0d; border: 2px solid black; margin-top: 3%; padding-bottom: 3%;">
 		<h1>Hier stimmt was nicht!</h1>
 		Manuell an der Datenbank gespielt, was?
 	</center>""")
 
 			elif "Warning" in trace and not notauthenticated:
-				print("""
+				print(u"""
 		<h3>Warnung: """+unicode(e)+"""</h3>""")
 			elif notauthenticated:
-				print("""
+				print(u"""
 		<h3>"""+unicode(e)+"""</h3>""")
 
 		#################################################
 
 		if not notauthenticated:
-			print("""
+			print(u"""
 			<h5>Details:</h5>
 			<pre><code>""")
 			print(cgi.escape(trace))
 			print("		</code></pre>")
 
 	elif debugv == 1:
-		print("""
+		print(u"""
 		<h4>Details:<br><h5>""")
 		print(unicode(e))
 		print("	</h5></h4>")
 
 	else:
-		print("""Weitere Informationen über "debug" in common.py!</h3><br><br>""")
+		print(u"""Weitere Informationen über "debug" in common.py!</h3><br><br>""")
 
 	#####################################################
 
 	if not notauthenticated:
-		print("""
+		print(u"""
 		<small>Seite wird in 30 Sekunden neu geladen.</small><br>
 		<small>Script: """+scrname+"""</small><br>
 		<small>"""+datum.strftime("%d.%m.%Y %H:%M:%S")+"""</small>""")
-	print("""\
+	print(u"""\
 	</div>
 </body>
 </html>""")
