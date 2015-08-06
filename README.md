@@ -1,6 +1,10 @@
 # monitornjus
 ## What is MonitorNjus?
-Python application written for displaying various pages time-based or static on a monitor in a intranet (e.g. in a school with the paedML Musterlösung).
+Python  CGI application written for displaying various pages time-based or static on a monitor in the intranet (e.g. in a school).
+
+## Alternative Versions:
+[mod_python](https://files.steffend.de/monitornjus/0.9.1/momp.zip)
+[Classic-ASP](https://files.steffend.de/monitornjus/0.9.1/moasp.zip)
 
 ## example
 http://monitornjus.steffend.de
