@@ -9,6 +9,7 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 import os
+workingdir = os.path.dirname(os.path.realpath(__file__))
 
 ############################## Settings ##############################
 
