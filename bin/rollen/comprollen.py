@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 # Copyright (c) 2015 Steffen Deusch
-# Beilage zu MonitorNjus, 05.08.2015 (Version 0.9.1)
+# Beilage zu MonitorNjus, 09.08.2015 (Version 0.9.2)
 
 try:
 	import cgi
