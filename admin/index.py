@@ -17,7 +17,6 @@ common = imp.load_source('common', workingdir+"/../common.py")
 
 try:
 	import colors
-	import firstrun
 
 	if common.authentication:
 		auth = imp.load_source("auth", workingdir+"/../auth.py")

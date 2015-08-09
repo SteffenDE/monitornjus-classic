@@ -3,7 +3,7 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 05.08.2015 (Version 0.9.1)
+# Beilage zu MonitorNjus, 09.08.2015 (Version 0.9.2)
 
 import os
 import sys
@@ -122,7 +122,7 @@ try:
 				if (event.data == "reload") {
 					var meta = document.createElement('meta');
 					meta.httpEquiv = "refresh";
-					meta.content = "5";
+					meta.content = "2";
 					document.getElementsByTagName('head')[0].appendChild(meta);
 				}
 			};

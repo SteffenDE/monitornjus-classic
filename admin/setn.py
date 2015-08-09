@@ -3,7 +3,7 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 27.07.2015 (Version 0.9)
+# Beilage zu MonitorNjus, 09.08.2015 (Version 0.9.2)
 
 import sys
 reload(sys)
@@ -225,9 +225,7 @@ Content-Type: text/html;charset=utf-8\n
 	del sys
 
 	if common.triggerrefresh:
-		datei = open(workingdir+"/../bin/refresh", "w")
-		datei.write("1")
-		datei.close()
+		common.writesettings("REFRESH", "1")
 
 except Exception as e:
 	common.debug(e)

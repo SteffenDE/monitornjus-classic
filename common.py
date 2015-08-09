@@ -3,25 +3,23 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 05.08.2015 (Version 0.9.1)
+# Beilage zu MonitorNjus, 09.08.2015 (Version 0.9.2)
 
 import os
+import os.path
 import datetime
 import sqlite3
 
 datum = datetime.datetime.now()
-version = "0.9.1&beta;"
+version = "0.9.2&beta;"
 workingdir = os.path.dirname(os.path.realpath(__file__))
+dbpath = workingdir+'/admin/MonitorNjus.db'
 
 ############################## Settings ##############################
 
 debugv = 2				# Verbosity: 0,1,2 (0 = off, 1 = basic, 2 = mit Anmerkungen, 3 = Traceback, 707 = Easter Egg)
 triggerrefresh = False	# Client checks for updates every few seconds (may cause high cpu usage when the server is slow)
 authentication = False	# Settings inside auth.py
-
-######################################################################
-
-conn = sqlite3.connect(workingdir+'/admin/MonitorNjus.db')
 
 ######################### basics #########################
 
@@ -74,16 +72,71 @@ def getallrows():
 
 ######################### firstrun #########################
 
-def write(Seite, Nummer, URL, Aktiv, Refreshaktiv, Refresh, vonbis, marginleft, marginright, margintop, marginbottom):
+def write(Seite, Nummer, URL, Aktiv, Refreshaktiv, Refresh, vonbis, marginleft, marginright, margintop, marginbottom, connt=False):
+	if connt:
+		conn = connt
+	else:
+		global conn
 	conn.execute("DELETE FROM DISPLAYSETS where SEITE=\'"+Seite+"\' AND NUMMER="+unicode(Nummer)+";");
 	conn.execute("INSERT INTO DISPLAYSETS (SEITE,NUMMER,URL,AKTIV,REFRESHAKTIV,REFRESH,VONBIS,MARGINLEFT,MARGINRIGHT,MARGINTOP,MARGINBOTTOM) values (?,?,?,?,?,?,?,?,?,?,?)", \
 	[unicode(Seite), unicode(Nummer), unicode(URL), unicode(Aktiv), unicode(Refreshaktiv), unicode(Refresh), unicode(vonbis), unicode(marginleft), unicode(marginright), unicode(margintop), unicode(marginbottom)]);
 	conn.commit()
 
-def newwidget(ID, NAME, TYP, AKTIV, URLw, valign, align, vmargin, margin, width, height):
+def newwidget(ID, NAME, TYP, AKTIV, URLw, valign, align, vmargin, margin, width, height, connt=False):
+	if connt:
+		conn = connt
+	else:
+		global conn
 	conn.execute("DELETE FROM WIDGETS WHERE ID=?", [unicode(ID)]);
 	conn.execute("INSERT INTO WIDGETS (ID,NAME,TYP,AKTIV,URL,valign,align,vmargin,margin,width,height) values ("+str(ID)+",\'"+NAME+"\',\'"+TYP+"\',"+unicode(AKTIV)+",\'"+URLw+"\',\'"+valign+"\',\'"+unicode(align)+"\',\'"+vmargin+"\',\'"+unicode(margin)+"\',\'"+unicode(width)+"\',\'"+unicode(height)+"\')");
 	conn.commit()
+
+def firstrun():
+	connt = sqlite3.connect(dbpath, check_same_thread=False)
+	connt.execute('''CREATE TABLE DISPLAYSETS
+		(ID INT PRIMARY KEY,
+			SEITE			TEXT,
+			NUMMER			INT,
+			URL				TEXT,
+			AKTIV			INT,
+			REFRESH 		INT,
+			REFRESHAKTIV 	INT,
+			VONBIS			TEXT,
+			MARGINLEFT		TEXT,
+			MARGINRIGHT		TEXT,
+			MARGINTOP		TEXT,
+			MARGINBOTTOM	TEXT);''')
+	connt.execute('''CREATE TABLE WIDGETS
+		(ID INT PRIMARY KEY,
+			NAME			TEXT,
+			TYP				TEXT,
+			AKTIV			INT,
+			URL				TEXT,
+			valign			TEXT,
+			align			TEXT,
+			vmargin 		TEXT,
+			margin			TEXT,
+			width			TEXT,
+			height			TEXT);''')
+	connt.execute('''CREATE TABLE SETTINGS
+		(ID INT PRIMARY KEY,
+			NAME			TEXT,
+			VALUE			TEXT);''')
+
+	write("Links", 1, "placeholder.html", 1, 1, 60, "*|*|*|*", "0px", "0px", "0px", "0px", connt)
+	write("Rechts", 1, "placeholder.html", 1, 1, 60, "*|*|*|*", "0px", "0px", "0px", "0px", connt)
+	write("globalmon", 0, "placeholder.html", 1, 0, 600, "*|*|*|*", "0px", "0px", "0px", "0px", connt)
+	write("global", 0, "placeholder.html", 1, 0, 300, "*|*|*|*", "0px", "0px", "0px", "0px", connt)
+
+	writesettings("TEILUNG", "50", connt)
+	writesettings("REFRESH", "0", connt)
+
+	newwidget(1, "Adminlink", "Adminlink", 1, "placeholder", "bottom", "0px", "center", "0px", "0", "0", connt)
+	newwidget(2, "Logo", "Logo", 0, "placeholder", "bottom", "0px", "left", "0px", "100%", "100%", connt)
+	newwidget(3, "Freies_Widget", "Freies_Widget", 0, """<iframe name="flipe" scrolling="no" src="http://www.daswetter.com/getwid/ef3e15e299d279eec78fbfc75d5190f6" id="ef3e15e299d279eec78fbfc75d5190f6" style="width: 250px; color: rgb(128, 128, 128); height: 142px;" frameborder="0"></iframe>""", "bottom", "-90px", "right", "145px", "100px", "200px", connt)
+
+	connt.commit()
+	connt.close()
 
 ######################### Displaysets #########################
 
@@ -106,7 +159,11 @@ def delrow(Nummer):
 		conn.execute("DELETE FROM DISPLAYSETS where NUMMER=?", [unicode(Nummer)]);
 		conn.commit()
 
-def writesettings(NAME, VAL):
+def writesettings(NAME, VAL, connt=False):
+	if connt:
+		conn = connt
+	else:
+		global conn
 	conn.execute("DELETE FROM SETTINGS where NAME=?", [unicode(NAME)]);
 	conn.execute("INSERT INTO SETTINGS (NAME,VALUE) values (\'"+NAME+"\',\'"+VAL+"\');");
 	conn.commit()
@@ -176,28 +233,6 @@ def addpx(string):
 		return unicode(string)
 	else:
 		return unicode(string)+"px"
-
-def isfirstrun():
-	import os
-	workingdir = os.path.dirname(os.path.realpath(__file__))
-	rfr = open(workingdir+"/admin/firstrun", "r")
-	read_firstrun = rfr.read()
-	rfr.close()
-	if int(read_firstrun) == 1:
-		print u"""\
-Content-Type: text/html
-
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="UTF-8">
-	<title>Redirecting...</title>
-	<meta http-equiv="refresh" content="0;url=../admin/index.py">
-</head>
-<body>
-</body>
-</html>"""
-		exit(0)
 
 ######################### checkvalues #########################
 
@@ -292,9 +327,6 @@ def debug(e):
 	trace = traceback.format_exc()
 
 	#####################################################
-
-	if "bin/index.py" in scrname:
-		isfirstrun()
 
 	if "admin" in scrname:
 		css = "../bin/css/materialize.css"
@@ -424,3 +456,7 @@ def debug(e):
 </body>
 </html>""")
 	exit(1)
+
+if not os.path.exists(dbpath):
+	firstrun()
+conn = sqlite3.connect(dbpath, check_same_thread=False)
