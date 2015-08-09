@@ -225,7 +225,9 @@ Content-Type: text/html;charset=utf-8\n
 	del sys
 
 	if common.triggerrefresh:
-		common.writesettings("REFRESH", "1")
+		datei = open(workingdir+"/../bin/refresh", "w")
+		datei.write("1")
+		datei.close()
 
 except Exception as e:
 	common.debug(e)

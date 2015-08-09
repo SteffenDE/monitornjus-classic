@@ -18,7 +18,7 @@ dbpath = workingdir+'/admin/MonitorNjus.db'
 ############################## Settings ##############################
 
 debugv = 2				# Verbosity: 0,1,2 (0 = off, 1 = basic, 2 = mit Anmerkungen, 3 = Traceback, 707 = Easter Egg)
-triggerrefresh = False	# Client checks for updates every few seconds (may cause high cpu usage when the server is slow)
+triggerrefresh = True	# Client checks for updates every few seconds (may cause high cpu usage when the server is slow)
 authentication = False	# Settings inside auth.py
 
 ######################### basics #########################
@@ -129,7 +129,6 @@ def firstrun():
 	write("global", 0, "placeholder.html", 1, 0, 300, "*|*|*|*", "0px", "0px", "0px", "0px", connt)
 
 	writesettings("TEILUNG", "50", connt)
-	writesettings("REFRESH", "0", connt)
 
 	newwidget(1, "Adminlink", "Adminlink", 1, "placeholder", "bottom", "0px", "center", "0px", "0", "0", connt)
 	newwidget(2, "Logo", "Logo", 0, "placeholder", "bottom", "0px", "left", "0px", "100%", "100%", connt)

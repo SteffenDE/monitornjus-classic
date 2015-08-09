@@ -102,29 +102,11 @@ try:
 	function resizeIframe(obj) {
 		obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
 	}
-	var framefenster = document.getElementsByTagName("iFrame");
-	var auto_resize_timer = window.setInterval("autoresize_frames()", 400);
-	function autoresize_frames()
-		{
-		for (var i = 0; i < framefenster.length; ++i)
-			{
-			if(framefenster[i].contentWindow.document.body)
-				{
-				var framefenster_size = framefenster[i].contentWindow.document.body.offsetHeight;
-				if(document.all && !window.opera)
-					{
-					framefenster_size = framefenster[i].contentWindow.document.body.scrollHeight;
-					}
-				framefenster[i].style.height = framefenster_size + 'px';
-				framefenster_size = framefenster[i].contentWindow.document.body.scrollHeight;
-				}
-			}
-		}
 	</script>
 </head>
-<body onload="autoresize_frames()" class=\"fadeIn fadeIn-animation\">
+<body class=\"fadeIn fadeIn-animation\">
 	<script type="text/javascript">
-	var frame = '<iframe src=\""""+unicode(url)+"""\" style="width:100%; height:100%;" frameborder="0" name="links" scrolling="no"></iframe>'
+	var frame = '<iframe src=\""""+unicode(url)+"""\" style="width:100%; height:100%;" frameborder="0" name="links" scrolling="no" onload="javascript:resizeIframe(this);"></iframe>'
 	var strDir      ='"""+unicode(direction)+"""';
 	var Interval = """+unicode(speed)+""";
 	var intRepeat   = 2;

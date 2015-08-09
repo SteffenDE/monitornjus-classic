@@ -19,13 +19,17 @@ workingdir = os.path.dirname(os.path.realpath(__file__))
 common = imp.load_source("common", workingdir+"/../common.py")
 
 while True:
-	content = int(common.readsettings("REFRESH"))
+	datei = open(workingdir+'/refresh', 'r')
+	content = datei.read()
+	datei.close()
 
 	if int(content) == 1:
 		print(u"data: reload\n\n")
 		sys.stdout.flush()
 		time.sleep(4)
-		common.writesettings("REFRESH", "0")
+		datei = open(workingdir+"/refresh", "w")
+		datei.write("0")
+		datei.close()
 	else:
 		print(u"data: none\n\n")
 		sys.stdout.flush()
