@@ -73,20 +73,18 @@ def getallrows():
 ######################### firstrun #########################
 
 def write(Seite, Nummer, URL, Aktiv, Refreshaktiv, Refresh, vonbis, marginleft, marginright, margintop, marginbottom, connt=False):
+	global conn
 	if connt:
 		conn = connt
-	else:
-		global conn
 	conn.execute("DELETE FROM DISPLAYSETS where SEITE=\'"+Seite+"\' AND NUMMER="+unicode(Nummer)+";");
 	conn.execute("INSERT INTO DISPLAYSETS (SEITE,NUMMER,URL,AKTIV,REFRESHAKTIV,REFRESH,VONBIS,MARGINLEFT,MARGINRIGHT,MARGINTOP,MARGINBOTTOM) values (?,?,?,?,?,?,?,?,?,?,?)", \
 	[unicode(Seite), unicode(Nummer), unicode(URL), unicode(Aktiv), unicode(Refreshaktiv), unicode(Refresh), unicode(vonbis), unicode(marginleft), unicode(marginright), unicode(margintop), unicode(marginbottom)]);
 	conn.commit()
 
 def newwidget(ID, NAME, TYP, AKTIV, URLw, valign, align, vmargin, margin, width, height, connt=False):
+	global conn
 	if connt:
 		conn = connt
-	else:
-		global conn
 	conn.execute("DELETE FROM WIDGETS WHERE ID=?", [unicode(ID)]);
 	conn.execute("INSERT INTO WIDGETS (ID,NAME,TYP,AKTIV,URL,valign,align,vmargin,margin,width,height) values ("+str(ID)+",\'"+NAME+"\',\'"+TYP+"\',"+unicode(AKTIV)+",\'"+URLw+"\',\'"+valign+"\',\'"+unicode(align)+"\',\'"+vmargin+"\',\'"+unicode(margin)+"\',\'"+unicode(width)+"\',\'"+unicode(height)+"\')");
 	conn.commit()
@@ -125,8 +123,8 @@ def firstrun():
 
 	write("Links", 1, "placeholder.html", 1, 1, 60, "*|*|*|*", "0px", "0px", "0px", "0px", connt)
 	write("Rechts", 1, "placeholder.html", 1, 1, 60, "*|*|*|*", "0px", "0px", "0px", "0px", connt)
-	write("globalmon", 0, "placeholder.html", 1, 0, 600, "*|*|*|*", "0px", "0px", "0px", "0px", connt)
-	write("global", 0, "placeholder.html", 1, 0, 300, "*|*|*|*", "0px", "0px", "0px", "0px", connt)
+	write("globalmon", 0, "placeholder.html", 1, 1, 3600, "*|*|*|*", "0px", "0px", "0px", "0px", connt)
+	write("global", 0, "placeholder.html", 1, 1, 1800, "*|*|*|*", "0px", "0px", "0px", "0px", connt)
 
 	writesettings("TEILUNG", "50", connt)
 
@@ -140,8 +138,8 @@ def firstrun():
 ######################### Displaysets #########################
 
 def createrow(Nummer):
-	write("Links", Nummer, "placeholder.html", 1, 1, 60, "*|*|*|*", "0px", "0px", "0px", "0px")
-	write("Rechts", Nummer, "placeholder.html", 1, 1, 60, "*|*|*|*", "0px", "0px", "0px", "0px")
+	write("Links", Nummer, "placeholder.html", 0, 1, 60, "*|*|*|*", "0px", "0px", "0px", "0px")
+	write("Rechts", Nummer, "placeholder.html", 0, 1, 60, "*|*|*|*", "0px", "0px", "0px", "0px")
 
 def delrow(Nummer):
 	rows = getrows()
@@ -159,10 +157,9 @@ def delrow(Nummer):
 		conn.commit()
 
 def writesettings(NAME, VAL, connt=False):
+	global conn
 	if connt:
 		conn = connt
-	else:
-		global conn
 	conn.execute("DELETE FROM SETTINGS where NAME=?", [unicode(NAME)]);
 	conn.execute("INSERT INTO SETTINGS (NAME,VALUE) values (\'"+NAME+"\',\'"+VAL+"\');");
 	conn.commit()
