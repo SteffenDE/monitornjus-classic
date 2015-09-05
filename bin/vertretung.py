@@ -29,6 +29,7 @@ def replace_b(body):
 		.replace('<table class="mon_head">','<!--<table class="mon_head">')\
 		.replace('<table class="mon_list" >', '--><table class="mon_list" >')\
 		.replace('<p>\r\n<font size="3" face="Arial"', '<!--<font size="3" face="Arial"')\
+		.replace('<font size="3" face="Arial"','<!--<font size="3" face="Arial"')\
 		.replace("</body>","--></body>")\
 		.replace("iso-8859-1","utf-8")
 	if '<th class="list" align="center">(Lehrer)</th>' in body:
