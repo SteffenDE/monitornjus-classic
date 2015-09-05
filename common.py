@@ -420,7 +420,8 @@ def debug(e):
 		<h3>Warnung: """+unicode(e)+"""</h3>""")
 			elif notauthenticated:
 				print(u"""
-		<h3>"""+unicode(e)+"""</h3>""")
+		<h3>"""+unicode(e)+"""</h3>
+		<meta http-equiv="refresh" content="5;url=../bin">\n""")
 
 		#################################################
 

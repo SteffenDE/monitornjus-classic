@@ -248,7 +248,7 @@ try:
 						<button class="btn waves-effect waves-light" type="submit">Abschicken<i class="mdi-content-send right"></i></button>"""
 	if common.triggerrefresh:
 		print u"""\
-						<a class="waves-effect waves-light btn right" href="setn.py?referer=triggerrefresh">Neuladen auslösen</a>"""
+						<a class="waves-effect waves-light btn right" href="setn.py?referer=triggerrefresh">Neuladen ausl&ouml;sen</a>"""
 	print u"""\
 					</div>
 				</div>
