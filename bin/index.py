@@ -98,15 +98,15 @@ try:
 	else:
 		refresh = ""
 
-	print u"Content-Type: text/html;charset=utf-8\n"
-	print u"""\
+	out = u"Content-Type: text/html;charset=utf-8\n"
+	out += u"""
 <!DOCTYPE html>
 <html style="overflow: hidden;" lang="de">
 <head>
 	<meta charset="UTF-8">
 	<link href="css/mnews.css" type="text/css" rel="stylesheet" media="screen,projection"/>"""
-	print unicode(refresh)
-	print u"""\
+	out += unicode(refresh)
+	out += u"""
 	<title>MonitorNjus</title>
 	<!-- MonitorNjus -->
 	<!-- Copyright (c) """+unicode(common.datum.year)+""" Steffen Deusch -->
@@ -114,9 +114,9 @@ try:
 </head>
 <body>
 	<iframe src="show.py" style="z-index: -1000; position:absolute; height:100%; width:100%; top: 0px; right:0px; border-style:none; overflow:hidden" scrolling="no"></iframe>"""
-	sys.stdout.write(unicode(widgets()))
+	out += unicode(widgets())
 	if common.triggerrefresh:
-		print u"""\
+		out += u"""
 	<script>
 	setTimeout(function() {
 		if(typeof(EventSource) !== "undefined") {
@@ -133,8 +133,12 @@ try:
 	}, 3000);
 	</script>"""
 
-	print u"</body>"
-	sys.stdout.write(unicode("</html>"))
+	out += u"""
+</body>
+</html>"""
+	
+	########### Ausgabe ###########
+	print unicode(out)
 
 except Exception as e:
 	common.debug(e)

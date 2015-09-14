@@ -110,7 +110,7 @@ try:
 	#import cgitb; cgitb.enable()
 	
 	if common.authentication:
-		from modules import auth
+		auth = imp.load_source("auth", modulesdir+"/auth.py")
 		auth.me()
 
 	form = cgi.FieldStorage()

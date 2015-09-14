@@ -149,6 +149,7 @@ try:
 	else:
 		raise Exception("Falscher oder fehlender Queryparameter: type")
 
+	########### Ausgabe ###########
 	print unicode(out)
 
 except Exception as e:

@@ -16,7 +16,6 @@ common = imp.load_source("common", modulesdir+"/common.py")
 checktime = imp.load_source("checktime", modulesdir+"/checktime.py")
 getytid = imp.load_source("getytid", modulesdir+"/getytid.py")
 import cgi
-#import cgitb; cgitb.enable()
 
 try:
 
@@ -212,7 +211,8 @@ try:
 	out += """
 </body>
 </html>"""
-
+	
+	########### Ausgabe ###########
 	print unicode(out)
 
 except Exception as e:

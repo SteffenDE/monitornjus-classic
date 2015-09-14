@@ -186,11 +186,12 @@ def widgets():
 
 try:
 	if common.authentication:
-		from modules import auth
+		auth = imp.load_source("auth", modulesdir+"/auth.py")
 		auth.me()
 
-	print u"Content-Type: text/html\n"
-	print u"""\
+	out = u"""\
+Content-Type: text/html;charset=utf-8
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -200,9 +201,9 @@ try:
 	<title>MonitorNjus Admin-Panel Widgets</title>
 	<!-- MonitorNjus -->
 	<!-- Copyright (c) """+unicode(common.datum.year)+""" Steffen Deusch -->
-	<!-- https://github.com/SteffenDE/MonitorNjus -->"""
-	print colors.adminstyles
-	print u"""\
+	<!-- https://github.com/SteffenDE/MonitorNjus -->\n"""
+	out += unicode(colors.adminstyles)
+	out += u"""
 </head>
 <body>
 	<script type="text/javascript" src="../bin/js/jquery-2.1.4.min.js"></script>
@@ -229,9 +230,9 @@ try:
 			<div class="col s6">
 				<form class="col s12" action="setn.py" method="post">
 					<input type="hidden" name="referer" value="widgets" />
-					<ul class="collapsible" data-collapsible="accordion">"""
-	print widgets()
-	print u"""\
+					<ul class="collapsible" data-collapsible="accordion">\n"""
+	out += unicode(widgets())
+	out += u"""\
 					</ul>
 					<button class="btn waves-effect waves-light" type="submit">Abschicken<i class="mdi-content-send right"></i></button>
 				</form>
@@ -243,7 +244,7 @@ try:
 							<input type="hidden" name="referer" value="newwidget" />
 							<div class="input-field col s12">
 								<select name="art">
-									<option value="" disabled selected>Widgetart wählen</option>
+									<option value="" disabled selected>Widgetart w&auml;hlen</option>
 									<option value="Logo">Logo</option>
 									<option value="Freies_Widget">Freies Widget</option>
 								</select>
@@ -251,7 +252,7 @@ try:
 							</div>
 						</div>
 					</div>
-					<button class="btn waves-effect waves-light" type="submit">Widget hinzufügen.</button>
+					<button class="btn waves-effect waves-light" type="submit">Widget hinzuf&uuml;gen.</button>
 				</form>
 			</div>
 		</div>
@@ -266,7 +267,7 @@ try:
 		</div>
 		<div class="footer-copyright">
 			<div class="container">
-				&copy; Steffen Deusch """+str(common.datum.year)+"""
+				&copy; Steffen Deusch """+unicode(common.datum.year)+"""
 				<a class="grey-text text-lighten-4 right" href="https://github.com/SteffenDE/monitornjus">"""+common.version+"""</a>
 			</div>
 		</div>
@@ -274,10 +275,11 @@ try:
 </footer>
 <!--  Scripts-->
 <script src="../bin/js/init.js"></script>
-</body>"""
-	import sys
-	sys.stdout.write(u"</html>")
-	del sys
+</body>
+</html>"""
+
+	########### Ausgabe ###########
+	print unicode(out)
 
 except Exception as e:
 	common.debug(e)

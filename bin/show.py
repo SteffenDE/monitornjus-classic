@@ -64,16 +64,16 @@ try:
 	else:
 		refresh = u""
 
-	print u"Content-Type: text/html;charset=utf-8\n"
-	print u"""\
+	out = u"Content-Type: text/html;charset=utf-8\n"
+	out += u"""
 <!DOCTYPE html>
 <html lang="de">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
 	<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>"""
-	print unicode(refresh)
-	print u"""\
+	out += unicode(refresh)
+	out += u"""
 	<title>MonitorNjus</title>
 	<!-- MonitorNjus -->
 	<!-- Copyright (c) """+unicode(common.datum.year)+""" Steffen Deusch -->
@@ -83,8 +83,12 @@ try:
 	#print timeL
 	#print timeR
 	#print geteilt
-	print unicode(disp)
-	sys.stdout.write(u"</html>")
+	out += unicode(disp)
+	out += """
+</html>"""
+	
+	########### Ausgabe ###########
+	print unicode(out)
 
 except Exception as e:
 	common.debug(e)

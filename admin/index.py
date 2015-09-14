@@ -18,7 +18,7 @@ colors = imp.load_source("colors", modulesdir+"/colors.py")
 
 try:
 	if common.authentication:
-		from modules import auth
+		auth = imp.load_source("auth", modulesdir+"/auth.py")
 		auth.me()
 
 	rows = int(common.getrows())
@@ -26,9 +26,10 @@ try:
 
 	def displaysets():
 		x = 1
+		out = ""
 		while x <= rows:
 			if unicode(x) in common.getallrows():
-				print u"""\
+				out += u"""\
 					<div class="col s12">
 						<h5 class="header center """+colors.color+"""-text">Displayset """+unicode(x)+"""</h5>
 						<div class="row">
@@ -153,16 +154,18 @@ try:
 										</div>
 									</div>
 								</div>
-							</div>"""
+							</div>\n"""
 				if rows != 1:
-					print u"""<center><a class="waves-effect waves-light btn" href="setn.py?referer=row&delnum="""+unicode(x)+"""\">Displayset l&ouml;schen</a></center>"""
-				print u"""\
+					out += u"""<center><a class="waves-effect waves-light btn" href="setn.py?referer=row&delnum="""+unicode(x)+"""\">Displayset l&ouml;schen</a></center>\n"""
+				out += u"""\
 						</div>
-					</div>"""
+					</div>\n"""
 			x = x + 1
+		return out
 
-	print u"Content-Type: text/html\n"
-	print u"""\
+	out = u"""\
+Content-Type: text/html;charset=utf-8
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -172,9 +175,9 @@ try:
 	<title>MonitorNjus Admin-Panel</title>
 	<!-- MonitorNjus -->
 	<!-- Copyright (c) """+unicode(common.datum.year)+""" Steffen Deusch -->
-	<!-- https://github.com/SteffenDE/MonitorNjus -->"""
-	print unicode(colors.adminstyles)
-	print u"""\
+	<!-- https://github.com/SteffenDE/MonitorNjus -->\n"""
+	out += unicode(colors.adminstyles)
+	out += u"""
 </head>
 <body>
 	<script type="text/javascript" src="../bin/js/jquery-2.1.4.min.js"></script>
@@ -200,9 +203,9 @@ try:
 		<div class="row">
 			<form class="col s12" action="setn.py" method="post">
 				<input type="hidden" name="referer" value="index" />
-				<div class="row">"""
-	displaysets()
-	print u"""\
+				<div class="row">\n"""
+	out += unicode(displaysets())
+	out += u"""\
 					<div class="col s12">
 						<center><a class="btn waves-effect waves-light """+colors.color+"""\" href=setn.py?referer=row&createnum="""+unicode(rowsone)+"""><i class="mdi-content-add"></i></a></center>
 						<p class="range-field"><input type="range" id="teilung" name="teilung" min="1" max="99" value=\""""+unicode(common.readsettings("TEILUNG"))+"""\" /></p>
@@ -244,11 +247,11 @@ try:
 								</div>
 							</div>
 						</div>
-						<button class="btn waves-effect waves-light" type="submit">Abschicken<i class="mdi-content-send right"></i></button>"""
+						<button class="btn waves-effect waves-light" type="submit">Abschicken<i class="mdi-content-send right"></i></button>\n"""
 	if common.triggerrefresh:
-		print u"""\
-						<a class="waves-effect waves-light btn right" href="setn.py?referer=triggerrefresh">Neuladen ausl&ouml;sen</a>"""
-	print u"""\
+		out += """\
+						<a class="waves-effect waves-light btn right" href="setn.py?referer=triggerrefresh">Neuladen ausl&ouml;sen</a>\n"""
+	out += """\
 					</div>
 				</div>
 			</form>
@@ -264,17 +267,18 @@ try:
 		</div>
 		<div class="footer-copyright">
 			<div class="container">
-				&copy; Steffen Deusch """+str(common.datum.year)+"""
+				&copy; Steffen Deusch """+unicode(common.datum.year)+"""
 				<a class="grey-text text-lighten-4 right" href="https://github.com/SteffenDE/monitornjus">"""+common.version+"""</a>
 			</div>
 		</div>
 	</footer>
 	<!-- Scripts -->
 	<script src="../bin/js/init.js"></script>
-</body>"""
-	import sys
-	sys.stdout.write(u"</html>")
-	del sys
+</body>
+</html>"""
+
+	########### Ausgabe ###########
+	print unicode(out)
 
 except Exception as e:
 	common.debug(e)
