@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 # Copyright (c) 2015 Steffen Deusch
-# Beilage zu MonitorNjus, 09.08.2015 (Version 0.9.2)
+# Beilage zu MonitorNjus, 14.09.2015 (Version 0.9.3)
 
 try:
 	import cgi
-	import sys
 
 	form = cgi.FieldStorage() 
 	url = form.getfirst('url', None)
@@ -22,7 +21,7 @@ try:
 	print u"Content-Type: text/html;charset=utf-8\n"
 
 	if typ == "redir":
-		print u"""\
+		out = u"""\
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,11 +61,11 @@ try:
 </head>
 <body onload="autoresize_frames()">
 	<iframe src=\""""+unicode(url)+"""\" style="visibility: hidden; position:absolute; width:100%; height:100%; top:0px; left:0px; margin-left:2px; border-style:none; overflow:hidden" frameborder="0" scrolling="no" id="fest"></iframe>
-</body>"""
-		sys.stdout.write("</html>")
+</body>
+</html>"""
 
 	elif typ == "rollen":
-		print u"""\
+		out = u"""\
 <!DOCTYPE html>
 <html>
 <head>
@@ -144,15 +143,20 @@ try:
 	}
 	objGo=setInterval('DM_ticken()',Interval);
 	</script>
-</body>"""
-		sys.stdout.write("</html>")
+</body>
+</html>"""
 
 	else:
 		raise Exception("Falscher oder fehlender Queryparameter: type")
 
+	print unicode(out)
+
 except Exception as e:
 	import os
-	import imp
 	workingdir = os.path.dirname(os.path.realpath(__file__))
-	common = imp.load_source('common', workingdir+"/../../common.py")
+	import sys
+	reload(sys)
+	sys.path.append(workingdir+"/../../")
+	sys.setdefaultencoding('utf-8')
+	from modules import common
 	common.debug(e)

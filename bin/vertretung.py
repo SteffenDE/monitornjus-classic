@@ -3,11 +3,11 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 05.08.2015 (Version 0.9.1)
+# Beilage zu MonitorNjus, 14.09.2015 (Version 0.9.3)
 
 import sys
 reload(sys)
-sys.setdefaultencoding('utf8')
+sys.setdefaultencoding('utf-8')
 
 ######### Settings #########
 
@@ -94,9 +94,12 @@ try:
 except Exception as e:
 	if not header:
 		import os
-		import imp
 		workingdir = os.path.dirname(os.path.realpath(__file__))
-		common = imp.load_source('common', workingdir+"/../common.py")
+		import sys
+		reload(sys)
+		sys.path.append(workingdir+"/../")
+		sys.setdefaultencoding('utf-8')
+		from modules import common
 		common.debug(e)
 	else:
 		print httpheader

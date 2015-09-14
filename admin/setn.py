@@ -3,16 +3,15 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 09.08.2015 (Version 0.9.2)
-
-import sys
-reload(sys)
-sys.setdefaultencoding('utf8')
+# Beilage zu MonitorNjus, 14.09.2015 (Version 0.9.3)
 
 import os
-import imp
 workingdir = os.path.dirname(os.path.realpath(__file__))
-common = imp.load_source('common', workingdir+"/../common.py")
+import sys
+reload(sys)
+sys.path.append(workingdir+"/../")
+sys.setdefaultencoding('utf-8')
+from modules import common
 
 def updateurl_refresh(Name, GETNAME, Seite, Nummer, widgname):
 	if "index" in referer:
@@ -110,7 +109,7 @@ try:
 	#import cgitb; cgitb.enable()
 	
 	if common.authentication:
-		auth = imp.load_source("auth", workingdir+"/../auth.py")
+		from modules import auth
 		auth.me()
 
 	form = cgi.FieldStorage()

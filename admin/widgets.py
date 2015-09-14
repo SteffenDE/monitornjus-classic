@@ -3,16 +3,17 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 05.08.2015 (Version 0.9.1)
-
-import sys
-reload(sys)
-sys.setdefaultencoding('utf8')
+# Beilage zu MonitorNjus, 14.09.2015 (Version 0.9.3)
 
 import os
-import imp
 workingdir = os.path.dirname(os.path.realpath(__file__))
-common = imp.load_source('common', workingdir+"/../common.py")
+import sys
+reload(sys)
+sys.path.append(workingdir+"/../")
+sys.setdefaultencoding('utf-8')
+import cgi
+from modules import common
+from modules import colors
 
 def widgets():
 	count = common.getwidgets()
@@ -183,11 +184,8 @@ def widgets():
 	return out
 
 try:
-	import colors
-	import cgi
-
 	if common.authentication:
-		auth = imp.load_source("auth", workingdir+"/../auth.py")
+		from modules import auth
 		auth.me()
 
 	print u"Content-Type: text/html\n"

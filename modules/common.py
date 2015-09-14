@@ -3,7 +3,7 @@
 #
 # Copyright (c) 2015 Steffen Deusch
 # Licensed under the MIT license
-# Beilage zu MonitorNjus, 09.08.2015 (Version 0.9.2)
+# Beilage zu MonitorNjus, 15.09.2015 (Version 0.9.3)
 
 import os
 import os.path
@@ -11,9 +11,9 @@ import datetime
 import sqlite3
 
 datum = datetime.datetime.now()
-version = "0.9.2&beta;"
+version = "0.9.3&beta;"
 workingdir = os.path.dirname(os.path.realpath(__file__))
-dbpath = workingdir+'/admin/MonitorNjus.db'
+dbpath = workingdir+'/../admin/MonitorNjus.db'
 
 ############################## Settings ##############################
 
