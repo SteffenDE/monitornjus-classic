@@ -9,13 +9,14 @@ import os
 workingdir = os.path.dirname(os.path.realpath(__file__))
 import sys
 reload(sys)
-sys.path.append(workingdir+"/../")
 sys.setdefaultencoding('utf-8')
+import imp
+modulesdir = workingdir+"/../modules"
+common = imp.load_source("common", modulesdir+"/common.py")
+checktime = imp.load_source("checktime", modulesdir+"/checktime.py")
+getytid = imp.load_source("getytid", modulesdir+"/getytid.py")
 import cgi
 #import cgitb; cgitb.enable()
-from modules import common
-from modules import checktime
-from modules import getytid
 
 try:
 
@@ -123,17 +124,13 @@ try:
 
 ################################ HTML ################################
 
-	print u"Content-Type: text/html;charset=utf-8\n"
-	print u"""\
+	out = u"Content-Type: text/html;charset=utf-8\n"
+	out += u"""
 <!DOCTYPE html>
 <html lang="de">
 <head>
-	<meta charset="UTF-8">"""
-	if prrefresh is not None:
-		print unicode(prrefresh)
-	else:
-		pass
-	print u"""\
+	<meta charset="UTF-8">
+	"""+(prrefresh if prrefresh is not None else "")+"""
 	<title>MonitorNjus</title>
 	<!-- MonitorNjus -->
 	<!-- Copyright (c) """+unicode(common.datum.year)+""" Steffen Deusch -->
@@ -190,7 +187,7 @@ try:
 	@-o-keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 	@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }"""
 	if rand:
-		sys.stdout.write(u"""\
+		out += """
 	<style>
 	iframe {
 		padding-left: """+common.addpx(common.getinfo("MARGINLEFT", mseite, nummer))+""";
@@ -198,24 +195,25 @@ try:
 		padding-top: """+common.addpx(common.getinfo("MARGINTOP", mseite, nummer))+""";
 		padding-bottom: """+common.addpx(common.getinfo("MARGINBOTTOM", mseite, nummer))+""";
 		box-sizing: border-box;
-	}""")
+	}"""
 	else:
-		print u"	<style>"
-	sys.stdout.write(unicode(style))
-	print u"""\
+		out += u"	<style>"
+	out += unicode(style)
+	out += u"""\
 	</style>
-</head>"""
-	print u"\
-<body class=\"fadeIn fadeIn-animation\">"
+</head>
+<body class=\"fadeIn fadeIn-animation\">"""
 	####     # = debug     ####
 	#print checktime.match(common.getinfo("VONBIS", mseite, int(common.minaktiv(mseite))),common.datum.now())
 	#print nextnummer
 	#print common.getinfo("VONBIS", mseite, nummer)
 	#print checktime.match(common.getinfo("VONBIS", mseite, nummer),common.datum.now())
-	sys.stdout.write(unicode(output))
-	print "\
-</body>"
-	sys.stdout.write("</html>")
+	out += unicode(output)
+	out += """
+</body>
+</html>"""
+
+	print unicode(out)
 
 except Exception as e:
 	common.debug(e)

@@ -9,10 +9,11 @@ import os
 workingdir = os.path.dirname(os.path.realpath(__file__))
 import sys
 reload(sys)
-sys.path.append(workingdir+"/../")
 sys.setdefaultencoding('utf-8')
-from modules import common
-from modules import checktime
+import imp
+modulesdir = workingdir+"/../modules"
+common = imp.load_source("common", modulesdir+"/common.py")
+checktime = imp.load_source("checktime", modulesdir+"/checktime.py")
 
 try:
 	rows = common.getrows()
