@@ -65,29 +65,28 @@ try:
 
 	form = cgi.FieldStorage() 
 
-	nxtday = int(form.getfirst('nxtday', "0"))
-	actday = int(form.getfirst('actday', "0"))
-	header = int(form.getfirst('header', "0"))
-	body = int(form.getfirst('body', "1"))
+	nxtday = form.has_key('nxtday')
+	actday = form.has_key('actday')
+	header = form.has_key('header')
+	body = form.has_key('body')
 
-	httpheader = u"Content-Type: text/html;charset=utf-8\n"
+	if not body and not header:
+		body = True
+
+	print(u"Content-Type: text/html;charset=utf-8\n")
 
 	if actday and header:
 		syh = open(path + name_heute, "r")
-		print httpheader
-		print replace_h(syh.read())
+		print(replace_h(syh.read()))
 	elif nxtday and header:
 		sym = open(path + name_morgen, "r")
-		print httpheader
-		print replace_h(sym.read())
+		print(replace_h(sym.read()))
 	elif actday and body:
 		syh = open(path + name_heute, "r")
-		print httpheader
-		print replace_b(syh.read())
+		print(replace_b(syh.read()))
 	elif nxtday and body:
 		sym = open(path + name_morgen, "r")
-		print httpheader
-		print replace_b(sym.read())
+		print(replace_b(sym.read()))
 	else:
 		raise Warning("No arguments passed!")
 

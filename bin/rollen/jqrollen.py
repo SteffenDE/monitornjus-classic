@@ -6,9 +6,10 @@
 # Beilage zu MonitorNjusMP, 14.09.2015 (Version 0.9.3)
 
 try:
-	form = req.form
-	url = form['url']
-	typ = form["type"]
+	import cgi
+	form = cgi.FieldStorage()
+	url = form.getfirst('url', None)
+	typ = form.getfirst("type", None)
 
 	############################
 
@@ -22,11 +23,16 @@ try:
 	<!-- MonitorNjus -->
 	<!-- Copyright (c) Steffen Deusch -->
 	<!-- https://github.com/SteffenDE/MonitorNjus -->
+	<script src="../js/jquery-2.1.4.min.js"></script>
 	<script type="text/javascript">
 	function resizeIframe(obj) {
 		obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
 	}
-	var height = window.innerHeight;
+	</script>
+</head>
+<body>
+	<iframe src=\""""+unicode(url)+"""\" style="visibility: hidden; position:absolute; width:100%; height:100%; top:0px; left:0px; margin-left:2px; border-style:none; overflow:hidden" frameborder="0" scrolling="no" id="fest"></iframe>
+	<script>
 	var framefenster = document.getElementsByTagName("iFrame");
 	var auto_resize_timer = window.setInterval("autoresize_frames()", 400);
 	function autoresize_frames()
@@ -36,10 +42,10 @@ try:
 			if(framefenster[i].contentWindow.document.body)
 				{
 				var framefenster_size = framefenster[i].contentWindow.document.body.scrollHeight;
+				/*var framefenster_size = framefenster[i].contentWindow.document.body.offsetHeight;*/
 				framefenster[i].style.height = framefenster_size + 'px';
-				/*document.write(framefenster_size+"<br>")
-				document.write(height)*/
-				if(framefenster_size == height)
+				var height = window.innerHeight;
+				if(framefenster_size <= height)
 					{
 					framefenster[i].style.visibility = "visible"
 					}
@@ -50,9 +56,6 @@ try:
 			}
 		}
 	</script>
-</head>
-<body onload="autoresize_frames()">
-	<iframe src=\""""+unicode(url)+"""\" style="visibility: hidden; position:absolute; width:100%; height:100%; top:0px; left:0px; margin-left:2px; border-style:none; overflow:hidden" frameborder="0" scrolling="no" id="fest"></iframe>
 </body>
 </html>"""
 
@@ -136,7 +139,8 @@ try:
 		raise Exception("Falscher oder fehlender Queryparameter: type")
 
 	########### Ausgabe ###########
-	print unicode(out)
+	print("Content-type: text/html; charset: utf-8\n\n")
+	print(unicode(out))
 
 except Exception as e:
 	import os

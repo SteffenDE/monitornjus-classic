@@ -209,20 +209,20 @@ try:
 	else:
 		refresh = ""
 
-	print u"""\
-Content-Type: text/html;charset=utf-8\n
+	out = "Content-Type: text/html;charset=utf-8\n"
+	out += u"""
 <!DOCTYPE html>
 <html lang="de">
 <head>
 	<meta charset="UTF-8">"""
 	#for item in form:
-		#print item+": "+form[item].value
-	print "	"+unicode(refresh)
-	print u"""\
-</head>"""
-	import sys
-	sys.stdout.write(u"</html>")
-	del sys
+		#out += item+": "+form[item].value
+	out += unicode(refresh)
+	out += u"""\
+</head>
+</html>"""
+
+	print(unicode(out))
 
 	if common.triggerrefresh:
 		datei = open(workingdir+"/../bin/refresh", "w")

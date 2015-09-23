@@ -39,7 +39,7 @@ try:
 		geteilt = True
 
 	if geteilt:
-		disp = u"""\
+		disp = u"""
 <frameset frameborder="0" rows="*,0">
 	<frameset frameborder="0" cols="""+str(teilung)+""","""+str(100-teilung)+""">
 		<frame scrolling="no" src="contentset.py?seite=1" name="links" />
@@ -47,12 +47,12 @@ try:
 	</frameset> 
 </frameset>"""
 	elif (linksgeteilt and not rechtsgeteilt and timeL) or (linksgeteilt and rechtsgeteilt and timeL and not timeR):
-		disp = u"""\
+		disp = u"""
 <frameset frameborder="0" rows="*,0">
 	<frame scrolling="no" src="contentset.py?seite=1" name="links" />
 </frameset>"""
 	elif (rechtsgeteilt and not linksgeteilt and timeR) or (rechtsgeteilt and linksgeteilt and timeR and not timeL):
-		disp = u"""\
+		disp = u"""
 <frameset frameborder="0" rows="*,0">
 	<frame scrolling="no" src="contentset.py?seite=2" name="rechts" />
 </frameset>"""
@@ -60,7 +60,7 @@ try:
 		raise Warning("Keine Seite aktiv")
 
 	if common.getinfo("REFRESHAKTIV", "global", 0) == 1:
-		refresh = u"	<META HTTP-EQUIV=\"refresh\" CONTENT=\""+unicode(common.getinfo("REFRESH", "global", 0))+"\">"
+		refresh = u"	<meta http-equiv=\"refresh\" content=\""+unicode(common.getinfo("REFRESH", "global", 0))+"\">"
 	else:
 		refresh = u""
 
@@ -80,15 +80,15 @@ try:
 	<!-- https://github.com/SteffenDE/MonitorNjus -->
 </head>"""
 	####     # = debug     ####
-	#print timeL
-	#print timeR
-	#print geteilt
+	# out += timeL
+	# out += timeR
+	# out += geteilt
 	out += unicode(disp)
 	out += """
 </html>"""
 	
 	########### Ausgabe ###########
-	print unicode(out)
+	print(unicode(out))
 
 except Exception as e:
 	common.debug(e)

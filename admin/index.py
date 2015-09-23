@@ -278,7 +278,7 @@ Content-Type: text/html;charset=utf-8
 </html>"""
 
 	########### Ausgabe ###########
-	print unicode(out)
+	print(unicode(out))
 
 except Exception as e:
 	common.debug(e)

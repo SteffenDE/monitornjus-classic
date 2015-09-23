@@ -22,8 +22,8 @@ try:
 	###########################
 
 	form = cgi.FieldStorage()
-	gseite = form.getvalue('seite')
-	gnummer = form.getvalue('nummer')
+	gseite = form.getfirst('seite')
+	gnummer = form.getfirst('nummer')
 	rows = common.getrows()
 	rand = False
 	fadeinzeit = 0.8
@@ -104,21 +104,21 @@ try:
 	typ = common.checkfiletype(url)
 
 	if typ == "image":
-		output = '	<div id="background"></div>'
+		output = '\n	<div id="background"></div>'
 	elif typ == "video":
-		output = '\
-	<div class="videocontainer"><video src=\''+url+'\' style="width:100%; height:auto; max-height: 100%;" autoplay="autoplay" loop="loop">Dein Browser unterst&uuml;tzt keine HTML5 Videos...</video></div>'
+		output = """
+	<div class="videocontainer"><video src=\'"""+url+"""\' style="width:100%; height:auto; max-height: 100%;" autoplay="autoplay" loop="loop">Dein Browser unterst&uuml;tzt keine HTML5 Videos...</video></div>"""
 	elif typ == "pdf":
-		output = '\
-	<iframe src=\"'+url+'\" style="position:absolute; z-index:9; height:98%; width:98%; border-style:none; overflow:hidden" scrolling="no" frameborder="0"></iframe>'
+		output = """
+	<iframe src=\""""+url+"""\" style="position:absolute; z-index:9; height:98%; width:98%; border-style:none; overflow:hidden" scrolling="no" frameborder="0"></iframe>"""
 		rand = True
 	elif typ == "youtube":
-		output = '\
-	<iframe style="position:absolute; height:100%; width:100%; top:0px; left: 0px; border-style:none; overflow:hidden" scrolling="no" frameborder="0" src="//www.youtube.com/embed/'+getytid.video_id(url)+'?rel=0&autoplay=1&loop=1&controls=0&showinfo=0"></iframe>'
+		output = """
+	<iframe style="position:absolute; height:100%; width:100%; top:0px; left: 0px; border-style:none; overflow:hidden" scrolling="no" frameborder="0" src="//www.youtube.com/embed/"""+getytid.video_id(url)+"""?rel=0&autoplay=1&loop=1&controls=0&showinfo=0"></iframe>"""
 		rand = True
 	else:
-		output = '\
-	<iframe src=\"'+url+'\" style="position:absolute; width:100%; height:100%; top:0px; left:0px; border-style:none;" scrolling="no" frameborder="0"></iframe>'
+		output = """
+	<iframe src=\""""+url+"""\" style="position:absolute; width:100%; height:100%; top:0px; left:0px; border-style:none;" scrolling="no" frameborder="0"></iframe>"""
 		rand = True
 
 ################################ HTML ################################
@@ -203,17 +203,17 @@ try:
 </head>
 <body class=\"fadeIn fadeIn-animation\">"""
 	####     # = debug     ####
-	#print checktime.match(common.getinfo("VONBIS", mseite, int(common.minaktiv(mseite))),common.datum.now())
-	#print nextnummer
-	#print common.getinfo("VONBIS", mseite, nummer)
-	#print checktime.match(common.getinfo("VONBIS", mseite, nummer),common.datum.now())
+	#out += checktime.match(common.getinfo("VONBIS", mseite, int(common.minaktiv(mseite))),common.datum.now())
+	#out += nextnummer
+	#out += common.getinfo("VONBIS", mseite, nummer)
+	#out += checktime.match(common.getinfo("VONBIS", mseite, nummer),common.datum.now())
 	out += unicode(output)
 	out += """
 </body>
 </html>"""
 	
 	########### Ausgabe ###########
-	print unicode(out)
+	print(unicode(out))
 
 except Exception as e:
 	common.debug(e)

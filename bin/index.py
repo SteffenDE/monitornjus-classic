@@ -36,7 +36,7 @@ def widgets():
 				marginx = ""
 			out += """\
 	<div id="logo" style="""+logovalign+""":"""+logoalign+""";>
-		<img align="""+logovmargin+""" style=\""""+marginx+""" width="""+logowidth+"""; height="""+logoheight+"""\" src=\""""+logolink+"""\">
+		<img align="""+logovmargin+""" style=\""""+marginx+""";\" width="""+logowidth+""" height="""+logoheight+""" src=\""""+logolink+"""\">
 	</div>"""
 
 		elif typ == "Freies_Widget" and common.getwidgetinfo("Freies_Widget", item, "AKTIV"):
@@ -94,7 +94,7 @@ def widgets():
 
 try:
 	if int(common.getinfo("REFRESHAKTIV", "globalmon", 0)) == 1:
-		refresh = "	<META HTTP-EQUIV=\"refresh\" CONTENT=\""+unicode(common.getinfo("REFRESH", "globalmon", 0))+"\" >"
+		refresh = "	<meta http-equiv=\"refresh\" content=\""+unicode(common.getinfo("REFRESH", "globalmon", 0))+"\">\n"
 	else:
 		refresh = ""
 
@@ -138,7 +138,7 @@ try:
 </html>"""
 	
 	########### Ausgabe ###########
-	print unicode(out)
+	print(unicode(out))
 
 except Exception as e:
 	common.debug(e)
