@@ -1,4 +1,4 @@
-# Dead. See [MonitorNews](https://github.com/MonitorNews/monitornews-web)
+# Dead. See [MonitorNews](https://monitornews.me)
 # monitornjus
 ## What is MonitorNjus?
 Python  CGI application written for displaying various pages time-based or static on a monitor in the intranet (e.g. in a school).
